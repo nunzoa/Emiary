@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+<script>
+//가입폼 확인
+function validation() {
+	let email = document.getElementById('email');
+	let password = document.getElementById('password');
+	let password2 = document.getElementById('password2');
+	let nickname = document.getElementById('nickname');
+	
+	if (email.value.length < 3 || email.value.length > 20) {
+		alert("Email은 3~20자로 입력하세요.");
+		return false;
+	}
+	if (password.value.length < 3 || password.value.length > 20) {
+		alert("비밀번호는 3~20자로 입력하세요.");
+		return false;
+	}
+	if (password.value != password2.value) {
+		alert("비밀번호를 정확하게 입력하세요.");
+		return false;
+	}
+	if (nickname.value == '') {
+		alert("닉네임을 입력하세요.");
+		return false;
+	}
+	return true;
+}
+
+function emailcheck() {
+	window.open('emailcheck', 'win', 'top=100,left=500,width=400,height=400');
+}
+</script>
+</head>
+<body>
+	<header>
+	<h1> Sign Up! </h1>
+	</header>
+	
+	<section>
+	<form id="joinform" th:action="@{/user/join}"  method="post" onsubmit="return validation();">
+            Email Address<br>
+            <div>
+                <input type="text" name="email" id="email" class="form-control" placeholder="abcd@gmail.com" autocomplete="off" required/>
+                <input type="button" value="Email확인" onclick="emailcheck()">
+            </div>
+            Password<br>
+            <div>
+                <input type="password" name="password" class="form-control" placeholder="" autocomplete="off" required/>
+            </div>
+            NickName<br>
+            <div>
+                <input type="text" name="nickname" class="form-control" placeholder="きみのなは名前は？" autocomplete="off" required/>
+            </div>
+            BirthDay<br>
+            <div>
+                <input type="text" name="birthdate" class="form-control" placeholder="" autocomplete="off"/>
+            </div>
+            Phone<br>
+            <div style="margin-bottom: 50px;">
+                <input type="text" name="phone" class="form-control" placeholder="" autocomplete="off"/>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-dark btn-large form-control">Sign Up</button>
+            </div>
+        </form>
+        <hr class="separator"/>
+        <div>
+            <h1>EMIARY</h1>
+            <p>©2023 All Rights Reserved.</p>
+        </div>
+    </div>
+</section>
+	
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ID 중복 확인</title>
+<script>
+function inputEmail() {
+	//현재 페이지의 email가 "email"인 입력란의 값을
+	//바깥쪽 창의 email가 "email"인 입력란에 넣는다
+	//현재 창을 닫는다
+	console.log("111" + document.getElementById("email").value);	
+	console.log(opener.document.getElementById("email").value);
+	opener.document.getElementById("email").value 
+		= document.getElementById("email").value;
+	this.close();
+}
+</script>
+</head>
+<body>
+<h2>[ Email 중복확인 ]</h2>
+<form th:action="@{/user/emailcheck}" method="post">
+검색할 Email 	<input type="text" name="email" id="email" th:value="${searchEmail}">
+			<input type="submit" value="검색">
+</form>
+
+<!-- 검색 후 (searchEmail가 null이 아닐 때)-->
+<div th:if="${searchEmail != null}">
+	<!-- 사용 불가능 (result가 true일때)-->
+	<div th:if="${result}">
+		<p>이미 사용중인 아이디 입니다.</p>
+	</div>
+	<!-- 사용 가능 (result가 false일때)-->
+	<div th:if="${not result}">
+		<p>사용 가능한 아이디 입니다.</p>
+		<p><input type="button" value="Email사용하기" onclick="inputEmail()"></p>
+	</div>
+</div>
+	
+</body>
+</html>
