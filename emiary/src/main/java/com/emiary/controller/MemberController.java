@@ -1,8 +1,6 @@
 package com.emiary.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,19 +8,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
-import com.emiary.domain.User;
-import com.emiary.service.UserService;
+import com.emiary.domain.Member;
+import com.emiary.service.MemberService;
 
 /**
  * 회원 관련 처리 콘트롤러
  */
 @Slf4j
-@RequestMapping("user")
+@RequestMapping("member")
 @Controller
-public class UserController {
+public class MemberController {
 
 	@Autowired
-	UserService service;
+	MemberService service;
 	
 	/**
 	 * 회원 가입 폼으로 이동
@@ -31,19 +29,19 @@ public class UserController {
 	@GetMapping("join")
 	public String join() {
 		
-		return "userView/joinForm";
+		return "memberView/joinForm";
 	}
 	
 	@PostMapping("join")
-	public String join(User user) {
-		log.debug("가입데이터 : {}", user);
-		service.insert(user);
+	public String join(Member member) {
+		log.debug("가입데이터 : {}", member);
+		service.insert(member);
 		return "redirect:/";
 	}
 	
 	@GetMapping("emailcheck")
 	public String emailcheck() {
-		return "userView/emailcheck";
+		return "memberView/emailcheck";
 	}
 	
 	@PostMapping("emailcheck")
@@ -56,7 +54,7 @@ public class UserController {
 		model.addAttribute("result", res);
 		log.debug("검색할 아이디 : {}", email);
 		log.debug("검색할 아이디 : {}", res);
-		return "userView/emailcheck";
+		return "memberView/emailcheck";
 	}
 	
 	/**
@@ -65,7 +63,7 @@ public class UserController {
 	 */
 	@GetMapping("loginForm")
 	public String loginForm() {
-		return "userView/loginForm";
+		return "memberView/loginForm";
 	}
 	
 	

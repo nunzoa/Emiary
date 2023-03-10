@@ -2,14 +2,14 @@ package com.emiary.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.emiary.domain.User;
+import com.emiary.domain.Member;
 
 @Mapper
-public interface UserDAO {
+public interface MemberDAO {
 	//회원정보 저장
-	int insert(User user);
+	int insert(Member member);
 	//회원정보 조회
-	User select(String email);
+	Member select(String email);
 	//회원정보 수정
-	int update(User user);
+	int update(Member member);
 }
