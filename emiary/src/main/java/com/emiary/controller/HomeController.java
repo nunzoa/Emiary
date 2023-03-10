@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeController {
 	
 
-	@GetMapping({"", "/"})
+	@GetMapping("/")
 	    public String main(){
 	        return "main";
 	    }
