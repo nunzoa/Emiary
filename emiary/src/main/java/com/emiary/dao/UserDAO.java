@@ -12,4 +12,6 @@ public interface UserDAO {
 	User select(String email);
 	//회원정보 수정
 	int update(User user);
+	//회원탈퇴
+	int delete(User user);
 }

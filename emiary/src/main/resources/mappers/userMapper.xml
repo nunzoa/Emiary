@@ -28,5 +28,12 @@
 </select>
 
 
+
+<!-- <delete id="">
+delete from users
+	where email = #{emil}
+	and	password = #{password}
+</delete> -->
+
 </mapper>
 

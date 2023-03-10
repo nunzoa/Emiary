@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
 		User user = dao.select(email);
 		return user;
 	}
+	
 
 
 	
