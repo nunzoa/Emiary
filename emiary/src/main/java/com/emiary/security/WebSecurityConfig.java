@@ -25,8 +25,8 @@ public class WebSecurityConfig {
         http.csrf().disable()
         .authorizeRequests()
         .antMatchers("/",
-                "/user/join",
-                "/user/emailcheck",
+                "/member/join",
+                "/member/emailcheck",
                 "/main/mypage",
                 "/main/mypage/update",
                 "/main/update",
@@ -38,13 +38,13 @@ public class WebSecurityConfig {
         .anyRequest().authenticated()   	//위의 경로 외에는 모두 로그인을 해야 함
         .and()
         .formLogin()						//일반적인 폼을 이용한 로그인 처리/실패 방법을 사용
-        .loginPage("/user/loginForm")		//시큐리티에서 제공하는 기본 폼이 아닌 사용자가 만든 폼 사용
-        .loginProcessingUrl("/user/login").permitAll()	//인증 처리를 하는 URL을 설정. 로그인 폼의 action으로 지정
+        .loginPage("/member/loginForm")		//시큐리티에서 제공하는 기본 폼이 아닌 사용자가 만든 폼 사용
+        .loginProcessingUrl("/member/login").permitAll()	//인증 처리를 하는 URL을 설정. 로그인 폼의 action으로 지정
         .usernameParameter("email")		//로그인폼의 아이디 입력란의 name
-        .passwordParameter("password")		//로그인폼의 비밀번호 입력란의 name
+        .passwordParameter("memberpw")		//로그인폼의 비밀번호 입력란의 name
         .and()
         .logout()
-        .logoutUrl("/user/logout")
+        .logoutUrl("/member/logout")
         .logoutSuccessUrl("/").permitAll()	//로그아웃시에 이동할 경로
         .and()
         .cors()
@@ -61,13 +61,13 @@ public class WebSecurityConfig {
         .dataSource(dataSource)
         // 인증 (로그인)
         .usersByUsernameQuery(
-        		"select email username, password password, enabled " +
-                "from users " +
+        		"select email username, memberpw password, enabled " +
+                "from member " +
                 "where email = ?")
         // 권한
         .authoritiesByUsernameQuery(
         		"select email username, rolename role_name " +
-                "from users " +
+                "from member " +
                 "where email = ?");
     }
 
