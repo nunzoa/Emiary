@@ -18,7 +18,7 @@ function inputEmail() {
 </head>
 <body>
 <h2>[ Email 중복확인 ]</h2>
-<form th:action="@{/user/emailcheck}" method="post">
+<form th:action="@{/member/emailcheck}" method="post">
 검색할 Email 	<input type="text" name="email" id="email" th:value="${searchEmail}">
 			<input type="submit" value="검색">
 </form>

@@ -42,7 +42,7 @@ function emailcheck() {
 	</header>
 	
 	<section>
-	<form id="joinform" th:action="@{/user/join}"  method="post" onsubmit="return validation();">
+	<form id="joinform" th:action="@{/member/join}"  method="post" onsubmit="return validation();">
             Email Address<br>
             <div>
                 <input type="text" name="email" id="email" class="form-control" placeholder="abcd@gmail.com" autocomplete="off" required/>
@@ -50,7 +50,7 @@ function emailcheck() {
             </div>
             Password<br>
             <div>
-                <input type="password" name="password" class="form-control" placeholder="" autocomplete="off" required/>
+                <input type="password" name="memberpw" class="form-control" placeholder="" autocomplete="off" required/>
             </div>
             NickName<br>
             <div>
@@ -58,7 +58,7 @@ function emailcheck() {
             </div>
             BirthDay<br>
             <div>
-                <input type="text" name="birthdate" class="form-control" placeholder="" autocomplete="off"/>
+                <input type="date" name="birthdate" class="form-control" placeholder="1999-01-01" autocomplete="off"/>
             </div>
             Phone<br>
             <div style="margin-bottom: 50px;">

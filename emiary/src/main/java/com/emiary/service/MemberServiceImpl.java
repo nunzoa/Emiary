@@ -36,6 +36,7 @@ public class MemberServiceImpl implements MemberService {
 		Member member = dao.select(email);
 		return member;
 	}
+	
 
 
 	

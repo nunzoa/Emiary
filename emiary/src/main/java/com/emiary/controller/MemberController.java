@@ -6,10 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import lombok.extern.slf4j.Slf4j;
 import com.emiary.domain.Member;
 import com.emiary.service.MemberService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 회원 관련 처리 콘트롤러
@@ -65,8 +69,7 @@ public class MemberController {
 	public String loginForm() {
 		return "memberView/loginForm";
 	}
-	
-	
+
 
 	
 	
