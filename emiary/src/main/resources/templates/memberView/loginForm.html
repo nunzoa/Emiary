@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>로그인</title>
+
+    <script>
+//로그인폼 확인
+function validation() {
+	let id = document.getElementById('email');
+	let password = document.getElementById('password');
+
+	if (id.value == '' || password.value == '') {
+		alert('Email과 비밀번호를 입력하세요.');
+		return false;
+	}
+	return true;
+}
+</script>
+</head>
+<body>
+<header>
+    <h1>Sign in to your Emiary</h1>
+</header>
+
+<section>
+    <form id="loginForm" th:action="@{/member/login}" method="post" onSubmit="return validation();">
+        <table>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="email" id="email" /></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password" id="password" /></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <div class="errorMsg" th:if="${param.error}">Email 또는 비밀번호가 틀립니다.</div>
+                    <div class="errorMsg" th:if="${param.error}"><script>alert('다시 입력해주세요')</script></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type = "submit" value="Sign in">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <ul>
+        <a th:href="@{/member/join}">Sign up</a>
+    </ul>
+</section>
+
+</body>
+</html>
