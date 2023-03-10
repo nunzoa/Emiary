@@ -24,17 +24,12 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
         .authorizeRequests()
-        .antMatchers("/",
-                "/member/join",
-                "/member/emailcheck",
-                "/main/mypage",
-                "/main/mypage/update",
-                "/main/update",
-                "/main/friendchat",
-                "/main/friendfind",
-                "/image/**",
-                "/css/**",
-                "/js/**").permitAll()   		//설정한 리소스의 접근을 인증절차 없이 허용
+        .antMatchers("/member/join"
+                ,"/member/emailcheck"
+                ,"/image/**"
+                ,"/css/**"
+                ,"/js/**"
+               ).permitAll()   		//설정한 리소스의 접근을 인증절차 없이 허용
         .anyRequest().authenticated()   	//위의 경로 외에는 모두 로그인을 해야 함
         .and()
         .formLogin()						//일반적인 폼을 이용한 로그인 처리/실패 방법을 사용
@@ -45,7 +40,7 @@ public class WebSecurityConfig {
         .and()
         .logout()
         .logoutUrl("/member/logout")
-        .logoutSuccessUrl("/").permitAll()	//로그아웃시에 이동할 경로
+        .logoutSuccessUrl("/member/loginForm").permitAll()	//로그아웃시에 이동할 경로
         .and()
         .cors()
         .and()
