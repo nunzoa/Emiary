@@ -1,0 +1,87 @@
+[33mcommit f85f404e84eee29ad9d1bf5550b099f46b9b383f[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m)[m
+Author: leeseungyeong <onunisuki62@gmail.com>
+Date:   Fri Mar 10 20:01:05 2023 +0900
+
+    webSecurity 수정
+
+[33mcommit 29a0642331b3dee833a782f3f7d23c90aaacafe4[m
+Merge: 40a25d4 4795232
+Author: LeeSeungYeong <104753578+nunzoa@users.noreply.github.com>
+Date:   Fri Mar 10 12:54:12 2023 +0900
+
+    Merge pull request #3 from nunzoa/join_topic
+    
+    반영해주세요 팀장님
+
+[33mcommit 4795232e248d55f8d9816705f0253c2d68fcaaca[m
+Merge: 5f27499 40a25d4
+Author: PHJ7729 <qkrgudwns1115@gmail.com>
+Date:   Fri Mar 10 12:45:34 2023 +0900
+
+    회원가입 완료
+
+[33mcommit 5f274999e02cdd19dc305e69f3a8d314981bb247[m
+Author: PHJ7729 <qkrgudwns1115@gmail.com>
+Date:   Fri Mar 10 12:04:28 2023 +0900
+
+    반영해주세요 팀장님
+
+[33mcommit 40a25d49163506ae717534c3d97d14d0931bd0a7[m
+Author: leeseungyeong <onunisuki62@gmail.com>
+Date:   Fri Mar 10 10:14:08 2023 +0900
+
+    MemberVO 수정
+
+[33mcommit ed1b3a71b82b17ab45ab8d36420c891bed07b665[m
+Merge: d50863f 4531622
+Author: LeeSeungYeong <104753578+nunzoa@users.noreply.github.com>
+Date:   Fri Mar 10 10:07:39 2023 +0900
+
+    Merge pull request #2 from nunzoa/login_topic
+    
+    user->member 로그인기능 70%
+
+[33mcommit 4531622d1e248afbae056e9cd6849c3ecd2fba1d[m
+Author: apudidi <lesuju9494@gmail.com>
+Date:   Fri Mar 10 10:03:33 2023 +0900
+
+    user->member 로그인기능 70%
+
+[33mcommit d50863f4e299cf48120a9bb8217c5b6b499b1830[m
+Author: leeseungyeong <onunisuki62@gmail.com>
+Date:   Thu Mar 9 11:48:45 2023 +0900
+
+    회원가입 기능 포함
+
+[33mcommit 122f26ca6da7c911416eca3802c069d6349818bb[m
+Merge: ea61739 e564594
+Author: LeeSeungYeong <104753578+nunzoa@users.noreply.github.com>
+Date:   Thu Mar 9 11:44:11 2023 +0900
+
+    Merge pull request #1 from nunzoa/join_topic
+    
+    회원가입 pull 신청
+
+[33mcommit e5645945dff99b4e6bcd3a92261c4f3c5e8ec0f7[m[33m ([m[1;31morigin/join_topic[m[33m)[m
+Author: PHJ7729 <qkrgudwns1115@gmail.com>
+Date:   Thu Mar 9 11:26:08 2023 +0900
+
+    회원가입 pull 신청
+
+[33mcommit ea61739c7a901c03f7135f0d1a8b870167ff2ba9[m
+Author: leeseungyeong <onunisuki62@gmail.com>
+Date:   Thu Mar 9 11:12:13 2023 +0900
+
+    초기설정 완료
+
+[33mcommit 114fc483f3e9aa26b30a9bd2a50519f258799a9d[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: leeseungyeong <onunisuki62@gmail.com>
+Date:   Thu Mar 9 09:25:16 2023 +0900
+
+    emairy 초기세팅
+
+[33mcommit d5df4662ddb748e0bb49766317caf29d183c66e7[m
+Author: LeeSeungYeong <104753578+nunzoa@users.noreply.github.com>
+Date:   Thu Mar 9 09:11:21 2023 +0900
+
+    Initial commit
