@@ -24,14 +24,9 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
         .authorizeRequests()
-        .antMatchers("/",
+        .antMatchers(
                 "/member/join",
                 "/member/emailcheck",
-                "/main/mypage",
-                "/main/mypage/update",
-                "/main/update",
-                "/main/friendchat",
-                "/main/friendfind",
                 "/image/**",
                 "/css/**",
                 "/js/**").permitAll()   		//설정한 리소스의 접근을 인증절차 없이 허용
