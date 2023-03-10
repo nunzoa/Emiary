@@ -4,24 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.emiary.dao.UserDAO;
-import com.emiary.domain.User;
+import com.emiary.dao.MemberDAO;
+import com.emiary.domain.Member;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class MemberServiceImpl implements MemberService {
 	@Autowired
-	UserDAO dao;
+	MemberDAO dao;
 	
 	@Autowired
 	PasswordEncoder encoder;
 	
 	@Override
-	public int insert(User user) {
+	public int insert(Member member) {
 		//비밀번호 암호화
-		String pw = encoder.encode(user.getPassword());
-		user.setPassword(pw);		
+		String pw = encoder.encode(member.getMemberpw());
+		member.setMemberpw(pw);
 		
-		int n = dao.insert(user);
+		int n = dao.insert(member);
 		return n;
 	}
 
@@ -32,9 +32,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User getUser(String email) {
-		User user = dao.select(email);
-		return user;
+	public Member getMember(String email) {
+		Member member = dao.select(email);
+		return member;
 	}
 
 
