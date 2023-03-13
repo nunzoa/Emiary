@@ -25,8 +25,8 @@ public class WebSecurityConfig {
         http.csrf().disable()
         .authorizeRequests()
         .antMatchers(
-                "/member/join",
-                "/member/emailcheck",
+                "/member/register",
+                "/resources/**",
                 "/image/**",
                 "/css/**",
                 "/js/**").permitAll()   		//설정한 리소스의 접근을 인증절차 없이 허용

@@ -1,59 +1,110 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ko"
+xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>로그인</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/js/jquery-3.6.0.js}"></script>
 
-    <script>
-//로그인폼 확인
-function validation() {
-	let id = document.getElementById('email');
-	let password = document.getElementById('password');
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}">
 
-	if (id.value == '' || password.value == '') {
-		alert('Email과 비밀번호를 입력하세요.');
-		return false;
-	}
-	return true;
-}
-</script>
 </head>
 <body>
-<header>
-    <h1>Sign in to your Emiary</h1>
-</header>
 
 <section>
-    <form id="loginForm" th:action="@{/member/login}" method="post" onSubmit="return validation();">
-        <table>
-            <tr>
-                <td>Email</td>
-                <td><input type="text" name="email" id="email" /></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" name="password" id="password" /></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                    <div class="errorMsg" th:if="${param.error}">Email 또는 비밀번호가 틀립니다.</div>
-                    <div class="errorMsg" th:if="${param.error}"><script>alert('다시 입력해주세요')</script></div>
-                </td>
-            </tr>
+    <div class="header">
+        <img th:src="@{/image/featherpen.png}" alt="logo">
+    </div>
 
-            <tr>
-                <td>
-                    <input type = "submit" value="Sign in">
-                </td>
-            </tr>
-        </table>
-    </form>
-    <ul>
-        <a th:href="@{/member/join}">Sign up</a>
-    </ul>
+    <div class="container">
+        <div class="form-box" id="form-box">
+
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">로그인</button>
+                <button type="button" class="toggle-btn" onclick="register()">등록</button>
+            </div>
+
+            <div>
+                <div class="social-icons">
+                    <a href="#"><img th:src="@{/image/Google.png}" alt="google" id="google"></a>
+                    <a href="#"><img th:src="@{/image/naver.jpg}" alt="naver" id="naver"></a>
+                </div>
+            </div>
+
+<!-- 로그인 -->
+            <form id="login" th:action="@{/member/login}" method="post" class="input-group">
+                <div class="input-field">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="text" id="email_login" name="email" autocomplete="off">
+                    <label for="email_login">이메일</label>
+                </div>
+
+                <div class="input-field">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="password" id="memberpw_login" name="memberpw" autocomplete="off">
+                    <label for="memberpw_login">비밀번호</label>
+                </div>
+
+                <p><a href="#" id="findid">아이디 찾기</a><a href="#">비밀번호 재설정</a></p>
+
+                <div class="btn-field">
+                    <button type="submit" class="submit-btn">로그인</button>
+                </div>
+            </form>
+
+
+<!--회원가입-->
+            <form  id="register" th:action="@{/member/register}" method="post" class="input-group" >
+                <div class="input-field">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="text" id="email" name="email" autocomplete="off">
+                    <label for="email">이메일</label>
+                </div>
+
+                <div class="input-field">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="password" id="memberpw" name="memberpw" autocomplete="off">
+                    <label for="memberpw">비밀번호</label>
+                </div>
+
+                <div class="input-field">
+                    <ion-icon name="bag-check-outline"></ion-icon>
+                    <input type="text" id="cmemberpw" name="cmemberpw" autocomplete="off">
+                    <label for="cmemberpw">비밀번호 재확인</label>
+                </div>
+
+                <div class="input-field">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <input type="text" id="nickname" name="nickname" autocomplete="off">
+                    <label for="nickname">별명</label>
+                </div>
+
+                <div class="input-field">
+                    <ion-icon name="calendar-outline"></ion-icon>
+                    <input type="date" id="birthdate" name="birthdate" autocomplete="off">
+                    <label for="birthdate">생년월일</label>
+                </div>
+
+                <div class="input-field">
+                    <ion-icon name="phone-portrait-outline"></ion-icon>
+                    <input type="number" id="phone" name="phone" autocomplete="off">
+                    <label for="phone">휴대전화</label>
+                </div>
+                <div class="btn-field">
+                    <button type="submit" class="submit-btn">회원가입</button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
 </section>
 
+<script th:src="@{/js/sign.js}"></script>
 </body>
 </html>

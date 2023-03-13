@@ -1,5 +1,6 @@
 package com.emiary.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.emiary.dao.MemberDAO;
 import com.emiary.domain.Member;
 
+@Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
@@ -20,8 +22,9 @@ public class MemberServiceImpl implements MemberService {
 		//비밀번호 암호화
 		String pw = encoder.encode(member.getMemberpw());
 		member.setMemberpw(pw);
-		
+		log.debug("service member값 {}", member);
 		int n = dao.insert(member);
+		log.debug("service n값 {}", n);
 		return n;
 	}
 
