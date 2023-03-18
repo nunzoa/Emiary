@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="login.css">
+  </head>
+
+  <body>
+    <header class=" overflow-hidden bg-orange">
+        <div class="container">
+            <div class="row pt-5">
+                <div class="col-sm-6 text-lg-start">
+                  <!-- 1. 로고 누르면 홈페이지로 이동 -->
+                    <a href="../homepage/homepage.html" class="navbar-brand display-1 text-white fs-1">
+                        Emiary 
+                        <img src="../image/logo.png" class="img-fluid" alt="logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="m-5">
+
+        </div>
+    </header>
+
+        <div class="login mx-auto mt-5">
+
+            <h1 class="text-uppercase display-3 fw-bold text-white">sign in</h1>
+
+            <form action="" class="needs-validation">
+
+                <div class="form-group mt-2 was-validated">
+                    <label for="email" class="form-label text-white fw-bold">Email address</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                    <div class="invalid-feedback fw-bold">
+                        이메일 형식을 지켜주세요
+                    </div>
+                </div>
+
+                <div class="form-group mt-2 was-validated">
+                    <label for="password" class="form-label text-white fw-bold">Password</label>
+                    <input type="password" id="password" name="memberpw" class="form-control" required>
+                    <div class="invalid-feedback fw-bold">
+                        비밀번호를 입력해주세요
+                    </div>
+                </div>
+
+                <div class="form-group mt-2">
+                    <input type="checkbox" id="check" name="check" class="form-check-in">
+                    <label for="check" class="form-check-label text-white fw-bold ">Remember me</label>
+                </div>
+
+                <input type="submit" class="btn text-white border-white mt-3 fw-bold" value="SIGN IN">
+                <input type="submit" class="btn text-white border-white mt-3 fw-bold" value="SIGN UP">
+            </form>
+
+            <div class="social-icons d-flex justify-content-center mt-3">
+                <a class="icon google me-3">
+                     
+                </a>
+
+                <a class="icon naver">
+
+                </a>
+            </div>
+        </div>
+   
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  </body>
+</html>
