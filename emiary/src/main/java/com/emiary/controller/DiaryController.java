@@ -20,13 +20,6 @@ public class DiaryController {
     @Autowired
     DiaryService diaryservice;
 
-    @GetMapping("list")
-    public String list(){
-        return "diaryView/list";
-    }
-    /**
-     * @return 다이어리  작성 폼으로 이동
-     */
     @GetMapping("write")
     public String write() {
         return "diaryView/writeForm";

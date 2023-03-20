@@ -50,7 +50,7 @@ function load(){
              daySquare.addEventListener('click', () => {
                 // display newEventModal
                 newEventModal.style.display = "block";
-                
+
             });
 
             document.querySelector('#close').addEventListener('click', () => {
@@ -82,6 +82,17 @@ function initButton(){
     });
 }
 
+//글 쓰기로 이동
+let write = document.getElementById("writeDiary");
+write.onclick = function(){
+    location.href = "/emiary/diary/write";
+}
+
+//글 읽기로 이동
+let read = document.getElementById("writeDiary");
+
 
 initButton();
 load();
+
+

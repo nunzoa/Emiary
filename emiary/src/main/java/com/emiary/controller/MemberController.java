@@ -29,11 +29,25 @@ public class MemberController {
 		return "memberView/loginForm";
 	}
 
+	/**
+	 * 회원가입 폼으로 이동
+	 * @return
+	 */
+	@GetMapping("register")
+	public String register() {
+		return "memberView/registerForm";
+	}
+
+	/**
+	 * 회원가입 후 로그인 창으로 이동
+	 * @param member
+	 * @return
+	 */
 
 	@PostMapping("register")
 	public String register(Member member){
 		service.insert(member);
-		return "memberView/register";
+		return "memberView/loginForm";
 	}
 
 

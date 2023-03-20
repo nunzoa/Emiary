@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
   </head>
 
   <body>
@@ -15,9 +15,9 @@
             <div class="row pt-5">
                 <div class="col-sm-6 text-lg-start">
                   <!-- 1. 로고 누르면 홈페이지로 이동 -->
-                    <a href="../homepage/homepage.html" class="navbar-brand display-1 text-white fs-1">
+                    <a th:href="@{/member/register}" class="navbar-brand display-1 text-white fs-1">
                         Emiary  
-                        <img src="../image/logo.png" class="img-fluid" alt="logo">
+                        <img th:src="@{/image/logo.png}" class="img-fluid" alt="logo">
                     </a>
                 </div>
             </div>
@@ -32,7 +32,7 @@
 
             <h1 class="text-uppercase display-3 fw-bold text-white">sign up</h1>
 
-            <form action="" class="needs-validation">
+            <form th:action="@{/member/register}" method="post" class="needs-validation">
 
                 <div class="form-group mt-2 was-validated">
                     <label for="email" class="form-label text-white fw-bold">Email address</label>
@@ -43,40 +43,40 @@
                 </div>
 
                 <div class="form-group mt-2 was-validated">
-                    <label for="password" class="form-label text-white fw-bold">Password</label>
-                    <input type="password" id="password" name="memberpw" class="form-control" required>
+                    <label for="memberpw" class="form-label text-white fw-bold">Password</label>
+                    <input type="password" id="memberpw" name="memberpw" class="form-control" required>
                     <div class="invalid-feedback fw-bold">
                         비밀번호를 입력해주세요
                     </div>
                 </div>
 
                 <div class="form-group mt-2 was-validated">
-                    <label for="password" class="form-label text-white fw-bold">Password Confirm</label>
-                    <input type="password" id="" name="" class="form-control" required>
+                    <label for="cmemberpw" class="form-label text-white fw-bold">Password Confirm</label>
+                    <input type="password" id="cmemberpw" class="form-control" required>
                     <div class="invalid-feedback fw-bold">
                         비밀번호를 입력해주세요
                     </div>
                 </div>
 
                 <div class="form-group mt-2 was-validated">
-                    <label for="password" class="form-label text-white fw-bold">Nickname</label>
-                    <input type="type" id="" name="" class="form-control" required>
+                    <label for="nickname" class="form-label text-white fw-bold">Nickname</label>
+                    <input type="type" id="nickname" name="nickname" class="form-control" required>
                     <div class="invalid-feedback fw-bold">
                         별명을 입력해주세요
                     </div>
                 </div>
 
                 <div class="form-group mt-2 was-validated">
-                    <label for="password" class="form-label text-white fw-bold">Birthday</label>
-                    <input type="date" id="" name="" class="form-control" required>
+                    <label for="birthdate" class="form-label text-white fw-bold">Birthday</label>
+                    <input type="date" id="birthdate" name="birthdate" class="form-control" required>
                     <div class="invalid-feedback fw-bold">
                         생년월일을 입력해주세요
                     </div>
                 </div>
 
                 <div class="form-group mt-2 was-validated">
-                    <label for="password" class="form-label text-white fw-bold">Phone</label>
-                    <input type="tel" id="" name="" class="form-control" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
+                    <label for="phone" class="form-label text-white fw-bold">Phone</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
                     <div class="invalid-feedback fw-bold">
                         전화번호를 입력해주세요 '-'포함 필수!
                     </div>
