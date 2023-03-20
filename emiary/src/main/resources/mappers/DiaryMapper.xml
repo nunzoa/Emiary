@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.emiary.dao.DiaryDAO">
+
+	<!-- 일기저장 -->
+	<insert id="write" parameterType="diaries">
+		insert into  diaries (
+		diary_id
+		, email
+		, title
+		, content
+		, emotion_id
+		)
+		values (
+		diaries_seq.nextval
+		, #{email}
+		, #{title}
+		, #{content}
+		, #{emotion_id}
+		)
+	</insert>
+
+	<select id="select" parameterType="string" resultType="Member">
+		select * from member
+		where email = #{email}
+	</select>
+
+
+</mapper>
+

@@ -32,10 +32,8 @@ public class MemberController {
 
 	@PostMapping("register")
 	public String register(Member member){
-		log.debug("멤버 {}", member);
 		service.insert(member);
-		log.debug("갔다왔나?");
-		return "memberView/loginForm";
+		return "memberView/register";
 	}
 
 
