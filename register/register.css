@@ -22,14 +22,14 @@ header .container{
     max-width: 1200px;
   }
   
-  .bg-orange{
+.bg-orange{
     background-color: var(--orange) !important;
-  }
+}
   
   
-  .container{
+.container{
     width : 770px;
-  }
+}   
 
 
 
@@ -54,9 +54,6 @@ header .container{
     accent-color: var(--green-dark);
 }
 
-.btn{
-    width: 150px;
-}
 
 .btn:hover{
     background-color: var(--green-dark);
@@ -70,26 +67,4 @@ header .container{
 }
 
 
-.icon{
-    width: 40px;
-    height: 40px;
-}
-.icon:hover{
-    border-radius: 50%;
-    box-shadow: 4px 4px 0px var(--green-dark);
-}
 
-.icon:active{
-    border-radius: 50%;
-    box-shadow: 4px 4px 0px black;
-}
-
-.google{
-    background: url(../image/google.png) center/contain no-repeat;
-
-}
-
-.naver{
-    background: url(../image/naver.png) center/contain no-repeat;
-   
-}
