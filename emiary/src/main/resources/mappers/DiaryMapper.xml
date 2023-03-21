@@ -9,16 +9,14 @@
 		insert into  diaries (
 		diary_id
 		, email
-		, title
 		, content
-		, emotion_id
+		, created_at
 		)
 		values (
 		diaries_seq.nextval
 		, #{email}
-		, #{title}
 		, #{content}
-		, #{emotion_id}
+		, #{created_at}
 		)
 	</insert>
 

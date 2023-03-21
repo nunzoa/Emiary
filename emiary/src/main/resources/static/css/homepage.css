@@ -95,8 +95,11 @@ header .container{
 .day{
   border-radius: 1.05rem;
   border : 3px solid var(--orange)!important;
+  display: flex;
+  margin : 5px;
   color : #13bc7e;
   font-weight: bold;
+  font-size: 20px;
   width : 100px;
   height : 100px;
   box-shadow: 3px 3px 0px var(--orange);
@@ -160,7 +163,7 @@ ion-icon{
 
 ion-icon:hover{
   background: #fff;
-  color : var(--orange)!important;
+  color : var(--green-dark)!important;
   border-radius: 50%;
 }
 
@@ -191,5 +194,16 @@ ion-icon:hover{
 .btn-modal:hover{
   background-color: #ff7f00;
   color : #fff;
+}
+
+#modalBackDrop {
+  display: none;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100vw;
+  height: 150vh;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 

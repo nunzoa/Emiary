@@ -7,6 +7,8 @@
 
 }
 
+
+
 *{
   font-family: 'Roboto', sans-serif;
 }
@@ -27,8 +29,24 @@ header .container{
   background-color: var(--orange) !important;
 }
 
+section{
 
-#titlebar input, textarea{
-    border : none;
+
+}
+
+#editorjs{
+  width: 60%;
+  border : none;
+  background: rgba(5, 171, 94, 0.5);
+  box-shadow: 0px 0px 10px rgba(5, 171, 94);
+}
+
+#diarybtn{
+  background: var(--orange);
+}
+
+#diarybtn:hover{
+  background: var(--green-dark);
+  color : #fff;
 }
 
