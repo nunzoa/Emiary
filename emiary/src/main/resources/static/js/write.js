@@ -42,7 +42,7 @@ $("#diarybtn").click(function() {
 
   $.ajax({
     type: "POST",
-    url: "/write",
+    url: "write",
     data: { content : content, created_at : daystring },
     dataType : 'text',
     success: function(n) {

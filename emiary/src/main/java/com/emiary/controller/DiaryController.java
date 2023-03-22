@@ -35,15 +35,14 @@ public class DiaryController {
 
     @ResponseBody
     @PostMapping("write")
-    public int write(String content, String created_at, @AuthenticationPrincipal UserDetails user) {
+    public int write(Diaries diaries, @AuthenticationPrincipal UserDetails user) {
 //        double score = EmotionAnalyzer.analyzeEmotion(diaries.getContent());
 //        log.debug(" 감정분석결과 점수 : {}",score);
 //
 //        diaries.setEmotion_id(score);
-//        diaries.setEmail(user.getUsername());
-        log.debug("{}", content);
-        log.debug("{}", created_at);
-        int n = diaryservice.write(null);
+        diaries.setEmail(user.getUsername());
+        log.debug("{}", diaries);
+        int n = diaryservice.write(diaries);
 
         return n;
     }
