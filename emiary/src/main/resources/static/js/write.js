@@ -30,7 +30,7 @@ const editor = new EditorJS({
 
 
 $("#diarybtn").click(function() {
-  let content = $("#editorjs").text();
+  let content = $("#editorjs").html();
   let daystring = $("#dayString").text();
   daystring = daystring
       .replace("년 ", "-")

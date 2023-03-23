@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <script th:src="@{/js/jquery-3.6.0.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/mypage.css}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header class="overflow-hidden bg-orange">
+      <div class="container">
+        <div class="row p-3 d-flex align-items-center">
+          <div class="col-sm-6 text-lg-start">
+            <!-- 1. 로고 누르면 홈페이지로 이동 -->
+            <a
+              th:href="@{/static}"
+              class="navbar-brand display-1 text-white fs-1"
+            >
+              Emiary
+              <img th:src="@{/image/logo.png}" class="img-fluid" alt="logo" />
+            </a>
+          </div>
+
+          <div id="date" class="col-sm-6 text-end text-white display-5">
+            마이페이지
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="m-5 mx-auto">
+      <div class="container">
+        <div id="profileBox" class="row">
+          <!-- 클릭 시 사진 바꿀 수 있게 -->
+          <a href="" class="d-flex justify-content-center mt-3">
+            <img id="profileImage" src="" alt="" />
+          </a>
+        </div>
+        <div class="row w-25 mx-auto" id="logout-box">
+          <a class="btn mt-2 display-5 text-center" id="logout"> 로그아웃 </a>
+        </div>
+        <!-- 읽기 전용 글 갯수  -->
+        <div id="information" class="mt-4 d-flex justify-content-evenly">
+          <div class="readinformation text-center p-2">글 갯수</div>
+
+          <div class="readinformation text-center p-2">평균 감정</div>
+
+          <div class="readinformation text-center p-2">친구 수</div>
+        </div>
+        <div
+          id="information-detail"
+          class="d-flex justify-content-evenly mx-auto m-3"
+        >
+          <!-- 글 갯수 -->
+          <div class="inputinformation text-center p-1">12</div>
+          <!-- 평균 감정 -->
+          <div class="inputinformation text-center p-1">12</div>
+          <!-- 친구 수 -->
+          <div class="inputinformation text-center p-1">12</div>
+        </div>
+
+        <!-- 회원정보 수정 -->
+        <div class="row mt-4">
+          <button class="bottom-btn btn w-50 mx-auto p-2 text-white fw-bold">
+            회원정보 수정
+          </button>
+        </div>
+        <!-- 회원 탈퇴 -->
+        <div class="row mt-3">
+          <button class="bottom-btn btn w-50 mx-auto p-2 text-white fw-bold">
+            회원 탈퇴
+          </button>
+        </div>
+        <!-- 프로필 공개 여부 -->
+        <div class="row mt-3">
+          <div
+            id="profile_access"
+            class="bottom-btn text-center w-50 mx-auto p-2 text-white fw-bold"
+          >
+            프로필 공개 여부
+          </div>
+          <div class="text-center mt-3">
+            <input type="checkbox" id="check" />
+            <label for="check" class="checkbutton"></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script th:src="@{/js/mypage.js}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

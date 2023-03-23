@@ -1,0 +1,133 @@
+
+:root{
+    --orange: #ff7f00;
+    --green-dark: #13bc7e;
+    --light-grey: #f1f1f1;
+  
+  }
+
+*{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+}
+
+body{
+    height : 100vh;
+}
+
+
+/* header 부분 */
+header .container{
+    max-width: 1200px;
+  }
+  
+  .bg-orange{
+    background-color: var(--orange) !important;
+  }
+  
+  
+  .container{
+    width : 770px;
+  }
+
+  section{
+    width : 500px;
+    height : 520px;
+    background : var(--green-dark);
+    border-radius: 25px;
+    box-shadow: 0px 3px 0px #016641;
+  }
+
+
+#profileBox{
+    height : 120px;
+}
+
+#logout{
+    font-size: 0.8rem;
+    border : 2px solid #fff;
+    color : white;
+    font-weight: bold;
+}
+
+div > button:hover, #logout:hover{
+    background-color: var(--orange)!important;
+    border: 1px solid var(--green-dark)!important;
+}
+
+
+#profileImage{
+    height : 100px;
+    width : 100px;
+    background: #f1f1f1;
+    background-image: url(../image/profile_image.jpg);
+    background-size: cover;
+    border-radius: 50%;
+}
+
+
+
+.readinformation{
+    background: var(--orange);
+    color : #fff;
+    font-weight: bold;
+    border-radius: 25px;
+    width : 150px;
+}
+
+.inputinformation{
+    background: #fff;
+    border-radius: 25px;
+    color : var(--green-dark);
+    width : 150px;
+}
+
+.bottom-btn{
+    border : 1px solid #fff!important;
+    border-radius: 5px;
+}
+
+#profile_access{
+    border : 1px solid #fff;
+}
+
+.checkbutton{
+    background-color: var(--orange);
+    width : 85px;
+    height : 35px;
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    
+}
+
+.checkbutton::before{
+    position: absolute;
+    content: '';
+    background-color: #fff;
+    width: 26px;
+    height : 26px;
+    left : 0;
+    bottom : 1%;
+    border-radius: 50%;
+    margin : 5px;
+    transition: 1s;
+}
+
+input:checked + .checkbutton{
+    background-color: #fff;
+    
+}
+
+
+input:checked + .checkbutton::before{
+    transform: translate(50px);
+    background-color: #13bc7e;
+}
+
+
+
+input{
+    display: none;
+}

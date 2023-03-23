@@ -5,26 +5,34 @@
 <mapper namespace="com.emiary.dao.DiaryDAO">
 
 	<!-- 일기저장 -->
-	<insert id="write" parameterType="diaries">
+	<insert id="write" parameterType="Diaries">
 		insert into  diaries (
 		diary_id
 		, email
 		, content
+		, emotionscore
 		, created_at
 		)
 		values (
 		diaries_seq.nextval
 		, #{email}
 		, #{content}
+		, #{emotionscore}
 		, #{created_at}
 		)
 	</insert>
 
-	<select id="select" parameterType="string" resultType="Member">
-		select * from member
+	<select id="readDiary" parameterType="Map" resultType="Diaries">
+		select diary_id, content, to_char(created_at, 'FMyyyy-mm-dd') as created_at
+		from diaries
 		where email = #{email}
+		  and created_at = #{created_at}
 	</select>
 
-
+	<select id="checkDiary" parameterType="String" resultType="Diaries">
+		select to_char(created_at, 'FMyyyymmdd') as created_at, emotionscore
+		from diaries
+		where email = #{username}
+	</select>
 </mapper>
 

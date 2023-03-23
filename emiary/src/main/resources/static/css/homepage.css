@@ -103,7 +103,10 @@ header .container{
   width : 100px;
   height : 100px;
   box-shadow: 3px 3px 0px var(--orange);
+
 }
+
+
 
 .day:hover{
   background-color: rgba(255, 127, 0, 0.5);
@@ -117,6 +120,11 @@ header .container{
   color: white;
   box-shadow: 3px 3px 0px #fff;
 }
+
+hasDiary{
+
+}
+
 
 #currentDay{
   background-color: rgba(255, 127, 0, 0.6);

@@ -2,17 +2,19 @@ package com.emiary.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("mypage")
 public class MypageController {
 	
 	/**
 	 * 
 	 * @return
 	 */
-	@GetMapping("mypage")
+	@GetMapping("home")
 	public String mypage() {
-		return "mypage";
+		return "mypageView/mypage";
 	}
 	
 

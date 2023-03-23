@@ -39,6 +39,7 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 
 	implementation 'com.github.shin285:KOMORAN:3.3.4'
+	implementation 'org.jsoup:jsoup:1.15.4'
 }
 
 tasks.named('test') {
