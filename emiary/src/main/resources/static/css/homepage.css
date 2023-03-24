@@ -32,6 +32,8 @@ header .container{
   width : 770px;
 }
 
+
+
 .searchinput{
   width : 300px;
 }
@@ -65,11 +67,7 @@ header .container{
   color : var(--orange);
 }
 
-#monthDisplay:hover{
-    background-color: var(--orange)!important;
-    color : #fff!important;
-    border-radius: 1.5rem;
-}
+
 
 #weekdays{
 
@@ -93,6 +91,7 @@ header .container{
 }
 
 .day{
+  position: relative;
   border-radius: 1.05rem;
   border : 3px solid var(--orange)!important;
   display: flex;
@@ -106,8 +105,6 @@ header .container{
 
 }
 
-
-
 .day:hover{
   background-color: rgba(255, 127, 0, 0.5);
   color: #fff;
@@ -119,6 +116,25 @@ header .container{
   background-color: rgba(255, 127, 0, 0.8);
   color: white;
   box-shadow: 3px 3px 0px #fff;
+}
+
+.emoticon{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: #fff;
+  transition: font-size 0.2s ease;
+}
+
+.emoticon:hover{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3.5rem;
+  color: #fff;
 }
 
 hasDiary{
@@ -175,14 +191,13 @@ ion-icon:hover{
   border-radius: 50%;
 }
 
-#modalwindow{
+.modalwindow{
   display : none;
-  
+  z-index: 20;
 }
 
 
 .modal-content{
-  display: relative;
   margin-top : 250px;
   margin-left : 650px;
   width: 200px;
@@ -204,7 +219,7 @@ ion-icon:hover{
   color : #fff;
 }
 
-#modalBackDrop {
+.modalBackDrop {
   display: none;
   top: 0px;
   left: 0px;
@@ -213,5 +228,74 @@ ion-icon:hover{
   height: 150vh;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+#colorExplanation{
+  position: fixed;
+  top : 340px;
+  left : 140px;
+  border : none!important;
+  background: var(--green-dark)!important;
+  color : #fff!important;
+}
+
+#colorExplanation:hover{
+  background: #fff!important;
+  color : var(--green-dark)!important;
+  border : 1px solid var(--green-dark)!important;
+}
+
+.offcanvas-start{
+  height: 330px;
+  width: 250px!important;
+  background :var(--green-dark);
+  border-radius: 5px;
+  box-shadow: 5px 5px 0px #076140;
+}
+
+.offcanvas-body{
+  width : 200px!important;
+}
+
+#veryNegative{
+  width: 80px;
+  height : 20px;
+  background : #EC00FFFF  ;
+  border-radius: 5px;
+}
+
+#negative{
+  width: 80px;
+  height : 20px;
+  background : #ff2d2d   ;
+  border-radius: 5px;
+}
+
+#neutral{
+  width: 80px;
+  height : 20px;
+  background : #919191  ;
+  border-radius: 5px;
+}
+
+#positive{
+  width: 80px;
+  height : 20px;
+  background : #4476ff  ;
+  border-radius: 5px;
+}
+
+#veryPositive{
+  width: 80px;
+  height : 20px;
+  background : #00FF7F  ;
+  border-radius: 5px;
+}
+
+#failed{
+  width: 80px;
+  height : 20px;
+  background : #2f2f2f  ;
+  border-radius: 5px;
 }
 

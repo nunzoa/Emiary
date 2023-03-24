@@ -1,10 +1,12 @@
 let nav = 0;
 const calendar = document.getElementById('calendar');
-const modalBackDrop = document.getElementById("modalBackDrop");
-const newEventModal = document.getElementById("modalwindow");
+const modalBackDrop = document.querySelector(".modalBackDrop");
+const writeEventModal = document.getElementById('writeEventModal');
+const delReadModal = document.getElementById("delReadModal");
 const todayDiary = document.getElementById("todayDiary");
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-let emotionColor;
+
+let emotionColor = "";
 
 $(document).ready(function() {
     $.ajax({
@@ -21,8 +23,8 @@ $(document).ready(function() {
 });
 
 
+// load 시작
 function load() {
-
     const dt = new Date();
 
     if (nav !== 0) {
@@ -47,81 +49,127 @@ function load() {
 
     calendar.innerHTML = '';
 
+    // for문 캘린더 작성
     for (let i = 1; i <= paddingDays + daysInMonth; i++) {
-        const daySquare = document.createElement('a');
+        let daySquare = document.createElement('a');
         daySquare.classList.add('day');
         let cleanDayString = `${year}${month + 1}${i - paddingDays}`;
+        let barDayString = `${year}-${month + 1}-${i - paddingDays}`;
+        
+        // modal창 확인 시 사용 및 read시 사용
+        daySquare.setAttribute("num", barDayString);
         let dayString = `${year}년 ${month + 1}월 ${i - paddingDays}일`;
+
+        // +버튼 누를 시 일기 작성으로 이동
         let todayDate = new Date(year, month, day);
         let todayString = `${todayDate.getFullYear()}년 ${(todayDate.getMonth() + 1)}월 ${todayDate.getDate()}일`;
         todayDiary.href = `/emiary/diary/write?dayString=` + todayString;
-
-
+        // paddingDays는 제외하고 출력
         if (i > paddingDays) {
-
             daySquare.innerText = i - paddingDays;
+            
+            daySquare.addEventListener("click", function(){
+                let dateForOne = daySquare.getAttribute("num");
 
+                // 오늘 이후로 일기를 쓸 수 없게 만드는 코드 구현?
+
+                console.log("dateForOne : ", dateForOne);
+                $.ajax({
+                    url : "diary/modalCheck",
+                    type : "GET",
+                    data : {dateForOne : dateForOne},
+                    success : function(n){
+                        if(n == 1){
+                            delReadModal.style.display = "block";
+                        }else{
+
+                            writeEventModal.style.display = "block";
+                        }
+                    },
+                    error : function (xhr, status, error) {
+                    console.log(status);
+                }
+
+                })
+
+                document.getElementById("writeDiary").onclick = function () {
+                    location.href = `/emiary/diary/write?dayString=${dayString}`;
+                }
+
+                document.getElementById("readDiary").onclick = function () {
+                    console.log(barDayString);
+                    location.href = `/emiary/diary/read?dayString=${barDayString}`;
+                }
+
+            })
+
+            document.querySelector('.write-close').addEventListener('click', () => {
+                writeEventModal.style.display = "none";
+                modalBackDrop.style.display = "none";
+            })
+
+            document.querySelector('.delRead-close').addEventListener('click', () => {
+                delReadModal.style.display = "none";
+                modalBackDrop.style.display = "none";
+            })
+
+
+
+
+            // 색깔 및 이모티콘 넣기
             for(let count = 0; count < emotionColor.length; ++count){
                 if (emotionColor[count].created_at == cleanDayString) {
+                    let scores = emotionColor[count].emotionscore
+                    let emoticon = document.createElement("i");
                         switch (true){
-                            case emotionColor[count].emotionscore < -1 :
-                                daySquare.style.background = '#4B0082';
+                            //     매우 부정
+                            case scores > -2 && scores <= -1.2  :
+                                daySquare.style.background = '#EC00FFFF';
+                                emoticon.classList.add("emoticon");
+                                emoticon.classList.add("fa-solid");
+                                emoticon.classList.add("fa-face-dizzy");
+                                daySquare.appendChild(emoticon);
                                 break;
-                            case emotionColor[count].emotionscore >= -1 && emotionColor[count].emotionscore < 0 :
-                                daySquare.style.background = '#C71585';
+                            //     약간 부정
+                            case scores > -1.2 && scores <= -0.5 :
+                                daySquare.style.background = '#ff2d2d';
+                                emoticon.classList.add("emoticon");
+                                emoticon.classList.add("fa-solid");
+                                emoticon.classList.add("fa-face-frown-open");
+                                daySquare.appendChild(emoticon);
                                 break;
-                            case emotionColor[count].emotionscore >= 0 && emotionColor[count].emotionscore < 1 :
-                                daySquare.style.background = '#FFFF00';
+                            //     중립
+                            case scores > -0.5 && scores <= 0.1 :
+                                daySquare.style.background = '#919191';
+                                emoticon.classList.add("emoticon");
+                                emoticon.classList.add("fa-solid");
+                                emoticon.classList.add("fa-face-meh");
+                                daySquare.appendChild(emoticon);
                                 break;
-                            case emotionColor[count].emotionscore >= 1 :
+                            //     약간 긍정
+                            case scores > 0.1 && scores <= 1.0 :
+                                daySquare.style.background = '#4476ff';
+                                emoticon.classList.add("emoticon");
+                                emoticon.classList.add("fa-solid");
+                                emoticon.classList.add("fa-face-laugh");
+                                daySquare.appendChild(emoticon);
+                                break;
+                            //     매우 긍정
+                            case scores > 1.0 && scores <= 2.0 :
                                 daySquare.style.background = '#00FF7F';
+                                emoticon.classList.add("emoticon");
+                                emoticon.classList.add("fa-solid");
+                                emoticon.classList.add("fa-face-laugh-squint");
+                                daySquare.appendChild(emoticon);
                                 break;
+                            //     10같은 경우 판변 못함으로 기본값처리
                             default :
-                                daySquare.style.background = '#000';
-                        }
+                                daySquare.style.background = '#2f2f2f';
 
+                        }
                 }
             }
 
-
-
-            if (day >= i - paddingDays || month < new Date().getMonth()) {
-                daySquare.addEventListener('click', () => {
-
-                    newEventModal.style.display = "block";
-                    document.getElementById("writeDiv").style.display = "block";
-                    document.getElementById("readDiv").style.display = "block";
-                    // 글이 있으면 글 보기만 볼 수 있게하고
-                    // 글이 없으면 글 쓰기만 할 수 있게 한다.
-                    // for(let count = 0; count < emotionColor.length; ++count){
-                    //     if(emotionColor[count].created_at == cleanDayString){
-                    //         document.getElementById("writeDiv").style.display = "none";
-                    //     }
-                    //
-                    // }
-
-                    modalBackDrop.style.display = "block";
-
-
-                    document.getElementById("writeDiary").onclick = function () {
-                        location.href = `/emiary/diary/write?dayString=${dayString}`;
-                    }
-
-                    document.getElementById("readDiary").onclick = function () {
-                        dayString = dayString
-                            .replace("년 ", "-")
-                            .replace("월 ", "-")
-                            .replace("일", "");
-                        console.log("글 읽을 때 날짜는? ", dayString);
-                        location.href = `/emiary/diary/read?dayString=${dayString}`;
-                    }
-                });
-            }
-
-            document.querySelector('#close').addEventListener('click', () => {
-                newEventModal.style.display = "none";
-                modalBackDrop.style.display = "none";
-            })
 
             if (i - paddingDays === day && nav === 0) {
                 daySquare.id = 'currentDay';
@@ -133,6 +181,7 @@ function load() {
     }
 
 }
+// load 끝
 
 // 달력 앞으로 뒤로 움직임
 function initButton(){
@@ -150,8 +199,13 @@ function initButton(){
 
 
 
+
+
+
 initButton();
 load();
+
+
 
 
 

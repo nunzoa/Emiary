@@ -12,4 +12,6 @@ public interface MemberDAO {
 	Member select(String email);
 	//회원정보 수정
 	int update(Member member);
+
+
 }

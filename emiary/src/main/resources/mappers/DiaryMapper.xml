@@ -34,5 +34,12 @@
 		from diaries
 		where email = #{username}
 	</select>
+
+	<select id="modalCheck" parameterType="String" resultType="int">
+		select count(*)
+		from diaries
+		where created_at = #{dateForOne}
+	</select>
+
 </mapper>
 

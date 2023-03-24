@@ -26,6 +26,6 @@ public interface MemberService {
 	 * @return	해당 회원의 정보
 	 */
 	public Member getMember(String email);
-	
-	
+
+
 }

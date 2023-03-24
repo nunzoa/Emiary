@@ -27,6 +27,7 @@ public class DiaryController {
 
     @GetMapping("write")
     public String write(String dayString, Model model) {
+        log.debug("dayString {}", dayString);
         model.addAttribute("dayString", dayString);
         return "diaryView/writeForm";
     }
@@ -76,5 +77,13 @@ public class DiaryController {
         log.debug("{}", emotionColors);
 
         return emotionColors;
+    }
+    @ResponseBody
+    @GetMapping("modalCheck")
+    public int modalCheck(@RequestParam("dateForOne") String dateForOne){
+        log.debug(dateForOne);
+        int n = diaryservice.modalCheck(dateForOne);
+        log.debug("콘트롤러 n의 값은? ", n);
+        return n;
     }
 }
