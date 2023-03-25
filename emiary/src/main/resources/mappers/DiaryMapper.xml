@@ -35,11 +35,18 @@
 		where email = #{username}
 	</select>
 
-	<select id="modalCheck" parameterType="String" resultType="int">
+	<select id="modalCheck" parameterType="Map" resultType="int">
 		select count(*)
 		from diaries
-		where created_at = #{dateForOne}
+		where created_at = #{created_at}
+		and email = #{email}
 	</select>
+
+	<delete id="deleteDiary" parameterType="Map">
+		delete diaries
+		where email = #{email}
+		and created_at = #{created_at}
+	</delete>
 
 </mapper>
 

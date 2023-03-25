@@ -50,3 +50,31 @@ section{
   color : #fff;
 }
 
+.alert{
+  display: none;
+}
+
+.swal-overlay {
+  background-color: rgba(19, 188, 126, 0.5);
+}
+
+.swal-button {
+  padding: 7px 19px;
+  border-radius: 5px;
+  background-color: #13BC7EFF;
+  font-size: 12px;
+  border: 1px solid #13BC7EFF!important;
+}
+
+.swal-button:hover{
+  background-color: #fff!important;
+  color : #ff7f00;
+}
+
+.swal-button:active{
+  color : #ff7f00;
+}
+
+i{
+  font-size: 7rem;
+}

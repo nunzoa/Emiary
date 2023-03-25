@@ -9,6 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import com.emiary.domain.Member;
 import com.emiary.service.MemberService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 회원 관련 처리 콘트롤러
  */
@@ -43,11 +46,10 @@ public class MemberController {
 	 * @param member
 	 * @return
 	 */
-
+	@ResponseBody
 	@PostMapping("register")
-	public String register(Member member){
-		service.insert(member);
-		return "memberView/loginForm";
+	public void register(Member member){
+		int n = service.insert(member);
 	}
 
 

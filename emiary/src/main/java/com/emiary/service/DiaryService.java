@@ -12,5 +12,7 @@ public interface DiaryService {
 
 	List<Diaries> checkDiary(String username);
 
-    int modalCheck(String dateForOne);
+    int modalCheck(String dateForOne, String username);
+
+    int deleteDiary(String deleteDiary, String username);
 }

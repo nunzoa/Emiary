@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.emiary.dao.MyPageDAO">
+
+	<select id="countDiaries" parameterType="String" resultType="int">
+		select count(*)
+		from diaries
+		where email = #{username}
+	</select>
+
+	<select id="calcEmotion" parameterType="String" resultType="Double">
+		select sum(emotionscore) / count(emotionscore)
+		from diaries
+		where emotionscore != 10
+		and email = #{username}
+	</select>
+
+<!--친구 수 세기 친구 칼럼이 필요할 듯? -->
+<!--	<select id="countFriends" parameterType="String" resultType="int">-->
+<!--		select count(*)-->
+<!--		from diaries-->
+<!--	</select>-->
+
+</mapper>
+

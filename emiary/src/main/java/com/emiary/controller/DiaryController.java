@@ -4,6 +4,7 @@ import com.emiary.domain.EmotionColor;
 import com.emiary.util.EmotionAnalyzer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,19 +41,21 @@ public class DiaryController {
 
     @ResponseBody
     @PostMapping("write")
-    public int write(Diaries diaries, @AuthenticationPrincipal UserDetails user) {
+    public double write(Diaries diaries, @AuthenticationPrincipal UserDetails user) {
         double score = EmotionAnalyzer.analyzeEmotion(diaries.getContent());
-        log.debug(" 감정분석결과 점수 : {}",score);
         diaries.setEmotionscore(score);
         diaries.setEmail(user.getUsername());
-        log.debug("{}", diaries);
+
+
         int n = diaryservice.write(diaries);
 
-        return n;
+        return score;
     }
 
     @GetMapping("read")
     public String read(String dayString, @AuthenticationPrincipal UserDetails user, Model model){
+        log.debug("barDayString at Controller[READ] : {}", dayString);
+
         Diaries diary = diaryservice.read(dayString, user.getUsername());
         String date = diary.getCreated_at();
         date = date.replaceFirst("-", "년 ").replace("-", "월 ").concat("일");
@@ -80,10 +83,20 @@ public class DiaryController {
     }
     @ResponseBody
     @GetMapping("modalCheck")
-    public int modalCheck(@RequestParam("dateForOne") String dateForOne){
-        log.debug(dateForOne);
-        int n = diaryservice.modalCheck(dateForOne);
-        log.debug("콘트롤러 n의 값은? ", n);
+    public int modalCheck(@RequestParam("dateForOne") String dateForOne, @AuthenticationPrincipal UserDetails userDetails){
+        log.debug("dateForOne : {}", dateForOne);
+        int n = diaryservice.modalCheck(dateForOne, userDetails.getUsername());
         return n;
     }
+
+    @GetMapping("deleteDiary")
+    public String deleteDiary(String dayString, @AuthenticationPrincipal UserDetails user) {
+        log.debug("barDayString at Controller : {}", dayString);
+        int n = diaryservice.deleteDiary(dayString, user.getUsername());
+
+        return "redirect:/";
+    }
+
+
+
 }

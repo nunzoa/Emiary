@@ -53,11 +53,13 @@ function load() {
     for (let i = 1; i <= paddingDays + daysInMonth; i++) {
         let daySquare = document.createElement('a');
         daySquare.classList.add('day');
+
         let cleanDayString = `${year}${month + 1}${i - paddingDays}`;
         let barDayString = `${year}-${month + 1}-${i - paddingDays}`;
-        
-        // modal창 확인 시 사용 및 read시 사용
+
         daySquare.setAttribute("num", barDayString);
+
+        // modal창 확인 시 사용 및 read시 사용
         let dayString = `${year}년 ${month + 1}월 ${i - paddingDays}일`;
 
         // +버튼 누를 시 일기 작성으로 이동
@@ -72,8 +74,11 @@ function load() {
                 let dateForOne = daySquare.getAttribute("num");
 
                 // 오늘 이후로 일기를 쓸 수 없게 만드는 코드 구현?
-
+                console.log("barDayString : ", barDayString)
+                console.log("dayString : ", dayString)
                 console.log("dateForOne : ", dateForOne);
+
+                // 모달 구분 코드 시작
                 $.ajax({
                     url : "diary/modalCheck",
                     type : "GET",
@@ -89,17 +94,21 @@ function load() {
                     error : function (xhr, status, error) {
                     console.log(status);
                 }
-
                 })
+                // 모달 구분 코드 끝
 
                 document.getElementById("writeDiary").onclick = function () {
                     location.href = `/emiary/diary/write?dayString=${dayString}`;
                 }
 
                 document.getElementById("readDiary").onclick = function () {
-                    console.log(barDayString);
                     location.href = `/emiary/diary/read?dayString=${barDayString}`;
                 }
+
+                document.getElementById("deleteDiary").onclick = function () {
+                    location.href = `/emiary/diary/deleteDiary?dayString=${barDayString}`;
+                }
+
 
             })
 
@@ -128,6 +137,8 @@ function load() {
                                 emoticon.classList.add("emoticon");
                                 emoticon.classList.add("fa-solid");
                                 emoticon.classList.add("fa-face-dizzy");
+
+
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     약간 부정

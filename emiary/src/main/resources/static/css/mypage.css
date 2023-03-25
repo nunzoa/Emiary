@@ -56,7 +56,7 @@ header .container{
 
 section{
     width : 500px;
-    height : 520px;
+    height : 530px;
     background : var(--green-dark);
     border-radius: 25px;
     box-shadow: 0px 3px 0px #016641;
@@ -71,7 +71,7 @@ section{
 
 #logout{
     font-size: 0.8rem;
-    border : 2px solid #fff;
+    border : 1px solid #fff;
     color : white;
     font-weight: bold;
 }
@@ -85,15 +85,26 @@ div > button:hover, #logout:hover{
 #profileImage{
     height : 100px;
     width : 100px;
-    background: #f1f1f1;
     background-image: url(../image/profile_image.jpg);
     background-size: cover;
     border-radius: 50%;
 }
 
+#profileImage:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+#inputImage{
+    display: none;
+}
+
+
+
 
 
 .readinformation{
+
     background: var(--orange);
     color : #fff;
     font-weight: bold;
@@ -106,6 +117,7 @@ div > button:hover, #logout:hover{
     border-radius: 25px;
     color : var(--green-dark);
     width : 150px;
+    height : 42px;
 }
 
 .bottom-btn{
@@ -156,3 +168,10 @@ input:checked + .checkbutton::before{
 input{
     display: none;
 }
+
+
+.emoticon{
+    font-size: 2em;
+}
+
+

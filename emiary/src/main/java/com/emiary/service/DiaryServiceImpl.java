@@ -41,11 +41,26 @@ public class DiaryServiceImpl implements DiaryService {
 	}
 
     @Override
-    public int modalCheck(String dateForOne) {
-		log.debug("서비스의 n의 값은? {}", dateForOne);
-		log.debug("서비스의 n의 값은? {}", dateForOne);
-		int n = diarydao.modalCheck(dateForOne);
+    public int modalCheck(String dateForOne, String username) {
+		log.debug("dateForOne : {}, username : {}", dateForOne, username);
+		Map<String, String> map = new HashMap<>();
+		map.put("created_at", dateForOne);
+		map.put("email", username);
+		log.debug("서비스의 map의 값은? {}", map);
+
+		int n = diarydao.modalCheck(map);
 		log.debug("서비스의 n의 값은? ", n);
+
+		return n;
+    }
+
+    @Override
+    public int deleteDiary(String barDayString, String username) {
+		Map<String, String> map = new HashMap<>();
+		map.put("created_at", barDayString);
+		map.put("email", username);
+		log.debug("{}", barDayString);
+		int n = diarydao.deleteDiary(map);
 
 		return n;
     }
