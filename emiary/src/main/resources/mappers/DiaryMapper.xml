@@ -14,7 +14,7 @@
 		, created_at
 		)
 		values (
-		diaries_seq.nextval
+		default
 		, #{email}
 		, #{content}
 		, #{emotionscore}
@@ -23,14 +23,14 @@
 	</insert>
 
 	<select id="readDiary" parameterType="Map" resultType="Diaries">
-		select diary_id, content, to_char(created_at, 'FMyyyy-mm-dd') as created_at
+		select diary_id, content, DATE_FORMAT(created_at, '%Y-%c-%e') as created_at
 		from diaries
 		where email = #{email}
 		  and created_at = #{created_at}
 	</select>
 
 	<select id="checkDiary" parameterType="String" resultType="Diaries">
-		select to_char(created_at, 'FMyyyymmdd') as created_at, emotionscore
+		select DATE_FORMAT(created_at, '%Y%c%e') as created_at, emotionscore
 		from diaries
 		where email = #{username}
 	</select>
