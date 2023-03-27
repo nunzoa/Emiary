@@ -19,7 +19,7 @@
 		, #{email}
 		, #{content}
 		, #{emotionscore}
-		, {keyword}
+		, #{keyword}
 		, #{created_at}
 		)
 	</insert>
