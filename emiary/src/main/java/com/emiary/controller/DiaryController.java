@@ -1,23 +1,26 @@
 package com.emiary.controller;
 
-import com.emiary.domain.EmotionColor;
-import com.emiary.util.EmotionAnalyzer;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.emiary.domain.Diaries;
+import com.emiary.domain.EmotionAnalysisResult;
+import com.emiary.domain.EmotionColor;
 import com.emiary.service.DiaryService;
+import com.emiary.util.EmotionAnalyzer;
 
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RequestMapping("diary")
@@ -41,15 +44,17 @@ public class DiaryController {
 
     @ResponseBody
     @PostMapping("write")
-    public double write(Diaries diaries, @AuthenticationPrincipal UserDetails user) {
-        double score = EmotionAnalyzer.analyzeEmotion(diaries.getContent());
-        diaries.setEmotionscore(score);
+    public double write(Diaries diaries, @AuthenticationPrincipal UserDetails user, Model model) {
+    	EmotionAnalysisResult result = EmotionAnalyzer.analyzeEmotion(diaries.getContent());
+        log.debug("감정분석 점수 : {}", result.getScore());
+        log.debug("빈출명사 : {}",result.getNoun());
+        diaries.setEmotionscore(result.getScore());
+        diaries.setKeyword(result.getNoun());
         diaries.setEmail(user.getUsername());
 
-
         int n = diaryservice.write(diaries);
-
-        return score;
+        log.debug("다이어리 : {}",diaries);
+        return result.getScore();
     }
 
     @GetMapping("read")
