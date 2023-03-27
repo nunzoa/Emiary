@@ -48,8 +48,9 @@ public class MemberController {
 	 */
 	@ResponseBody
 	@PostMapping("register")
-	public void register(Member member){
+	public int register(Member member){
 		int n = service.insert(member);
+		return n;
 	}
 
 
