@@ -11,7 +11,7 @@
 		, email
 		, content
 		, emotionscore
-		,keyword
+		, keyword
 		, created_at
 		)
 		values (
@@ -19,7 +19,7 @@
 		, #{email}
 		, #{content}
 		, #{emotionscore}
-		,#{keyword}
+		, {keyword}
 		, #{created_at}
 		)
 	</insert>
