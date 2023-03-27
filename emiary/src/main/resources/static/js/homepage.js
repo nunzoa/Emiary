@@ -90,6 +90,7 @@ function load() {
 
                             writeEventModal.style.display = "block";
                         }
+                        modalBackDrop.style.display = "block";
                     },
                     error : function (xhr, status, error) {
                     console.log(status);
