@@ -1,14 +1,14 @@
 package com.emiary.domain;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
-
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Data
 @NoArgsConstructor
@@ -21,7 +21,7 @@ public class Member implements UserDetails {
 	String birthdate ;				//생일
 	boolean enabled;			//계정 상태 (1-사용가능, 0-불가능)
 	String rolename;			//('ROLE_USER' - 일반회원, 'ROLE_ADMIN' - 관리자)
-
+	List<Member> friends;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -52,4 +52,5 @@ public class Member implements UserDetails {
 	public boolean isCredentialsNonExpired() {
 		return false;
 	}
+	 
 }
