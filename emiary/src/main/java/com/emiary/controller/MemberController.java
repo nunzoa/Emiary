@@ -1,16 +1,22 @@
 package com.emiary.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-
-import lombok.extern.slf4j.Slf4j;
 import com.emiary.domain.Member;
 import com.emiary.service.MemberService;
 
-import java.util.HashMap;
-import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 회원 관련 처리 콘트롤러
@@ -22,7 +28,7 @@ public class MemberController {
 
 	@Autowired
 	MemberService service;
-	
+
 	/**
 	 * 로그인 폼으로 이동
 	 * @return
@@ -56,6 +62,6 @@ public class MemberController {
 
 
 }
-	
+
 
 
