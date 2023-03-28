@@ -87,7 +87,6 @@ function load() {
                         if(n == 1){
                             delReadModal.style.display = "block";
                         }else{
-
                             writeEventModal.style.display = "block";
                         }
                         modalBackDrop.style.display = "block";
@@ -134,49 +133,57 @@ function load() {
                         switch (true){
                             //     매우 부정
                             case scores > -2 && scores <= -1.2  :
-                                daySquare.style.background = '#EC00FFFF';
+                                // daySquare.style.background = '#EC00FFFF';
                                 emoticon.classList.add("emoticon");
                                 emoticon.classList.add("fa-solid");
                                 emoticon.classList.add("fa-face-dizzy");
-
-
+                                emoticon.style.color = "#EC00FFFF";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     약간 부정
                             case scores > -1.2 && scores <= -0.5 :
-                                daySquare.style.background = '#ff2d2d';
+                                // daySquare.style.background = '#ff2d2d';
                                 emoticon.classList.add("emoticon");
                                 emoticon.classList.add("fa-solid");
                                 emoticon.classList.add("fa-face-frown-open");
+                                emoticon.style.color = "#ff2d2d";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     중립
                             case scores > -0.5 && scores <= 0.1 :
-                                daySquare.style.background = '#919191';
+                                // daySquare.style.background = '#919191';
                                 emoticon.classList.add("emoticon");
                                 emoticon.classList.add("fa-solid");
                                 emoticon.classList.add("fa-face-meh");
+                                emoticon.style.color = "#919191";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     약간 긍정
                             case scores > 0.1 && scores <= 1.0 :
-                                daySquare.style.background = '#4476ff';
+                                // daySquare.style.background = '#4476ff';
                                 emoticon.classList.add("emoticon");
                                 emoticon.classList.add("fa-solid");
                                 emoticon.classList.add("fa-face-laugh");
+                                emoticon.style.color = "#4476ff";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     매우 긍정
                             case scores > 1.0 && scores <= 2.0 :
-                                daySquare.style.background = '#00FF7F';
+                                // daySquare.style.background = '#00FF7F';
                                 emoticon.classList.add("emoticon");
                                 emoticon.classList.add("fa-solid");
                                 emoticon.classList.add("fa-face-laugh-squint");
+                                emoticon.style.color = "#00FF7F";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     10같은 경우 판변 못함으로 기본값처리
                             default :
-                                daySquare.style.background = '#2f2f2f';
+                                // daySquare.style.background = '#2f2f2f';
+                                emoticon.classList.add("emoticon");
+                                emoticon.classList.add("fa-solid");
+                                emoticon.classList.add("fa-face-meh-blank");
+                                emoticon.style.color = "#2f2f2f";
+                                daySquare.appendChild(emoticon);
 
                         }
                 }
