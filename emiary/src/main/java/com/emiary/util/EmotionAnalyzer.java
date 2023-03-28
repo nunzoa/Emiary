@@ -49,7 +49,17 @@ public class EmotionAnalyzer {
         return dict;
     }
     
+    /**
+     * 빈출단어 반환하기
+     * @param nouns 형태소분석으로 정리된 명사List
+     * @return String 빈출단어
+     */
     public static String findMostFrequentString(List<String> nouns) {
+    	// 리스트 길이가 1일 경우 바로 리턴
+    	//if (nouns.size() == 1) {
+       //     return nouns.get(0);
+       // }
+    	
         Map<String, Integer> counts = new HashMap<>();
         
         // 각 문자열의 카운트 계산
@@ -119,11 +129,22 @@ public class EmotionAnalyzer {
             	}
             	
             }
+        // 명사리스트가 비었거나 비교할 데이터가 없을 때 빈문자열 처리
+        if (nouns.isEmpty() || nouns.size()==1) {
+        	result.setNoun("");
+        }else  {
+        // 빈출단어 도출후 EmotionAnalysisResult 객체에 저장
+        String noun = findMostFrequentString(nouns);
         
-
-        if (scores.isEmpty()) {
-        	// 형태소와 감정사전 매핑 결과가 없을 때 10으로 리턴
-            return result;
+        result.setNoun(noun);
+        }
+        
+        
+        // 형태소와 감정사전 매핑 결과가 없거나 형태소가 너무 적을 경우 감정점수 10으로 리턴
+        if (scores.isEmpty() || scores.size()<15) {
+        	result.setScore(10);
+        	//result.setNoun(noun);
+            return  result;
         } else {
             double sum = scores.stream().mapToDouble(Double::doubleValue).sum();
             double avg = sum / scores.size();
@@ -140,9 +161,6 @@ public class EmotionAnalyzer {
         //       return "neutral";
        //     }
         }
-        	String noun = findMostFrequentString(nouns);
-        
-        	result.setNoun(noun);
             return result;
     }
 }
