@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+:root{
+    --orange: #ff7f00;
+    --green-dark: #13bc7e;
+    --light-grey: #f1f1f1;
+
+  }
+
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+ul li{
+    list-style-type: none;
+}
+
+.display-1{
+    letter-spacing: 1px;
+}
+
+/* header 부분 */
+header .container{
+    max-width: 770px;
+  }
+
+  .bg-orange{
+    background-color: var(--orange) !important;
+  }
+
+  
+  
+  .container{
+    width : 770px;
+  }
+
+  .nav-link{
+      color : #fff!important;
+  }
+
+.nav-link:hover{
+    color : var(--orange)!important;
+    background: #fff!important;
+}
+
+.nav-link:focus{
+    color : var(--orange)!important;
+    background: #fff;
+}
+
+.active{
+    color : var(--orange)!important;
+}
+
+.btn{
+    border : none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-family: var(--lg-font);
+    border: 3px solid #fff;
+    width : 100px;
+    padding : 8px 0;
+    letter-spacing: 2px;
+}
+
+.btn:hover{
+    color : #fff;
+}
+
+.btn:active{
+    border : 1px solid #fff!important;
+}
+
+.line{
+    height : 3px;
+    width : 70px;
+    background-color: var(--green-dark);
+    margin-right : 30px;
+}
+
+.title h3{
+    font-family: var(--sm-font);
+    color : var(--green-dark);
+}
+
+.title span{
+    font-size : 32px;
+    font-family : var(--lg-font);
+}
+
+.about-img{
+
+    min-height: 300px;
+    
+}
+
+.about-text .btn{
+    border-color : var(--green-dark);
+}
+
+.about-text .btn:hover{
+    background-color : var(--green-dark);
+}
+
+
+section{
+    height : 700px;
+}
+
+.chart{
+    height : 500px;
+}
+
+
+
+/* Media Queries */
+@media(max-width : 576px){
+    .lead{
+        font-size : 17px;
+    }
+}
+
+@media(min-width : 678px){
+    .header-banner h1{
+        font-size : 80px;
+    }
+    .btn{
+        font-size : 22px;
+    }
+
+    .title span{
+        font-size : 50px;
+    }
+}
+
+
+.chart_text_color{
+    color : var(--green-dark)!important;
+}
+
+.textGreen{
+    color : var(--green-dark);
+}
+
+i{
+    font-size : 6rem;
+}
+
+.plant-box{
+    color : var(--green-dark);
+}
+
+.chartsakai{
+    border-right: 3px dotted #13bc7e;
+}
+
+.chartsakai-left{
+    border-left: 3px dotted #13bc7e;
+}
+
+canvas {
+    background-color: #131722;
+}
