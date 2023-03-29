@@ -23,8 +23,9 @@ public class GraphServiceImpl implements GraphService{
     }
 
     @Override
-    public List<Graph> lineFunction(String presentMonth, String username) {
+    public List<Graph> lineFunction(String presentMonth, String presentYear, String username) {
         Map<String, String> map = new HashMap<>();
+        map.put("presentYear", presentYear);
         map.put("presentMonth", presentMonth);
         map.put("username", username);
         List<Graph> graph = graphDAO.lineFunction(map);
@@ -37,6 +38,15 @@ public class GraphServiceImpl implements GraphService{
         map.put("presentMonth", presentMonth);
         map.put("username", username);
         List<Graph> graph = graphDAO.radarFunction(map);
+        return graph;
+    }
+
+    @Override
+    public List<Graph> monthlyLineFunction(String presentYear, String username) {
+        Map<String, String> map = new HashMap<>();
+        map.put("presentYear", presentYear);
+        map.put("username", username);
+        List<Graph> graph = graphDAO.monthlyLineFunction(map);
         return graph;
     }
 }

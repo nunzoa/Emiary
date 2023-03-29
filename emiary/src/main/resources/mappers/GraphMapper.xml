@@ -13,11 +13,19 @@
 	</select>
 
 	<select id="lineFunction" parameterType="map" resultType="Graph">
-		select TO_CHAR(diaries.created_at, 'yyyy-mm-dd') AS YEARANDMONTHANDDAY, emotionScore
+		select TO_CHAR(diaries.created_at, 'yyyy-mm-dd') AS YEARANDMONTHANDDAY, emotionscore
 		from diaries
 		where email = #{username}
-		and extract(month from diaries.created_at) = #{presentMonth} and emotionscore != 10
+		  and extract(year from created_at) = #{presentYear} and extract(month from created_at) = #{presentMonth} and emotionscore != 10
 		order by created_at
+	</select>
+
+	<select id="monthlyLineFunction" parameterType="map" resultType="Graph">
+		select to_char(created_at, 'yyyy-mm') as yearAndMonth, trunc(avg(emotionscore), 2) as emotionscore
+		from diaries
+		where email = #{username} and extract(year from created_at) = #{presentYear}
+		group by to_char(created_at, 'yyyy-mm')
+		order by yearAndMonth
 	</select>
 
 	<select id="radarFunction" parameterType="map" resultType="Graph">

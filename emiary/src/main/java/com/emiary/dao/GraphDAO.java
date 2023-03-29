@@ -11,4 +11,5 @@ public interface GraphDAO {
     List<Graph> countDiaryForGraph(String username);
     List<Graph> lineFunction(Map<String, String> map);
     List<Graph> radarFunction(Map<String, String> map);
+    List<Graph> monthlyLineFunction(Map<String, String> map);
 }

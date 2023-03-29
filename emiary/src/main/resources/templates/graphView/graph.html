@@ -150,9 +150,10 @@
             <p id="emotionLineContent" class="lead my-4">
             </p>
             <div class="d-flex">
-                <a href="" class="btn mt-3 me-3">월별</a>
-                <a href="" class="btn mt-3 me-3">일별</a>
-              </div>
+              <btn id="lastMonth" class="btn mt-3 me-3"><i class="arrow fa-solid fa-arrow-left"></i></btn>
+              <btn id="nextMonth" class="btn mt-3 me-3"><i class="arrow fa-solid fa-arrow-right"></i></btn>
+              <btn id="monthly" class="btn mt-3 me-3">월별</btn>
+            </div>
               <div id="emotionLine" class="plant-box d-flex mx-auto mt-5">
               </div>
           </div>
@@ -181,16 +182,17 @@
             <p id="radarContent" class="lead my-4">
             </p>
             <div class="d-flex ">
-                <a href="" class="btn mt-3 me-3">1년</a>
-                <a href="" class="btn mt-3 me-3">6개월</a>
-                <a href="" class="btn mt-3">3개월</a>
-              </div>
+              <a href="" class="btn mt-3 me-3">1개월</a>
+              <a href="" class="btn mt-3 me-3">3개월</a>
+              <a href="" class="btn mt-3 me-3">6개월</a>
+              <a href="" class="btn mt-3">1년</a>
+            </div>
               <div id="radarEmoticon" class="face-box d-flex mx-auto mt-5">
               </div>
           </div>
           
           <div class="chart col-lg-6 order-lg-0">
-              <canvas id="RadarChart" class="mt-5"></canvas>
+              <canvas id="DoughnutChart" class="mt-5"></canvas>
           </div>
           
         </div>

@@ -1,9 +1,15 @@
-
+let presentYear = new Date().getFullYear();
+let presentMonth = new Date().getMonth() + 1;
+const barChart = document.getElementById("barChart");
+const lineChart = document.getElementById("lineChart");
+const DoughnutChart = document.getElementById("DoughnutChart");
+let lineDraw;
+let doughnutDraw;
 
 $(document).ready(function(){
-  const lineChart = document.getElementById("lineChart");
-  const barChart = document.getElementById("barChart");
-  const RadarChart = document.getElementById("RadarChart");
+  console.log("가장먼저 뜨나?", presentYear);
+  console.log(presentMonth)
+
 
   const YEAR = [
     "1월",
@@ -29,8 +35,6 @@ $(document).ready(function(){
     url : "bar",
     dataType : "json",
     success : function(n){
-      // console.log("년월 : ", n[0].yearAndMonth, ", 카운트 : ", n[0].countPerMonth);
-
       let months = [];
       for(let items of n){
         let monthOfTheYear = items.yearAndMonth.substring(5);
@@ -50,7 +54,7 @@ $(document).ready(function(){
           labels : YEAR,
           datasets: [
             {
-              label: new Date().getFullYear(),
+              label: presentYear,
               data: months,
               borderWidth: 1,
               backgroundColor: "rgb(19, 188, 126)",
@@ -120,135 +124,9 @@ $(document).ready(function(){
 //   line ajax 처리
   $.ajax({
     url : "line",
-    data : {presentMonth : new Date().getMonth() + 1 },
+    data : {presentMonth : presentMonth, presentYear : presentYear},
     dataType: "json",
-    success : function(n){
-      console.log("왜 다 안나오는거야 : ", n);
-      let emotionscoreArr = [];
-      for(let items of n){
-        let dayOfMonth = items.yearAndMonthAndDay.substring(8);
-        let emotionScore = items.emotionScore;
-
-        for(let i = 0; i < 31; ++i){
-          if(dayOfMonth == i + 1){
-            emotionscoreArr[i] = emotionScore;
-          }
-        }
-      }
-
-      let yLabels = {"-2" : '-', "0" : "0","2" : "+"};
-      console.log("emotionscoreArr : ", emotionscoreArr)
-      new Chart(lineChart, {
-        type: "line",
-        data: {
-          labels : DAY,
-          datasets: [
-            {
-              label: `${new Date().getMonth() + 1}월`,
-              data: emotionscoreArr,
-              borderColor: "rgb(19, 188, 126)",
-              borderWidth: 1,
-              pointRadius: 4,
-              pointHoverRadius: 8,
-              pointBorderColor: "#13bc7e",
-              pointBackgroundColor: "#13bc7e",
-              spanGaps: true,
-              cubicInterpolationMode: 'monotone',
-            },
-          ],
-        },
-        options: {
-          plugins: {
-            legend: {
-              labels: {
-                font: {
-                  size: 20,
-                },
-                // color: "white",
-              }
-            }
-          },
-          // 비율을 유지하라는 속성을 빼버리면 전체 width와 height를 갖게 된다.
-          maintainAspectRatio: false,
-          tension : 1,
-          scales: {
-            x: {
-              ticks: {
-                // color: 'white',
-                beginAtZero: true },
-              grid: {
-                display: false,
-              },
-            },
-            y: {
-              ticks:
-                  {
-                    // color: 'white',
-                  beginAtZero: true,
-                  font : {
-                    size : 20,
-                  },
-                  callback : function(value, index, values){
-                    return yLabels[value];
-                    }},
-                  grid: {
-                  display: false,
-                  },
-            },
-          },
-        },
-      });
-
-      let d_2 = emotionscoreArr[emotionscoreArr.length -3];
-      let d_1 = emotionscoreArr[emotionscoreArr.length -2];
-      let d_day = emotionscoreArr[emotionscoreArr.length -1];
-      if(d_2 > 0){
-        if(d_1 > 0){
-          if(d_day > 0){
-            $("#emotionLineTitle").text("긍정적인 나날들")
-            $("#emotionLineContent").text(" 너무 멋있어! 계속해서 좋은 일들이 일어나길 바랄게.")
-            $("#emotionLine").html('<i class="fa-solid fa-sun" style="color : #ffd400;"></i>');
-          }else{
-            $("#emotionLineTitle").text("기분이 갑자기 우울해졌어.")
-            $("#emotionLineContent").text("무슨 일이 있는거야? 조금 지나면 괜찮아질 거야.")
-            $("#emotionLine").html('<i class="fa-solid fa-meteor" style="color : #a9cbd7;"></i>');
-          }
-        }else{
-          if(d_day > 0){
-            $("#emotionLineTitle").text("기분이 오락가락")
-            $("#emotionLineContent").text("조금 쉬어가면서 마음을 진정시키고, 긍정적인 에너지를 유지하는 노력을 해보자")
-            $("#emotionLine").html('<i class="fa-solid fa-tornado" style="color : #808080;"></i>');
-          }else{
-            $("#emotionLineTitle").text("요즘 감정이 하락중")
-            $("#emotionLineContent").text("조금만 기다리면 좋은 날이 일어날거야. 내일은 더 나은 날이 되기를")
-            $("#emotionLine").html('<i class="fa-solid fa-cloud" style="color : #8b00ff;"></i>');
-          }
-        }
-      }else{
-        if(d_1 > 0){
-          if(d_day > 0){
-            $("#emotionLineTitle").text("요즘 감정 상승 중!")
-            $("#emotionLineContent").text("요즘 좋은 일이 가득한거야? 앞으로도 좋은 일들이 일어나길!")
-            $("#emotionLine").html('<i class="fa-solid fa-cloud-sun" style="color : #00ff80;"></i>');
-          }else{
-            $("#emotionLineTitle").text("기분이 오락가락")
-            $("#emotionLineContent").text("감정이 진정되지 않은 상태야, 긍정적인 에너지를 유지하는 노력을 해보자")
-            $("#emotionLine").html('<i class="fa-solid fa-tornado" style="color : #808080;"></i>');
-          }
-        }else{
-          if(d_day > 0){
-            $("#emotionLineTitle").text("오랜만에 좋은 기분!")
-            $("#emotionLineContent").text("다행이야 요새 계속 우울했던데, 앞으로 좋은 일만 있기를!")
-            $("#emotionLine").html('<i class="fa-solid fa-rainbow" style="color : #096da9;"></i>');
-          }else{
-            $("#emotionLineTitle").text("완전 어두워")
-            $("#emotionLineContent").text("주변 사람들과 자신의 감정을 이야기하면, 조금씩 나아질 거야. 함께 이겨내보자.")
-            $("#emotionLine").html('<i class="fa-sharp fa-solid fa-cloud-bolt" style="color : #000;"></i>');
-          }
-        }
-      }
-
-    },
+    success : lineFunction,
     error : function(n){
       console.log(n);
     }
@@ -258,7 +136,7 @@ $(document).ready(function(){
 //   radar ajax 처리
   $.ajax({
     url : "radar",
-    data : {presentMonth : new Date().getMonth() + 1 },
+    data : {presentMonth : presentMonth},
     dataType: "json",
     success : function(n){
 
@@ -298,13 +176,13 @@ $(document).ready(function(){
       console.log("가장 많은 숫자 : ", maxEmotion);
       console.log("maxDay : ", maxDay);
 
-      new Chart(RadarChart, {
+      new Chart(DoughnutChart, {
         type: "doughnut",
         data: {
           labels: nameOfDay,
           datasets: [
             {
-              label: new Date().getFullYear(),
+              label: presentYear,
               data: resultOfSum,
               borderWidth: 1,
               backgroundColor: "rgba(19, 188, 126, 0.8)",
@@ -370,8 +248,335 @@ $(document).ready(function(){
 
     }
   })
+
+  // 선그래프 왼쪽 버튼
+  $('#lastMonth').on('click', function(){
+    lineDraw.destroy();
+    presentMonth  -= 1;
+
+    $.ajax({
+      url : "line",
+      data : {presentMonth : presentMonth, presentYear : presentYear},
+      dataType : "json",
+      success : lineFunction,
+      error : function(n){
+        console.log("error")
+      }
+    })
+  })
+
+  // 선그래프 오른쪽 버튼
+  $('#nextMonth').on('click', function(){
+    lineDraw.destroy();
+    presentMonth  += 1;
+
+    $.ajax({
+      url : "line",
+      data : {presentMonth : presentMonth, presentYear : presentYear},
+      dataType : "json",
+      success : lineFunction,
+      error : function(n){
+        console.log("error")
+      }
+    })
+  })
+
+  // 선그래프 월별 버튼
+  $('#monthly').on('click', function(){
+    lineDraw.destroy();
+
+    $.ajax({
+      url : "monthlyLine",
+      data : {presentYear : presentYear},
+      dataType : "json",
+      success : lineFunctionMonth,
+      error : function(n){
+        console.log("error")
+      }
+    })
+  })
+
+
+  // 일별로 감정변화 확인
+  function lineFunction(n){
+    let emotionscoreArr = [null];
+    if(n != null && n != "") {
+      for(let items of n){
+        let dayOfMonth = items.yearAndMonthAndDay.substring(8);
+        let emotionScore = items.emotionScore;
+
+        for(let i = 0; i < 31; ++i){
+          if(dayOfMonth == i + 1){
+            emotionscoreArr[i] = emotionScore;
+          }
+        }
+      }
+    }
+
+
+    let yLabels = {"-2" : '-', "0" : "0","2" : "+"};
+    lineDraw = new Chart(lineChart, {
+      type: "line",
+      data: {
+        labels : DAY,
+        datasets: [
+          {
+            label: `${presentMonth}월`,
+            data: emotionscoreArr,
+            borderColor: "rgb(19, 188, 126)",
+            borderWidth: 1,
+            pointRadius: 4,
+            pointHoverRadius: 8,
+            pointBorderColor: "#13bc7e",
+            pointBackgroundColor: "#13bc7e",
+            spanGaps: true,
+            cubicInterpolationMode: 'monotone',
+          },
+        ],
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 20,
+              },
+              // color: "white",
+            }
+          }
+        },
+        // 비율을 유지하라는 속성을 빼버리면 전체 width와 height를 갖게 된다.
+        maintainAspectRatio: false,
+        tension : 1,
+        scales: {
+          x: {
+            ticks: {
+              // color: 'white',
+              beginAtZero: true },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            ticks:
+                {
+                  // color: 'white',
+                  beginAtZero: true,
+                  font : {
+                    size : 20,
+                  },
+                  callback : function(value, index, values){
+                    return yLabels[value];
+                  }},
+            grid: {
+              display: false,
+            },
+          },
+        },
+      },
+    });
+
+    if(n == null || n == "") return;
+
+    let d_day = emotionscoreArr[emotionscoreArr.length -1];
+    let dcount = 2;
+    let d_1 = null;
+    while(d_1 == null){
+      d_1 = emotionscoreArr[emotionscoreArr.length - dcount];
+      dcount++;
+    }
+    let d_2 = null;
+    while(d_2 == null){
+      d_2 = emotionscoreArr[emotionscoreArr.length - dcount];
+      dcount++;
+    }
+
+
+    if(d_2 > 0){
+      if(d_1 > 0){
+        if(d_day > 0){
+          $("#emotionLineTitle").text("긍정적인 나날들")
+          $("#emotionLineContent").text(" 너무 멋있어! 계속해서 좋은 일들이 일어나길 바랄게.")
+          $("#emotionLine").html('<i class="fa-solid fa-sun" style="color : #ffd400;"></i>');
+        }else{
+          $("#emotionLineTitle").text("기분이 갑자기 우울해졌어.")
+          $("#emotionLineContent").text("무슨 일이 있는거야? 조금 지나면 괜찮아질 거야.")
+          $("#emotionLine").html('<i class="fa-solid fa-meteor" style="color : #a9cbd7;"></i>');
+        }
+      }else{
+        if(d_day > 0){
+          $("#emotionLineTitle").text("기분이 오락가락")
+          $("#emotionLineContent").text("조금 쉬어가면서 마음을 진정시키고, 긍정적인 에너지를 유지하는 노력을 해보자")
+          $("#emotionLine").html('<i class="fa-solid fa-tornado" style="color : #808080;"></i>');
+        }else{
+          $("#emotionLineTitle").text("요즘 감정이 하락중")
+          $("#emotionLineContent").text("조금만 기다리면 좋은 날이 일어날거야. 내일은 더 나은 날이 되기를")
+          $("#emotionLine").html('<i class="fa-solid fa-cloud" style="color : #8b00ff;"></i>');
+        }
+      }
+    }else{
+      if(d_1 > 0){
+        if(d_day > 0){
+          $("#emotionLineTitle").text("요즘 감정 상승 중!")
+          $("#emotionLineContent").text("요즘 좋은 일이 가득한거야? 앞으로도 좋은 일들이 일어나길!")
+          $("#emotionLine").html('<i class="fa-solid fa-cloud-sun" style="color : #00ff80;"></i>');
+        }else{
+          $("#emotionLineTitle").text("기분이 오락가락")
+          $("#emotionLineContent").text("감정이 진정되지 않은 상태야, 긍정적인 에너지를 유지하는 노력을 해보자")
+          $("#emotionLine").html('<i class="fa-solid fa-tornado" style="color : #808080;"></i>');
+        }
+      }else{
+        if(d_day > 0){
+          $("#emotionLineTitle").text("오랜만에 좋은 기분!")
+          $("#emotionLineContent").text("다행이야 요새 계속 우울했던데, 앞으로 좋은 일만 있기를!")
+          $("#emotionLine").html('<i class="fa-solid fa-rainbow" style="color : #096da9;"></i>');
+        }else{
+          $("#emotionLineTitle").text("완전 어두워")
+          $("#emotionLineContent").text("주변 사람들과 자신의 감정을 이야기하면, 조금씩 나아질 거야. 함께 이겨내보자.")
+          $("#emotionLine").html('<i class="fa-sharp fa-solid fa-cloud-bolt" style="color : #000;"></i>');
+        }
+      }
+    }
+  }
+
+
+  // 선그래프 월별 함수
+  function lineFunctionMonth(n){
+    let emotionscoreArr = [];
+    for(let items of n){
+      let monthOfYear = items.yearAndMonth.substring(5);
+      let emotionScore = items.emotionScore;
+
+      for(let i = 0; i < 12; ++i){
+        if(monthOfYear == i + 1){
+          emotionscoreArr[i] = emotionScore;
+        }
+      }
+    }
+
+    let yLabels = {"-2" : '-', "0" : "0","2" : "+"};
+    console.log("emotionscoreArr : ", emotionscoreArr)
+    lineDraw = new Chart(lineChart, {
+      type: "line",
+      data: {
+        labels : YEAR,
+        datasets: [
+          {
+            label: `${presentYear}월`,
+            data: emotionscoreArr,
+            borderColor: "rgb(19, 188, 126)",
+            borderWidth: 1,
+            pointRadius: 4,
+            pointHoverRadius: 8,
+            pointBorderColor: "#13bc7e",
+            pointBackgroundColor: "#13bc7e",
+            spanGaps: true,
+            cubicInterpolationMode: 'monotone',
+          },
+        ],
+      },
+      options: {
+        plugins: {
+          legend: {
+            labels: {
+              font: {
+                size: 20,
+              },
+              // color: "white",
+            }
+          }
+        },
+        // 비율을 유지하라는 속성을 빼버리면 전체 width와 height를 갖게 된다.
+        maintainAspectRatio: false,
+        tension : 1,
+        scales: {
+          x: {
+            ticks: {
+              // color: 'white',
+              beginAtZero: true },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            ticks:
+                {
+                  // color: 'white',
+                  beginAtZero: true,
+                  font : {
+                    size : 20,
+                  },
+                  callback : function(value, index, values){
+                    return yLabels[value];
+                  }},
+            grid: {
+              display: false,
+            },
+          },
+        },
+      },
+    });
+
+    let d_day = emotionscoreArr[emotionscoreArr.length -1];
+    let dcount = 2;
+    let d_1 = null;
+    while(d_1 == null){
+      d_1 = emotionscoreArr[emotionscoreArr.length - dcount];
+      dcount++;
+    }
+    let d_2 = null;
+    while(d_2 == null){
+      d_2 = emotionscoreArr[emotionscoreArr.length - dcount];
+      dcount++;
+    }
+
+    if(d_2 > 0){
+      if(d_1 > 0){
+        if(d_day > 0){
+          $("#emotionLineTitle").text("긍정적인 나날들")
+          $("#emotionLineContent").text(" 너무 멋있어! 계속해서 좋은 일들이 일어나길 바랄게.")
+          $("#emotionLine").html('<i class="fa-solid fa-sun" style="color : #ffd400;"></i>');
+        }else{
+          $("#emotionLineTitle").text("기분이 갑자기 우울해졌어.")
+          $("#emotionLineContent").text("무슨 일이 있는거야? 조금 지나면 괜찮아질 거야.")
+          $("#emotionLine").html('<i class="fa-solid fa-meteor" style="color : #a9cbd7;"></i>');
+        }
+      }else{
+        if(d_day > 0){
+          $("#emotionLineTitle").text("기분이 오락가락")
+          $("#emotionLineContent").text("조금 쉬어가면서 마음을 진정시키고, 긍정적인 에너지를 유지하는 노력을 해보자")
+          $("#emotionLine").html('<i class="fa-solid fa-tornado" style="color : #808080;"></i>');
+        }else{
+          $("#emotionLineTitle").text("요즘 감정이 하락중")
+          $("#emotionLineContent").text("조금만 기다리면 좋은 날이 일어날거야. 내일은 더 나은 날이 되기를")
+          $("#emotionLine").html('<i class="fa-solid fa-cloud" style="color : #8b00ff;"></i>');
+        }
+      }
+    }else{
+      if(d_1 > 0){
+        if(d_day > 0){
+          $("#emotionLineTitle").text("요즘 감정 상승 중!")
+          $("#emotionLineContent").text("요즘 좋은 일이 가득한거야? 앞으로도 좋은 일들이 일어나길!")
+          $("#emotionLine").html('<i class="fa-solid fa-cloud-sun" style="color : #00ff80;"></i>');
+        }else{
+          $("#emotionLineTitle").text("기분이 오락가락")
+          $("#emotionLineContent").text("감정이 진정되지 않은 상태야, 긍정적인 에너지를 유지하는 노력을 해보자")
+          $("#emotionLine").html('<i class="fa-solid fa-tornado" style="color : #808080;"></i>');
+        }
+      }else{
+        if(d_day > 0){
+          $("#emotionLineTitle").text("오랜만에 좋은 기분!")
+          $("#emotionLineContent").text("다행이야 요새 계속 우울했던데, 앞으로 좋은 일만 있기를!")
+          $("#emotionLine").html('<i class="fa-solid fa-rainbow" style="color : #096da9;"></i>');
+        }else{
+          $("#emotionLineTitle").text("완전 어두워")
+          $("#emotionLineContent").text("주변 사람들과 자신의 감정을 이야기하면, 조금씩 나아질 거야. 함께 이겨내보자.")
+          $("#emotionLine").html('<i class="fa-sharp fa-solid fa-cloud-bolt" style="color : #000;"></i>');
+        }
+      }
+    }
+  }
+
 })
-
-
 
 

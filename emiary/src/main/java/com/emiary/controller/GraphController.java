@@ -30,21 +30,26 @@ public class GraphController {
     @ResponseBody
     @GetMapping("bar")
     public List<Graph> bar(@AuthenticationPrincipal UserDetails userDetails){
-
-        log.debug("바 그래프 실행되냐??");
         List<Graph> graph = graphService.countDiaryForGraph(userDetails.getUsername());
-
         return graph;
     }
 
     @ResponseBody
     @GetMapping("line")
-    public List<Graph> line(String presentMonth, @AuthenticationPrincipal UserDetails userDetails){
-        log.debug("이번달은? {} ", presentMonth);
-        List<Graph> lineGraph = graphService.lineFunction(presentMonth, userDetails.getUsername());
-
+    public List<Graph> line(String presentMonth, String presentYear, @AuthenticationPrincipal UserDetails userDetails){
+        log.debug("가지? presentMonth : {} presentYear : {} ", presentMonth, presentYear);
+        List<Graph> lineGraph = graphService.lineFunction(presentMonth, presentYear, userDetails.getUsername());
+        log.debug("이거 값이 없어? {}", lineGraph);
         return lineGraph;
     }
+
+    @ResponseBody
+    @GetMapping("monthlyLine")
+    public List<Graph> monthlyLine(String presentYear, @AuthenticationPrincipal UserDetails userDetails){
+        List<Graph> radarGraph = graphService.monthlyLineFunction(presentYear, userDetails.getUsername());
+        return radarGraph;
+    }
+
 
     @ResponseBody
     @GetMapping("radar")
