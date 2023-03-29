@@ -13,4 +13,6 @@ public class Graph {
     int countPerMonth;
     double emotionScore;
     String yearAndMonthAndDay;
+    String nameOfDay;
+    int resultOfSum;
 }

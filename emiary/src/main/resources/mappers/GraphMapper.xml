@@ -12,12 +12,32 @@
 		order by yearAndMonth
 	</select>
 
-	<select id="lineFunction" parameterType="String" resultType="Graph">
+	<select id="lineFunction" parameterType="map" resultType="Graph">
 		select TO_CHAR(diaries.created_at, 'yyyy-mm-dd') AS YEARANDMONTHANDDAY, emotionscore
 		from diaries
 		where email = #{username}
 		and extract(month from diaries.created_at) = #{presentMonth}
 		order by created_at
+	</select>
+
+	<select id="radarFunction" parameterType="map" resultType="Graph">
+		select nameOfDay, sum(diarycount) as resultOfSum
+		from(
+				SELECT
+					CASE
+						WHEN emotionscore BETWEEN -2 AND -1.2 THEN 'disaster'
+						WHEN emotionscore BETWEEN -1.2 AND -0.5 THEN 'badDay'
+						WHEN emotionscore BETWEEN -0.5 AND 0.1 THEN 'okayDay'
+						WHEN emotionscore BETWEEN 0.1 AND 1.0 THEN 'goodDay'
+						WHEN emotionscore BETWEEN 1.0 AND 2.0 THEN 'bestDay'
+						ELSE 'notCalculated'
+						END AS nameOfDay,
+					COUNT(*) AS DiaryCount
+				FROM diaries
+				where email = #{username} and extract(month from created_at) = #{presentMonth}
+				GROUP BY emotionscore
+			)
+		group by nameOfDay
 	</select>
 
 </mapper>

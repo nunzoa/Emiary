@@ -30,4 +30,13 @@ public class GraphServiceImpl implements GraphService{
         List<Graph> graph = graphDAO.lineFunction(map);
         return graph;
     }
+
+    @Override
+    public List<Graph> radarFunction(String presentMonth, String username) {
+        Map<String, String> map = new HashMap<>();
+        map.put("presentMonth", presentMonth);
+        map.put("username", username);
+        List<Graph> graph = graphDAO.radarFunction(map);
+        return graph;
+    }
 }

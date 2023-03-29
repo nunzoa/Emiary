@@ -5,6 +5,7 @@ import com.emiary.service.GraphService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,5 +44,12 @@ public class GraphController {
         List<Graph> barGraph = graphService.lineFunction(presentMonth, userDetails.getUsername());
 
         return barGraph;
+    }
+
+    @ResponseBody
+    @GetMapping("radar")
+    public List<Graph> graph(String presentMonth, @AuthenticationPrincipal UserDetails userDetails){
+        List<Graph> radarGraph = graphService.radarFunction(presentMonth, userDetails.getUsername());
+        return radarGraph;
     }
 }

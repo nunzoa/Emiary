@@ -9,4 +9,6 @@ public interface GraphService {
     List<Graph> countDiaryForGraph(String username);
 
     List<Graph> lineFunction(String presentMonth, String username);
+
+    List<Graph> radarFunction(String presentMonth, String username);
 }
