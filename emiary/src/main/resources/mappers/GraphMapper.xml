@@ -13,10 +13,10 @@
 	</select>
 
 	<select id="lineFunction" parameterType="map" resultType="Graph">
-		select TO_CHAR(diaries.created_at, 'yyyy-mm-dd') AS YEARANDMONTHANDDAY, emotionscore
+		select TO_CHAR(diaries.created_at, 'yyyy-mm-dd') AS YEARANDMONTHANDDAY, emotionScore
 		from diaries
 		where email = #{username}
-		and extract(month from diaries.created_at) = #{presentMonth}
+		and extract(month from diaries.created_at) = #{presentMonth} and emotionscore != 10
 		order by created_at
 	</select>
 

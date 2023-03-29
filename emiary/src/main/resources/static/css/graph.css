@@ -110,7 +110,7 @@ section{
 }
 
 .chart{
-    height : 500px;
+    max-height : 500px;
 }
 
 
@@ -160,6 +160,3 @@ i{
     border-left: 3px dotted #13bc7e;
 }
 
-canvas {
-    background-color: #131722;
-}

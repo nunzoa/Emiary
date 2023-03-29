@@ -37,7 +37,7 @@ $(document).ready(function(){
         let countDiariesOfMonth = items.countPerMonth;
         total += Number(countDiariesOfMonth);
 
-        for(let i = 0; i < n.length; ++i){
+        for(let i = 0; i < 12; ++i){
           if(monthOfTheYear == i + 1){
             months[i] = countDiariesOfMonth
           }
@@ -65,7 +65,7 @@ $(document).ready(function(){
                 font: {
                   size: 20,
                 },
-                color: "white",
+                // color: "white",
               }
             }
           },
@@ -73,13 +73,17 @@ $(document).ready(function(){
           maintainAspectRatio: false,
           scales: {
             x: {
-              ticks: { color: 'white', beginAtZero: true },
+              ticks: {
+                // color: 'white',
+                beginAtZero: true },
               grid: {
                 display: false,
               },
             },
             y: {
-              ticks: { color: 'white', beginAtZero: true },
+              ticks: {
+                // color: 'white',
+                beginAtZero: true },
               grid: {
                 display: false,
               },
@@ -119,12 +123,13 @@ $(document).ready(function(){
     data : {presentMonth : new Date().getMonth() + 1 },
     dataType: "json",
     success : function(n){
+      console.log("왜 다 안나오는거야 : ", n);
       let emotionscoreArr = [];
       for(let items of n){
         let dayOfMonth = items.yearAndMonthAndDay.substring(8);
         let emotionScore = items.emotionScore;
 
-        for(let i = 0; i < n.length; ++i){
+        for(let i = 0; i < 31; ++i){
           if(dayOfMonth == i + 1){
             emotionscoreArr[i] = emotionScore;
           }
@@ -132,7 +137,7 @@ $(document).ready(function(){
       }
 
       let yLabels = {"-2" : '-', "0" : "0","2" : "+"};
-
+      console.log("emotionscoreArr : ", emotionscoreArr)
       new Chart(lineChart, {
         type: "line",
         data: {
@@ -159,7 +164,7 @@ $(document).ready(function(){
                 font: {
                   size: 20,
                 },
-                color: "white",
+                // color: "white",
               }
             }
           },
@@ -168,14 +173,17 @@ $(document).ready(function(){
           tension : 1,
           scales: {
             x: {
-              ticks: { color: 'white', beginAtZero: true },
+              ticks: {
+                // color: 'white',
+                beginAtZero: true },
               grid: {
                 display: false,
               },
             },
             y: {
               ticks:
-                  { color: 'white',
+                  {
+                    // color: 'white',
                   beginAtZero: true,
                   font : {
                     size : 20,
@@ -291,7 +299,7 @@ $(document).ready(function(){
       console.log("maxDay : ", maxDay);
 
       new Chart(RadarChart, {
-        type: "radar",
+        type: "doughnut",
         data: {
           labels: nameOfDay,
           datasets: [
@@ -300,6 +308,14 @@ $(document).ready(function(){
               data: resultOfSum,
               borderWidth: 1,
               backgroundColor: "rgba(19, 188, 126, 0.8)",
+              backgroundColor: [
+                '#EC00FFFF',
+                '#ff2d2d',
+                '#919191',
+                '#4476ff',
+                '#00FF7F',
+              ],
+              hoverOffset: 4
             },
           ],
         },
@@ -308,27 +324,14 @@ $(document).ready(function(){
             legend: {
               labels: {
                 font: {
-                  size: 20,
+                  size: 10,
                 },
-                color: "white",
+                // color: "white",
               }
             }
           },
           maintainAspectRatio: true,
           scales : {
-            r:{
-              angleLines : {
-                color : 'white'
-              },
-              grid : {
-                color : "white"
-              },
-              pointLabels:{
-                color : "white"
-              },
-              suggestedMin: 0,
-              suggestedMax: maxEmotion,
-            }
           }
         },
       });
@@ -367,10 +370,6 @@ $(document).ready(function(){
 
     }
   })
-
-
-
-
 })
 
 

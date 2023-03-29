@@ -41,9 +41,9 @@ public class GraphController {
     @GetMapping("line")
     public List<Graph> line(String presentMonth, @AuthenticationPrincipal UserDetails userDetails){
         log.debug("이번달은? {} ", presentMonth);
-        List<Graph> barGraph = graphService.lineFunction(presentMonth, userDetails.getUsername());
+        List<Graph> lineGraph = graphService.lineFunction(presentMonth, userDetails.getUsername());
 
-        return barGraph;
+        return lineGraph;
     }
 
     @ResponseBody

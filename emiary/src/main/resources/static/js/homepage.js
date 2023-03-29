@@ -26,9 +26,12 @@ $(document).ready(function() {
 // load 시작
 function load() {
     const dt = new Date();
-
+    
+    // 3월 29일 이후 2월달 캘린더가 안떴는데 그게 month만 빼서 그럼
+    dt.setDate(1);
     if (nav !== 0) {
         dt.setMonth(new Date().getMonth() + nav);
+
     }
 
     const day = dt.getDate();
@@ -36,7 +39,8 @@ function load() {
     const year = dt.getFullYear();
 
     const firstDayOfMonth = new Date(year, month, 1);
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let daysInMonth = new Date(year, month + 1, 0).getDate();
     const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
         weekday: 'long',
         year: 'numeric',
@@ -46,6 +50,9 @@ function load() {
 
     const paddingDays = weekdays.indexOf(dateString.split(',')[0]);
     document.getElementById("monthDisplay").innerText = `${dt.toLocaleDateString('en-us', {month: 'numeric'})}월 ${year}`
+
+    console.log("달", month)
+    console.log("daysInMonth", daysInMonth)
 
     calendar.innerHTML = '';
 
@@ -108,8 +115,6 @@ function load() {
                 document.getElementById("deleteDiary").onclick = function () {
                     location.href = `/emiary/diary/deleteDiary?dayString=${barDayString}`;
                 }
-
-
             })
 
             document.querySelector('.write-close').addEventListener('click', () => {
@@ -190,7 +195,7 @@ function load() {
             }
 
 
-            if (i - paddingDays === day && nav === 0) {
+            if (i - paddingDays === new Date().getDate() && nav === 0) {
                 daySquare.id = 'currentDay';
             }
         } else {
