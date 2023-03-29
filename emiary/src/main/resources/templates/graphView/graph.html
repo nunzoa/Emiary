@@ -6,6 +6,7 @@
     <title>Bootstrap demo</title>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.8.0.js"
   integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs="
   crossorigin="anonymous"></script>
@@ -110,21 +111,25 @@
     <section id="bar" class="my-5 mx-auto">
       <div class="row w-100 m-0">
         <div
-          class="chartsakai-left about-text col-lg-6 order-lg-1 my-5 p-5 d-flex flex-column justify-content-center align-items-start"
+          class="chartsakai-left about-text col-lg-6 order-lg-1 my-5 ps-5 d-flex flex-column justify-content-center align-items-start"
         >
           <div class="title">
             <div class="d-flex justify-content-start align-items-center">
               <div class="line"></div>
               <h3 class="text-uppercase mb-0">나는 일기를 얼마나 썼을까</h3>
             </div>
-            <span id="CountingDiary" class="text-uppercase mt-3 d-block"
+            <span id="CountingDiary" class="text-uppercase mt-3"
               ></span
-            >
+            >   <span id="plantBar" class="plant-box ms-5">
+          </span>
           </div>
           <p id="messageOfDiary" class="lead my-4">
           </p>
-          <div id="plantBar" class="plant-box d-flex mx-auto">
+          <div class="d-flex">
+            <btn id="lastYear" class="btn mt-3 me-3"><i class="arrow fa-solid fa-arrow-left"></i></btn>
+            <btn id="nextYear" class="btn mt-3 me-3"><i class="arrow fa-solid fa-arrow-right"></i></btn>
           </div>
+
         </div>
         <div class="chart col-lg-6 order-lg-0">
             <canvas id="barChart" class="mt-5"></canvas>
@@ -143,19 +148,23 @@
                 <div class="line"></div>
                 <h3 class="text-uppercase mb-0">당신의 감정선</h3>
               </div>
-              <span id="emotionLineTitle" class="text-uppercase mt-3 d-block"
+              <span id="emotionLineTitle" class="text-uppercase mt-3"
                 ></span
-              >
+              ><span id="emotionLine" class="plant-box ms-5">
+            </span>
             </div>
             <p id="emotionLineContent" class="lead my-4">
             </p>
-            <div class="d-flex">
+            <div id="dailyBox">
               <btn id="lastMonth" class="btn mt-3 me-3"><i class="arrow fa-solid fa-arrow-left"></i></btn>
               <btn id="nextMonth" class="btn mt-3 me-3"><i class="arrow fa-solid fa-arrow-right"></i></btn>
               <btn id="monthly" class="btn mt-3 me-3">월별</btn>
             </div>
-              <div id="emotionLine" class="plant-box d-flex mx-auto mt-5">
-              </div>
+            <div id="monthBox">
+              <btn id="lastYearLine" class="btn mt-3 me-3"><i class="arrow fa-solid fa-arrow-left"></i></btn>
+              <btn id="nextYearLine" class="btn mt-3 me-3"><i class="arrow fa-solid fa-arrow-right"></i></btn>
+              <btn id="daily" class="btn mt-3 me-3">일별</btn>
+            </div>
           </div>
           
           <div class="chart col-lg-6 order-lg-1">
@@ -177,18 +186,18 @@
               </div>
               <span id="radarTitle" class="text-uppercase mt-3 d-block"
                 ></span
-              >
+              ><span id="radarEmoticon" class="face-box mx-auto ms-5">
+              </span>
             </div>
             <p id="radarContent" class="lead my-4">
             </p>
             <div class="d-flex ">
-              <a href="" class="btn mt-3 me-3">1개월</a>
-              <a href="" class="btn mt-3 me-3">3개월</a>
-              <a href="" class="btn mt-3 me-3">6개월</a>
-              <a href="" class="btn mt-3">1년</a>
+              <btn id="doughnut1" class="btn mt-3 me-3">1개월</btn>
+              <btn id="doughnut3" class="btn mt-3 me-3">3개월</btn>
+              <btn id="doughnut6" class="btn mt-3 me-3">6개월</btn>
+              <btn id="doughnut12" class="btn mt-3">1년</btn>
             </div>
-              <div id="radarEmoticon" class="face-box d-flex mx-auto mt-5">
-              </div>
+
           </div>
           
           <div class="chart col-lg-6 order-lg-0">

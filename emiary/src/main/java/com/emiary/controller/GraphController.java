@@ -29,8 +29,8 @@ public class GraphController {
 
     @ResponseBody
     @GetMapping("bar")
-    public List<Graph> bar(@AuthenticationPrincipal UserDetails userDetails){
-        List<Graph> graph = graphService.countDiaryForGraph(userDetails.getUsername());
+    public List<Graph> bar(String presentYear, @AuthenticationPrincipal UserDetails userDetails){
+        List<Graph> graph = graphService.barFunction(presentYear, userDetails.getUsername());
         return graph;
     }
 
@@ -52,9 +52,9 @@ public class GraphController {
 
 
     @ResponseBody
-    @GetMapping("radar")
-    public List<Graph> graph(String presentMonth, @AuthenticationPrincipal UserDetails userDetails){
-        List<Graph> radarGraph = graphService.radarFunction(presentMonth, userDetails.getUsername());
-        return radarGraph;
+    @GetMapping("doughnut")
+    public List<Graph> doughnutFunction(String givenMonth, @AuthenticationPrincipal UserDetails userDetails){
+        List<Graph> doughnutGraph = graphService.doughnutFunction(givenMonth, userDetails.getUsername());
+        return doughnutGraph;
     }
 }

@@ -4,10 +4,10 @@
 
 <mapper namespace="com.emiary.dao.GraphDAO">
 
-	<select id="countDiaryForGraph" parameterType="String" resultType="Graph">
+	<select id="barFunction" parameterType="map" resultType="Graph">
 		select to_char(created_at, 'FMyyyy-mm') as yearAndMonth, count(to_char(created_at, 'yymm')) as countPerMonth
 		from diaries
-		where email = #{username}
+		where email = #{username} and extract(year from created_at) = #{presentYear}
 		group by to_char(created_at, 'FMyyyy-mm')
 		order by yearAndMonth
 	</select>
@@ -28,7 +28,7 @@
 		order by yearAndMonth
 	</select>
 
-	<select id="radarFunction" parameterType="map" resultType="Graph">
+	<select id="doughnutFunction" parameterType="map" resultType="Graph">
 		select nameOfDay, sum(diarycount) as resultOfSum
 		from(
 				SELECT
@@ -42,7 +42,7 @@
 						END AS nameOfDay,
 					COUNT(*) AS DiaryCount
 				FROM diaries
-				where email = #{username} and extract(month from created_at) = #{presentMonth}
+				where email = #{username}  and created_at between add_months(sysdate,  -#{givenMonth}) and sysdate
 				GROUP BY emotionscore
 			)
 		group by nameOfDay

@@ -8,8 +8,9 @@ import java.util.Map;
 
 @Mapper
 public interface GraphDAO {
-    List<Graph> countDiaryForGraph(String username);
+    List<Graph> barFunction(Map<String, String> map);
     List<Graph> lineFunction(Map<String, String> map);
-    List<Graph> radarFunction(Map<String, String> map);
     List<Graph> monthlyLineFunction(Map<String, String> map);
+    List<Graph> doughnutFunction(Map<String, String> map);
+
 }

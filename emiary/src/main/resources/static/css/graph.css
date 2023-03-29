@@ -145,7 +145,7 @@ section{
 }
 
 i{
-    font-size : 6rem;
+    font-size : 5rem;
 }
 
 .plant-box{
@@ -162,4 +162,8 @@ i{
 
 .arrow{
     font-size: 2rem;
+}
+
+#monthBox{
+    display: none;
 }

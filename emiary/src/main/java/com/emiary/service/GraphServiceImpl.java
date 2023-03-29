@@ -17,8 +17,11 @@ public class GraphServiceImpl implements GraphService{
 
 
     @Override
-    public List<Graph> countDiaryForGraph(String username) {
-        List<Graph> graph = graphDAO.countDiaryForGraph(username);
+    public List<Graph> barFunction(String presentYear, String username) {
+        Map<String, String> map = new HashMap<>();
+        map.put("presentYear", presentYear);
+        map.put("username", username);
+        List<Graph> graph = graphDAO.barFunction(map);
         return graph;
     }
 
@@ -33,11 +36,11 @@ public class GraphServiceImpl implements GraphService{
     }
 
     @Override
-    public List<Graph> radarFunction(String presentMonth, String username) {
+    public List<Graph> doughnutFunction(String givenMonth, String username) {
         Map<String, String> map = new HashMap<>();
-        map.put("presentMonth", presentMonth);
+        map.put("givenMonth", givenMonth);
         map.put("username", username);
-        List<Graph> graph = graphDAO.radarFunction(map);
+        List<Graph> graph = graphDAO.doughnutFunction(map);
         return graph;
     }
 
