@@ -28,8 +28,8 @@ header .container{
   .bg-orange{
     background-color: var(--orange) !important;
   }
-  
-  
+
+
   .container{
     width : 770px;
   }
@@ -62,7 +62,33 @@ section{
     box-shadow: 0px 3px 0px #016641;
   }
 
+#modify-container{
+    width : 500px;
+    height : 530px;
+    background : var(--green-dark);
+    border-radius: 25px;
+    box-shadow: 0px 3px 0px #016641;
+}
 
+#modifysection{
+    width : 500px;
+    height : 670px;
+    background : var(--green-dark);
+    border-radius: 25px;
+    box-shadow: 0px 3px 0px #016641;
+}
+
+#quitsection{
+    width : 500px;
+    height : 280px;
+    background : var(--green-dark);
+    border-radius: 25px;
+    box-shadow: 0px 3px 0px #016641;
+}
+
+#quit-title{
+    font-size: 1.5rem;
+}
 
 
 #profileBox{
@@ -136,7 +162,7 @@ div > button:hover, #logout:hover{
     border-radius: 30px;
     cursor: pointer;
     position: relative;
-    
+
 }
 
 .checkbutton::before{
@@ -154,7 +180,7 @@ div > button:hover, #logout:hover{
 
 input:checked + .checkbutton{
     background-color: #fff;
-    
+
 }
 
 
@@ -174,4 +200,15 @@ input{
     font-size: 2em;
 }
 
+.quit {
+    border: 1px solid #fff!important;
+    background: var(--green-dark)!important;
+    color: #fff!important;
+    font-weight: bold;
+}
 
+.quit:hover{
+    background: #fff !important;
+    color: var(--green-dark)!important;
+    font-weight: bold;
+}

@@ -5,22 +5,7 @@ const editor = new EditorJS({
   tools: {
     header: Header,
     quote: Quote,
-    // image: {
-    //   class: ImageTool,
-    //   config: {
-    //     endpoints: {
-    //       byFile: "http://localhost:8888/uploadFile", // Your backend file uploader endpoint
-    //       byUrl: "http://localhost:8888/fetchUrl", // Your endpoint that provides uploading by Url
-    //     },
-    //   },
-    // },
-    list: {
-      class: NestedList,
-      inlineToolbar: true,
-      config: {
-        defaultStyle: "unordered",
-      },
-    },
+
     checklist: {
       class: Checklist,
       inlineToolbar: true,

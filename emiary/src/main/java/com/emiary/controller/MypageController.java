@@ -33,6 +33,20 @@ public class MypageController {
 
 		return "mypageView/mypage";
 	}
+
+	@GetMapping("quit")
+	public String quit() {
+
+
+		return "mypageView/myPageQuit";
+	}
+
+	@GetMapping("modify")
+	public String modify() {
+
+
+		return "mypageView/myPageModify";
+	}
 	
 
 }

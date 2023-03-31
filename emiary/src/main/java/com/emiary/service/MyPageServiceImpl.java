@@ -21,7 +21,6 @@ public class MyPageServiceImpl implements MypageService{
     @Override
     public double calcEmotion(String username) {
         Double n = myPageDAO.calcEmotion(username);
-        log.debug("n의 값은? {}", n);
         if(n == null)  n = 0d;
         n = n.doubleValue();
 
