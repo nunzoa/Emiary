@@ -50,5 +50,18 @@
 		and created_at = #{created_at}
 	</delete>
 
+	<select id="emptyDiaryCheck" parameterType="Map" resultType="int"
+	>
+		select count(*)
+		from diaries
+		where created_at = #{dayString} and email = #{username}
+	</select>
+
+	<select id="writtenDiaryCheck" parameterType="Map" resultType="Diaries">
+		select content, to_char(created_at, 'yyyy-mm-dd') as created_at
+		from diaries
+		where created_at = #{dayString}
+		  and email = #{username}
+	</select>
 </mapper>
 

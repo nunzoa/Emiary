@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+:root{
+  --orange: #ff7f00;
+  --green-dark: #13bc7e;
+  --light-grey: #f1f1f1;
+
+}
+
+
+
+*{
+  font-family: 'Roboto', sans-serif;
+}
+
+ul li{
+  list-style-type: none;
+}
+
+.display-1{
+  letter-spacing: 1px;
+}
+
+header .container{
+  max-width: 770px;
+}
+
+.bg-orange{
+  background-color: var(--orange) !important;
+}
+
+
+.container{
+  width : 770px;
+}
+
+
+
+#editorjs{
+  width: 60%;
+  border : none;
+  height:auto;
+}
+
+.subbtn{
+  background: var(--green-dark)!important;
+}
+
+.subbtn:hover {
+  background: #fff!important;
+  border: 1px solid var(--green-dark)!important;
+  color: var(--green-dark)!important;
+}
+
+.alert{
+  display: none;
+}
+
+/*.swal-overlay {*/
+/*  background-color: rgba(19, 188, 126, 0.5);*/
+/*}*/
+
+.swal-button {
+  padding: 7px 19px;
+  border-radius: 5px;
+  background-color: #13BC7EFF;
+  font-size: 12px;
+  border: 1px solid #13BC7EFF!important;
+}
+
+.swal-button:hover{
+  background-color: #fff!important;
+  color : #ff7f00;
+}
+
+.swal-button:active{
+  color : #ff7f00;
+}
+
+i{
+  font-size: 6rem;
+}
+
+.loading-containerbox{
+  display: none;
+  position: absolute;
+  left: 50%;
+  right : 50%;
+  transform: translate(-50%, -50%);
+}
+/*로딩바 구현*/
+.box {
+  display: none;
+  z-index: 20;
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+  top: 30%;
+}
+
+.text {
+  color: #fff;
+  text-align: center;
+}
+
+.loading {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading .line-box {
+  padding: 2px;
+  width: 40%;
+  height: 20px;
+}
+
+.loading .line-box .line {
+  height: 20px;
+  border-radius: 20px;
+  background-color: var(--green-dark);
+  animation: loading 5s forwards cubic-bezier(0, 0, 0, 0);
+}
+
+@keyframes loading {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.modalBackDrop {
+  display: none;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100vw;
+  height: 500vh;
+  position: absolute;
+  background-color: #131722;
+}
+
+.arrow{
+  font-size: 1rem;
+  color: var(--green-dark);
+}
+
+.move:hover{
+  background: #fff!important;
+  border-radius: 5px;
+}
+
+.move:active{
+  border : 1px solid #fff!important;
+}
+

@@ -14,9 +14,4 @@ public class GraphTest {
     @Autowired
     GraphService graphService;
 
-    @Test
-    public void testingBarGraph(){
-        List<Graph> graph = graphService.countDiaryForGraph("twinyoung96@gmail.com");
-        System.out.println(graph);
-    }
 }

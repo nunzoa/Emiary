@@ -67,11 +67,11 @@ function load() {
         daySquare.setAttribute("num", barDayString);
 
         // modal창 확인 시 사용 및 read시 사용
-        let dayString = `${year}년 ${month + 1}월 ${i - paddingDays}일`;
+        let dayString = `${year}년${month + 1}월${i - paddingDays}일`;
 
         // +버튼 누를 시 일기 작성으로 이동
         let todayDate = new Date(year, month, day);
-        let todayString = `${todayDate.getFullYear()}년 ${(todayDate.getMonth() + 1)}월 ${todayDate.getDate()}일`;
+        let todayString = `${todayDate.getFullYear()}년${(todayDate.getMonth() + 1)}월${todayDate.getDate()}일`;
         todayDiary.href = `/emiary/diary/write?dayString=` + todayString;
         // paddingDays는 제외하고 출력
         if (i > paddingDays) {
@@ -105,7 +105,7 @@ function load() {
                 // 모달 구분 코드 끝
 
                 document.getElementById("writeDiary").onclick = function () {
-                    location.href = `/emiary/diary/write?dayString=${dayString}`;
+                    location.href = `/emiary/diary/write?dayString=${barDayString}`;
                 }
 
                 document.getElementById("readDiary").onclick = function () {

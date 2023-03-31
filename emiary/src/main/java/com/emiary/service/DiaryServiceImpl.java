@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import com.emiary.dao.DiaryDAO;
 import com.emiary.domain.Diaries;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -49,7 +49,6 @@ public class DiaryServiceImpl implements DiaryService {
 		log.debug("서비스의 map의 값은? {}", map);
 
 		int n = diarydao.modalCheck(map);
-		log.debug("서비스의 n의 값은? ", n);
 
 		return n;
     }
@@ -59,11 +58,133 @@ public class DiaryServiceImpl implements DiaryService {
 		Map<String, String> map = new HashMap<>();
 		map.put("created_at", barDayString);
 		map.put("email", username);
-		log.debug("{}", barDayString);
 		int n = diarydao.deleteDiary(map);
 
 		return n;
     }
+
+	@Override
+	public String lastDiary(String dayString, String username) {
+
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		int resultDate = 1;
+		String sendDate = "";
+		int count = 0;
+
+		while(resultDate != 0){
+			Date date = null;
+			try {
+				date = sdf.parse(dayString);
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+			cal.setTime(date);
+			count++;
+			cal.add(Calendar.DATE, -count);
+			Date time = cal.getTime();
+			sendDate = sdf.format(time);
+			Map<String, String> map = new HashMap<>();
+			map.put("dayString", sendDate);
+			map.put("username", username);
+
+			resultDate = diarydao.emptyDiaryCheck(map);
+		}
+
+		return sendDate;
+	}
+
+	@Override
+    public String nextDiary(String dayString, String username) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		int resultDate = 1;
+		String sendDate = "";
+		int count = 0;
+
+		while(resultDate != 0){
+			Date date = null;
+			try {
+				date = sdf.parse(dayString);
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+			cal.setTime(date);
+			count++;
+			cal.add(Calendar.DATE, count);
+			Date time = cal.getTime();
+			sendDate = sdf.format(time);
+			Map<String, String> map = new HashMap<>();
+			map.put("dayString", sendDate);
+			map.put("username", username);
+
+			resultDate = diarydao.emptyDiaryCheck(map);
+		}
+
+		return sendDate;
+    }
+
+	@Override
+	public Diaries lastReadDiary(String dayString, String username) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		Diaries isDiaryEmpty = null;
+		String sendDate = "";
+		int count = 0;
+
+		while(isDiaryEmpty == null){
+			Date date = null;
+			try {
+				date = sdf.parse(dayString);
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+			cal.setTime(date);
+			count++;
+			cal.add(Calendar.DATE, -count);
+			Date time = cal.getTime();
+			sendDate = sdf.format(time);
+			Map<String, String> map = new HashMap<>();
+			map.put("dayString", sendDate);
+			map.put("username", username);
+
+			isDiaryEmpty = diarydao.writtenDiaryCheck(map);
+		}
+
+		return isDiaryEmpty;
+	}
+
+	@Override
+	public Diaries nextReadDiary(String dayString, String username) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		Diaries isDiaryEmpty = null;
+		String sendDate = "";
+		int count = 0;
+
+		while(isDiaryEmpty == null){
+			Date date = null;
+			try {
+				date = sdf.parse(dayString);
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+			cal.setTime(date);
+			count++;
+			cal.add(Calendar.DATE, count);
+			Date time = cal.getTime();
+			sendDate = sdf.format(time);
+			Map<String, String> map = new HashMap<>();
+			map.put("dayString", sendDate);
+			map.put("username", username);
+
+			isDiaryEmpty = diarydao.writtenDiaryCheck(map);
+		}
+
+		return isDiaryEmpty;
+	}
 
 
 }

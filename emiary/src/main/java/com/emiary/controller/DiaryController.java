@@ -31,7 +31,6 @@ public class DiaryController {
 
     @GetMapping("write")
     public String write(String dayString, Model model) {
-        log.debug("dayString {}", dayString);
         model.addAttribute("dayString", dayString);
         return "diaryView/writeForm";
     }
@@ -45,28 +44,22 @@ public class DiaryController {
     @ResponseBody
     @PostMapping("write")
     public double write(Diaries diaries, @AuthenticationPrincipal UserDetails user, Model model) {
+        log.debug("diaries.getCreated_at() : {}", diaries.getCreated_at());
     	EmotionAnalysisResult result = EmotionAnalyzer.analyzeEmotion(diaries.getContent());
-        log.debug("감정분석 점수 : {}", result.getScore());
-        log.debug("빈출명사 : {}",result.getNoun());
         diaries.setEmotionscore(result.getScore());
         diaries.setKeyword(result.getNoun());
         diaries.setEmail(user.getUsername());
 
         int n = diaryservice.write(diaries);
-        log.debug("다이어리 : {}",diaries);
         return result.getScore();
     }
 
     @GetMapping("read")
     public String read(String dayString, @AuthenticationPrincipal UserDetails user, Model model){
-        log.debug("barDayString at Controller[READ] : {}", dayString);
-
         Diaries diary = diaryservice.read(dayString, user.getUsername());
         String date = diary.getCreated_at();
-        date = date.replaceFirst("-", "년 ").replace("-", "월 ").concat("일");
         model.addAttribute("content", diary.getContent());
         model.addAttribute("created_at", date);
-
         return "diaryView/readForm";
     }
 
@@ -80,28 +73,56 @@ public class DiaryController {
         for(Diaries diary : diaries){
             emotionColors.add(new EmotionColor(diary.getCreated_at(), diary.getEmotionscore()));
         }
-
-
-        log.debug("{}", emotionColors);
-
         return emotionColors;
     }
     @ResponseBody
     @GetMapping("modalCheck")
     public int modalCheck(@RequestParam("dateForOne") String dateForOne, @AuthenticationPrincipal UserDetails userDetails){
-        log.debug("dateForOne : {}", dateForOne);
         int n = diaryservice.modalCheck(dateForOne, userDetails.getUsername());
         return n;
     }
 
     @GetMapping("deleteDiary")
     public String deleteDiary(String dayString, @AuthenticationPrincipal UserDetails user) {
-        log.debug("barDayString at Controller : {}", dayString);
         int n = diaryservice.deleteDiary(dayString, user.getUsername());
 
         return "redirect:/";
     }
 
+
+    @ResponseBody
+    @GetMapping("lastDiary")
+    public String lastDiary(String dayString, @AuthenticationPrincipal UserDetails user){
+
+        String dayStringBefore = diaryservice.lastDiary(dayString, user.getUsername());
+
+        return dayStringBefore;
+    }
+
+    @ResponseBody
+    @GetMapping("nextDiary")
+    public String nextDiary(String dayString, @AuthenticationPrincipal UserDetails user){
+        String dayStringAfter = diaryservice.nextDiary(dayString, user.getUsername());
+
+        return dayStringAfter;
+    }
+
+    @ResponseBody
+    @GetMapping("lastReadDiary")
+    public Diaries lastReadDiary(String dayString, @AuthenticationPrincipal UserDetails user){
+        log.debug("dayString read {} ", dayString);
+        Diaries diaries = diaryservice.lastReadDiary(dayString, user.getUsername());
+
+        return diaries;
+    }
+
+    @ResponseBody
+    @GetMapping("nextReadDiary")
+    public Diaries nextReadDiary(String dayString, @AuthenticationPrincipal UserDetails user){
+        Diaries diaries = diaryservice.nextReadDiary(dayString, user.getUsername());
+
+        return diaries;
+    }
 
 
 }

@@ -15,4 +15,7 @@ public interface DiaryDAO {
 	List<Diaries> checkDiary(String username);
 	int modalCheck(Map<String, String> map);
     int deleteDiary(Map<String, String> map);
+    int emptyDiaryCheck(Map<String, String> map);
+
+	Diaries writtenDiaryCheck(Map<String, String> map);
 }

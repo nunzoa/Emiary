@@ -15,4 +15,12 @@ public interface DiaryService {
     int modalCheck(String dateForOne, String username);
 
     int deleteDiary(String deleteDiary, String username);
+
+    String lastDiary(String dayString, String username);
+
+    String nextDiary(String dayString, String username);
+
+    Diaries lastReadDiary(String dayString, String username);
+
+    Diaries nextReadDiary(String dayString, String username);
 }

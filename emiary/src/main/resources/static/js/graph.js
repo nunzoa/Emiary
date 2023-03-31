@@ -499,7 +499,7 @@ $("#doughnut1").on("click", function(){
       },
     });
 
-    lineContent(n);
+    lineContentMonth(n);
     }
 
     function lineContent(n){
@@ -512,7 +512,6 @@ $("#doughnut1").on("click", function(){
           countNull += 1;
         }
       }
-      if(countNull > 10) return;
 
       let d_day = 0;
       let d_1 = null;
@@ -529,6 +528,7 @@ $("#doughnut1").on("click", function(){
         dcount++;
       }
 
+      console.log("d_day, d_1, d_2", d_day, d_1, d_2)
 
       if(d_2 > 0){
         if(d_1 > 0){
@@ -576,6 +576,82 @@ $("#doughnut1").on("click", function(){
         }
       }
     }
+
+  function lineContentMonth(n){
+    if(n.length == 0) return;
+
+    // 값이 1개만 있으면 안되어서
+    let countNull = 0;
+    for(let i = 0; i < emotionscoreArr.length; ++i){
+      if(emotionscoreArr[i] == null){
+        countNull += 1;
+      }
+    }
+    if(countNull > 10) return;
+
+    let d_day = 0;
+    let d_1 = null;
+    let d_2 = null;
+
+    d_day = emotionscoreArr[emotionscoreArr.length -1];
+    let dcount = 2;
+    while(d_1 == null){
+      d_1 = emotionscoreArr[emotionscoreArr.length - dcount];
+      dcount++;
+    }
+    while(d_2 == null){
+      d_2 = emotionscoreArr[emotionscoreArr.length - dcount];
+      dcount++;
+    }
+
+    console.log("d_day, d_1, d_2", d_day, d_1, d_2)
+
+    if(d_2 > 0){
+      if(d_1 > 0){
+        if(d_day > 0){
+          $("#emotionLineTitle").text("행복한 나날")
+          $("#emotionLineContent").text(" 너무 멋있어! 계속해서 좋은 일들이 일어나길 바랄게.")
+          $("#emotionLine").html('<i class="fa-solid fa-sun" style="color : #ffd400;"></i>');
+        }else{
+          $("#emotionLineTitle").text("갑자기 우울")
+          $("#emotionLineContent").text("무슨 일이 있는거야? 조금 지나면 괜찮아질 거야.")
+          $("#emotionLine").html('<i class="fa-solid fa-meteor" style="color : #a9cbd7;"></i>');
+        }
+      }else{
+        if(d_day > 0){
+          $("#emotionLineTitle").text("감정이 요동쳐")
+          $("#emotionLineContent").text("조금 쉬어가면서 마음을 진정시키고, 긍정적인 에너지를 유지하는 노력을 해보자")
+          $("#emotionLine").html('<i class="fa-solid fa-tornado" style="color : #808080;"></i>');
+        }else{
+          $("#emotionLineTitle").text("감정 하락중")
+          $("#emotionLineContent").text("조금만 기다리면 좋은 날이 일어날거야. 내일은 더 나은 날이 되기를")
+          $("#emotionLine").html('<i class="fa-solid fa-cloud" style="color : #8b00ff;"></i>');
+        }
+      }
+    }else{
+      if(d_1 > 0){
+        if(d_day > 0){
+          $("#emotionLineTitle").text("좋아지고 있어~")
+          $("#emotionLineContent").text("요즘 좋은 일이 가득한거야? 앞으로도 좋은 일들이 일어나길!")
+          $("#emotionLine").html('<i class="fa-solid fa-cloud-sun" style="color : #00ff80;"></i>');
+        }else{
+          $("#emotionLineTitle").text("감정 롤러코스터")
+          $("#emotionLineContent").text("감정이 진정되지 않은 상태야, 긍정적인 에너지를 유지하는 노력을 해보자")
+          $("#emotionLine").html('<i class="fa-solid fa-tornado" style="color : #808080;"></i>');
+        }
+      }else{
+        if(d_day > 0){
+          $("#emotionLineTitle").text("오랜만에 좋아!")
+          $("#emotionLineContent").text("다행이야 요새 계속 우울했던데, 앞으로 좋은 일만 있기를!")
+          $("#emotionLine").html('<i class="fa-solid fa-rainbow" style="color : #096da9;"></i>');
+        }else{
+          $("#emotionLineTitle").text("완전 어두워")
+          $("#emotionLineContent").text("주변 사람들과 자신의 감정을 이야기하면, 조금씩 나아질 거야. 함께 이겨내보자.")
+          $("#emotionLine").html('<i class="fa-sharp fa-solid fa-cloud-bolt" style="color : #000;"></i>');
+        }
+      }
+    }
+  }
 
     function radarFunction(n){
         let nameOfDay = [];
@@ -654,12 +730,12 @@ $("#doughnut1").on("click", function(){
 
         switch (maxDay){
           case "최악의 날" :
-            $("#radarTitle").text("이번 달은 힘든 날이 많았네요");
+            $("#radarTitle").text("같이 화이팅!");
             $("#radarContent").text("앞으로는 올라갈 일만 남았으니, 행복한 나날이 오길 빌겠습니다.");
             $("#radarEmoticon").html('<i class="fa-solid fa-face-dizzy" style="color : #EC00FFFF;"></i>')
             break;
           case "쓸쓸한 날" :
-            $("#radarTitle").text("조금만 더 힘내보아요");
+            $("#radarTitle").text("힘내요~");
             $("#radarContent").text("답답한 날이 많아서 힘드셨죠. 이 또한 지나갈 것입니다.");
             $("#radarEmoticon").html('<i class="fa-solid fa-face-frown-open" style="color : #ff2d2d;"></i>')
             break;
@@ -669,12 +745,12 @@ $("#doughnut1").on("click", function(){
             $("#radarEmoticon").html('<i class="fa-solid fa-face-meh" style="color : #919191;"></i>')
             break;
           case "행복한 날" :
-            $("#radarTitle").text("요새 행복하신가봐요!");
+            $("#radarTitle").text("요새 행복~");
             $("#radarContent").text("축하드려요! 요새 좋은 일이 가득한가봐요! 앞으로도 좋은 일만 일어나길!");
             $("#radarEmoticon").html('<i class="fa-solid fa-face-laugh" style="color : #4476ff;"></i>')
             break;
           case "최고의 날" :
-            $("#radarTitle").text("대박! 당신은 행운아!");
+            $("#radarTitle").text("완전 최고!");
             $("#radarContent").text("최고의 날이 이렇게나 많다니~ 당신은 대체 어떤 인생을 사는 겁니까! 축하드려요~");
             $("#radarEmoticon").html('<i class="fa-solid fa-face-laugh-squint" style="color : #00FF7F;"></i>')
             break;

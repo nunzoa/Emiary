@@ -34,14 +34,12 @@ const editor = new EditorJS({
 $("#diarybtn").click(function() {
   let content = $("#editorjs").html();
   let daystring = $("#dayString").text();
-  daystring = daystring
-      .replace("년 ", "-")
-      .replace("월 ", "-")
-      .replace("일", "");
+    // 버튼 클릭시 스크롤 최상단으로 이동
+    window.scrollTo(0, 0);
 
-  console.log(content);
-  console.log(daystring);
-
+  $(".box").css("display", "block");
+  $(".box").css("display", "block");
+  $(".modalBackDrop").css("display", "block");
   $.ajax({
     type: "POST",
     url: "write",
@@ -116,3 +114,62 @@ $("#diarybtn").click(function() {
   });
 });
 
+
+
+$("#lastDiary").click(function() {
+  let daystring = $("#dayString").text();
+  $.ajax({
+      url : "lastDiary",
+      data : {dayString : daystring},
+      success : function(dayString){
+        location.href = `write?dayString=${dayString}`;
+      },
+      error : function(){
+        alert("error");
+      }
+  })
+});
+
+$("#nextDiary").click(function() {
+  let daystring = $("#dayString").text();
+  $.ajax({
+    url : "nextDiary",
+    data : {dayString : daystring},
+    success : function(dayString){
+      location.href = `write?dayString=${dayString}`;
+    },
+    error : function(){
+      alert("error");
+    }
+  })
+});
+
+$("#lastReadDiary").click(function() {
+  let daystring = $("#dayString").text();
+  $.ajax({
+    url : "lastReadDiary",
+    data : {dayString : daystring},
+    dataType: "json",
+    success : function(n){
+      location.href = `read?dayString=${n.created_at}`;
+    },
+    error : function(){
+      alert("error");
+    }
+  })
+});
+
+$("#nextReadDiary").click(function() {
+  let daystring = $("#dayString").text();
+  $.ajax({
+    url : "nextReadDiary",
+    data : {dayString : daystring},
+    dataType: "json",
+    success : function(n){
+      location.href = `read?dayString=${n.created_at}`;
+    },
+    error : function(){
+      alert("error");
+    }
+  })
+});
