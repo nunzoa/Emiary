@@ -232,8 +232,8 @@ ion-icon:hover{
 
 #colorExplanation{
   position: fixed;
-  right : 0px;
-  bottom : 0px;
+  right : 30px;
+  bottom : 20px;
   border : none!important;
   background: var(--green-dark)!important;
   color : #fff!important;

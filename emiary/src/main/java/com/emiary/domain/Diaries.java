@@ -16,5 +16,6 @@ public class Diaries {
 	String keyword;         // 빈출단어
 	String created_at; // 작성 날짜
 	String updated_at; // 수정 날짜
+
 	
 }

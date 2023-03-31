@@ -58,7 +58,7 @@
 
             <!-- 5. 친구 페이지로 이동 -->
             <li class="nav-item">
-              <a class="nav-link" href="#">친구</a>
+              <a class="nav-link" th:href="@{/friend/findFriend}">친구</a>
             </li>
 
             <!-- 음악 추천 해주기 -->
@@ -68,7 +68,7 @@
 
             <!-- 6. 마이페이지로 이동 -->
             <li class="nav-item">
-              <a class="nav-link active" href="#profileBox">마이페이지</a>
+              <a class="nav-link active" th:href="@{mypage/home}">마이페이지</a>
             </li>
           </ul>
         </div>
@@ -88,7 +88,7 @@
 
       <div class="form-group mt-2 was-validated">
         <label for="email" class="form-label text-white fw-bold">Email address</label>
-        <input type="email" id="email" name="email" class="form-control" required>
+        <input type="email" id="email" name="email" class="form-control" required readonly>
         <div class="invalid-feedback fw-bold">
           이메일 형식을 지켜주세요
         </div>

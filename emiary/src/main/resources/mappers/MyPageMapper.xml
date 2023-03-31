@@ -23,5 +23,28 @@
 <!--		from diaries-->
 <!--	</select>-->
 
+	<select id="checkProfile" parameterType="String" resultType="char">
+		select profile_visibility
+		from member
+		where email = #{username}
+	</select>
+
+	<update id="allowpf" parameterType="Map">
+		update member
+		set profile_visibility = #{isAllowed}
+		where email = #{username}
+	</update>
+
+	<update id="changeImg" parameterType="Member">
+		update Member
+		set originalfile = #{originalfile}, savedfile = #{savedfile}
+		where email = #{email}
+	</update>
+
+	<select id="getImage" parameterType="Member" resultType="String">
+		select originalfile
+		from member
+		where email = #{email}
+	</select>
 </mapper>
 
