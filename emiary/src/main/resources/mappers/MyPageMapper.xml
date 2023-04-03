@@ -46,5 +46,11 @@
 		from member
 		where email = #{email}
 	</select>
+
+	<select id="selectMember" parameterType="String" resultType="Member">
+		select email, originalfile, savedfile
+		from member
+		where email = #{email}
+	</select>
 </mapper>
 

@@ -84,14 +84,21 @@
     <section class="m-5 mx-auto">
       <div class="container">
         <div id="profileBox" class="row d-flex justify-content-center">
-          <form id="profileImage" th:action="@{/mypage/changeImg}" method="post" class="mt-3" enctype="multipart/form-data">
-            <input type="file" name="inputImage" id="inputImage" style="display:none;">
+          <a id="profileImageA" class="d-flex justify-content-center mt-3" onclick="document.getElementById('inputImage').click()">
+            <img id="profileImage"  th:src="@{/mypage/download}"/>
+          </a>
+          <form id="profileImageForm" th:action="@{/mypage/changeImg}" method="post" style="display: none" enctype="multipart/form-data">
+            <input type="file" name="upload" id="inputImage" />
           </form>
+
+
 
 <!--          <form action="" id="profileImage" hidden>-->
 <!--            <label for="inputImage">Select an image:</label>-->
 <!--            <input type="file" id="inputImage" style="display: none" />-->
 <!--          </form>-->
+
+
 
 <!--     버튼에 사진 넣자     <button onclick="document.getElementById('inputImage').click()">-->
 <!--            <img src="image/logo.png" />-->

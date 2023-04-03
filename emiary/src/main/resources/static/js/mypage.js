@@ -1,5 +1,13 @@
 $(document).ready(function () {
 
+  // $.ajax({
+  //   url : "getImage",
+  //   success : function(){
+  //
+  //   }
+  // })
+
+
   $.ajax({
     url : "checkProfile",
     success : function(n){
@@ -21,8 +29,6 @@ $(document).ready(function () {
 
 
   $("#check").change(function () {
-
-
 
     let isAllowed = $("#check").attr("allow");
     console.log("변화가 생기면 attr머 갖고 오는지 체크 ", isAllowed);
@@ -49,14 +55,9 @@ $(document).ready(function () {
             button: "나가기!",
           });
         }
-
-
       }
     });
-
-
   });
-
 
 
 });
@@ -111,13 +112,11 @@ switch (true){
 }
 
 
+$("#inputImage").on("change", function(){
+  $("#profileImageForm").submit();
+  console.log("뜨냐?")
+  $("#profileImageForm").on("submit", function(){
+    console.log("여기 들어오냐")
+  })
+})
 
-
-$('#profileImage').on("click", function(){
-  $('#inputImage').click();
-});
-
-$('#inputImage').on("change", function(){
-  console.log("ㅎㅇ");
-  // $('#profileImage').submit();
-});

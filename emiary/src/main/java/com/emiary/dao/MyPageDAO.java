@@ -17,5 +17,7 @@ public interface MyPageDAO {
     int changeImg(Member member);
 
     String getImage(Member member);
+
+    Member selectMember(String username);
 //    int countFriends(String username);
 }

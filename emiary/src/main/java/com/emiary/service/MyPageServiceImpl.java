@@ -61,6 +61,13 @@ public class MyPageServiceImpl implements MypageService{
         return img;
     }
 
+    @Override
+    public Member read(String username) {
+
+        Member member = myPageDAO.selectMember(username);
+        return member;
+    }
+
 //    @Override
 //    public int countFriends(String username) {
 //        int n = myPageDAO.countFriends(username);

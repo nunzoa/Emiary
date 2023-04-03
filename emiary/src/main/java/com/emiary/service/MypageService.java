@@ -14,5 +14,7 @@ public interface MypageService {
 
     String changeImg(Member member);
 
+    Member read(String username);
+
 //    int countFriends(String username);
 }
