@@ -9,7 +9,8 @@ let doughnutDraw;
 let emotionscoreArr = [];
 let n;
 $(document).ready(function(){
-
+  console.log("presentYear", presentYear)
+  console.log("presentMonth", presentMonth)
   const YEAR = [
     "1월",
     "2월",
@@ -29,6 +30,7 @@ $(document).ready(function(){
         DAY[i] = `${i+1}일`;
       }
   let total = 0;
+  console.log("불러오기 - 바")
 
   $.ajax({
     url : "bar",
@@ -48,7 +50,6 @@ $(document).ready(function(){
     dataType: "json",
     success : lineFunction,
     error : function(n){
-      console.log(n);
     }
   })
 //   line ajax끝
@@ -503,7 +504,7 @@ $("#doughnut1").on("click", function(){
     }
 
     function lineContent(n){
-      if(n.length == 0) return;
+      if(n.length < 3) return;
 
       // 값이 1개만 있으면 안되어서
       let countNull = 0;
