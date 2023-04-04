@@ -23,6 +23,7 @@ dependencies {
 
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
@@ -30,7 +31,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	runtimeOnly 'com.oracle.database.jdbc:ojdbc8'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.1'
 
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
@@ -40,6 +41,12 @@ dependencies {
 
 	implementation 'com.github.shin285:KOMORAN:3.3.4'
 	implementation 'org.jsoup:jsoup:1.15.4'
+
+	// Swagger
+	implementation 'io.springfox:springfox-swagger2:3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
+
+	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 
 }
 
