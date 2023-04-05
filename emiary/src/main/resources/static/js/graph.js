@@ -336,7 +336,7 @@ $("#doughnut1").on("click", function(){
       case total >= 60 :
         $("#CountingDiary").text("감정일기 중독자");
         $("#messageOfDiary").text("당신의 일기는 참으로 뛰어나요. 감정과 경험을 섬세하게 기록하고, 인생의 깊은 곳에서 얻은 진실을 다루고 있습니다.");
-        $("#plantBar").html('<i class="fa-sharp fa-solid fa-seedling"></i>');
+        $("#plantBar").html('<i class="fa-solid fa-tree"></i>');
         break;
     }
   }

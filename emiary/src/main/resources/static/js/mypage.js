@@ -1,11 +1,12 @@
 $(document).ready(function () {
 
-  // $.ajax({
-  //   url : "getImage",
-  //   success : function(){
-  //
-  //   }
-  // })
+
+  $.ajax({
+    url : "getImgURL",
+    success : function(n){
+      $("#profileImage").css({"backgroundImage": `url(${n})`})
+    }
+  })
 
 
   $.ajax({
@@ -59,6 +60,47 @@ $(document).ready(function () {
     });
   });
 
+
+  $("#signup-btn").on("click", function (){
+    if(confirm("정말로 수정하시겠습니까?")){
+      $.ajax({
+        url : "modify",
+        method : "post",
+        data : {
+          email : $("#email").val(),
+          memberpw : $("#memberpw").val(),
+          nickname : $("#nickname").val(),
+          phone : $("#phone").val()
+        },
+        success : function(n){
+          if(n){
+            swal({
+              title: '수정 완료!',
+              icon: "success",
+              button: "마이페이지로",
+            }).then((result) =>
+                location.href = 'home'
+            );
+          }
+        }
+      })
+    }
+  })
+
+  $("#quitYes").on("click", function(){
+    if(confirm("정말로 탈퇴하시겠습니까?")){
+      $.ajax({
+        url : "deleteMember",
+        success : function(){
+          location.href = "/emiary/member/loginForm"
+        }
+      })
+    }
+  })
+
+  $("#quitNo").on("click", function(){
+    location.href="home"
+  })
 
 });
 
@@ -119,4 +161,3 @@ $("#inputImage").on("change", function(){
     console.log("여기 들어오냐")
   })
 })
-

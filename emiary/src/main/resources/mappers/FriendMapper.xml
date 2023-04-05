@@ -1,0 +1,46 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.emiary.dao.FriendDAO">
+
+	<select id="getFriendInfo" parameterType="String" resultType="FindFriend">
+		SELECT email, nickname, imgurl as img,
+			   COUNT(*) AS countDiary,
+			   CASE
+				   WHEN AVG(emotionscore) &lt; -1.2 THEN '우울해'
+				   WHEN AVG(emotionscore) &lt; -0.5 THEN '약간 힘들어'
+				   WHEN AVG(emotionscore) &lt; 0.1 THEN '평화로워'
+				   WHEN AVG(emotionscore) &lt; 1.0 THEN '아주 좋아'
+				   WHEN AVG(emotionscore) &lt; 2 THEN '행복해'
+				   END AS emotion
+		FROM diaries join member
+						  using (email)
+		where profile_visibility = 'Y' and email != #{username}
+		GROUP BY email, nickname, imgurl
+	</select>
+
+	<insert id="likeFriend" parameterType="map">
+		INSERT INTO friendship (user_email, friend_email, like_status)
+		VALUES (#{user_email}, #{friend_email}, 'LIKED')
+	</insert>
+
+	<select id="checkMatched" parameterType="map" resultType="String">
+		select like_status
+		from friendship
+		where user_email = #{friend_email} and friend_email = #{user_email}
+	</select>
+
+	<update id="insertMatchedUser" parameterType="map">
+		update friendship
+		set like_status = 'MATCHED'
+		where user_email = #{user_email} and friend_email = #{friend_email}
+	</update>
+
+	<update id="insertMatchedFriend" parameterType="map">
+		update friendship
+		set like_status = 'MATCHED'
+		where user_email = #{friend_email} and friend_email = #{user_email}
+	</update>
+</mapper>
+

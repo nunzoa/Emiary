@@ -1,8 +1,10 @@
 package com.emiary.controller;
 
 import com.emiary.domain.Member;
+import com.emiary.service.FileUpload;
 import com.emiary.service.MypageService;
 import com.emiary.util.FileService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,8 +24,11 @@ import java.net.URLEncoder;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("mypage")
 public class MypageController {
+
+	private final FileUpload fileUpload;
 
 	@Autowired
 	MypageService mypageService;
@@ -44,21 +49,6 @@ public class MypageController {
 
 		return "mypageView/mypage";
 	}
-
-	@GetMapping("quit")
-	public String quit() {
-
-
-		return "mypageView/myPageQuit";
-	}
-
-	@GetMapping("modify")
-	public String modify() {
-
-
-		return "mypageView/myPageModify";
-	}
-
 
 	@ResponseBody
 	@GetMapping("checkProfile")
@@ -83,50 +73,53 @@ public class MypageController {
 		return isProfile;
 	}
 
-	@PostMapping("changeImg")
-	public String changeImg(Member member, MultipartFile upload, @AuthenticationPrincipal UserDetails userDetails, Model model){
-		log.debug("여기 오니???");
-		if ( upload != null && !upload.isEmpty()) {
-			String filename = FileService.saveFile(upload, uploadPath);
-			member.setOriginalfile(upload.getOriginalFilename());
-			member.setSavedfile(filename);
-		}
-		member.setEmail(userDetails.getUsername());
+	@GetMapping("quit")
+	public String quit(
+			@AuthenticationPrincipal UserDetails userDetails
+			, Model model ) {
 
-		log.debug("member : {}", member);
+		return "mypageView/myPageQuit";
+	}
 
-		String img = mypageService.changeImg(member);
-		model.addAttribute("pImg", img);
-		log.debug("img : {}", img);
+	@ResponseBody
+	@GetMapping("deleteMember")
+	public void deleteMember(Member member, @AuthenticationPrincipal UserDetails user) {
+
+		member.setEmail(user.getUsername());
+		mypageService.delete(member);
+
+	}
+
+
+	@GetMapping("modify")
+	public String modify(@AuthenticationPrincipal UserDetails user, Model model) {
+		Member member = mypageService.read(user.getUsername());
+		log.debug("수정: {}", member);
+		model.addAttribute("member", member);
+		return "mypageView/myPageModify";
+	}
+
+	@ResponseBody
+	@PostMapping("modify")
+	public String modify(Member member) {
+		mypageService.modify(member);
+		return "redirect:/mypage/home";
+	}
+
+	@PostMapping("upload")
+	public String uploadFile(@AuthenticationPrincipal UserDetails userDetails ,@RequestParam("image") MultipartFile multipartFile,
+							 Model model) throws IOException {
+		String imageURL = fileUpload.uploadFile(multipartFile);
+		int result = mypageService.inputURL(imageURL, userDetails.getUsername());
+		model.addAttribute("imageURL",imageURL);
 		return "redirect:home";
 	}
 
 
-	@GetMapping("download")
-	public String download(@AuthenticationPrincipal UserDetails user
-			, HttpServletResponse response) {
-		Member member = mypageService.read(user.getUsername());
-		if (member == null || member.getSavedfile() == null) {
-			return "redirect:list";
-		}
-		String file = uploadPath + "/" + member.getSavedfile();
-		FileInputStream in = null;
-		ServletOutputStream out = null;
-		try {
-			//응답 정보의 헤더 세팅
-			response.setHeader("Content-Disposition",
-					" attachment;filename="+ URLEncoder.encode(member.getOriginalfile(), "UTF-8"));
-
-			in = new FileInputStream(file);
-			out = response.getOutputStream();
-			//파일 전송
-			FileCopyUtils.copy(in, out);
-
-			in.close();
-			out.close();
-		}
-		catch (IOException e) {	//예외 메시지 출력
-		}
-		return "redirect:home";
+	@ResponseBody
+	@GetMapping("getImgURL")
+	public String getImgURL(@AuthenticationPrincipal UserDetails userDetails ){
+		String imgURL = mypageService.getImgURL(userDetails.getUsername());
+		return imgURL;
 	}
 }

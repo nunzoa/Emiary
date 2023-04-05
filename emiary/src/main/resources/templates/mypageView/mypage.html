@@ -84,25 +84,14 @@
     <section class="m-5 mx-auto">
       <div class="container">
         <div id="profileBox" class="row d-flex justify-content-center">
+
           <a id="profileImageA" class="d-flex justify-content-center mt-3" onclick="document.getElementById('inputImage').click()">
-            <img id="profileImage"  th:src="@{/mypage/download}"/>
+            <img id="profileImage"/>
           </a>
-          <form id="profileImageForm" th:action="@{/mypage/changeImg}" method="post" style="display: none" enctype="multipart/form-data">
-            <input type="file" name="upload" id="inputImage" />
+          <form id="profileImageForm" th:action="@{/mypage/upload}" method="post" style="display: none" enctype="multipart/form-data">
+            <input type="file" name="image" id="inputImage" />
           </form>
 
-
-
-<!--          <form action="" id="profileImage" hidden>-->
-<!--            <label for="inputImage">Select an image:</label>-->
-<!--            <input type="file" id="inputImage" style="display: none" />-->
-<!--          </form>-->
-
-
-
-<!--     버튼에 사진 넣자     <button onclick="document.getElementById('inputImage').click()">-->
-<!--            <img src="image/logo.png" />-->
-<!--          </button>-->
         </div>
           <!-- logout-->
         <div class="row w-25 mx-auto" id="logout-box">
@@ -155,6 +144,7 @@
         </div>
       </div>
     </section>
+    <img th:src="@{${imageURL}}" alt="">
 
     <script th:src="@{/js/mypage.js}"></script>
     <script

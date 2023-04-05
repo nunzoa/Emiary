@@ -48,9 +48,39 @@
 	</select>
 
 	<select id="selectMember" parameterType="String" resultType="Member">
-		select email, originalfile, savedfile
+		select email, nickname, phone, birthdate, originalfile, savedfile
 		from member
 		where email = #{email}
+	</select>
+
+	<update id="modify" parameterType="Member">
+		update member
+		set
+			memberpw = #{memberpw}
+		  , nickname = #{nickname}
+		  , phone = #{phone}
+		where
+			email = #{email}
+	</update>
+
+	<delete id="deletChildMember" parameterType="Member">
+		DELETE FROM diaries WHERE email = #{email}
+	</delete>
+
+	<delete id="deleteMember" parameterType="Member">
+		DELETE FROM member WHERE email = #{email}
+	</delete>
+
+	<update id="inputURL" parameterType="map">
+		update member
+		set imgurl = #{imageURL}
+		where email = #{username}
+	</update>
+
+	<select id="getImgURL" parameterType="String" resultType="String">
+		select imgurl
+		from member
+		where email = #{username}
 	</select>
 </mapper>
 
