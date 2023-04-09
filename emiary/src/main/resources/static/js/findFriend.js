@@ -1,12 +1,14 @@
 
 $(document).ready(function(){
-
     let imgCount = 0;
-    const cloudUrl = "https://djjjk9bjm164h.cloudfront.net/";
+
+
+
     $.ajax({
         url : "getFriendInfo",
         dataType : "json",
         success : function(data){
+
             const frame = document.body.querySelector("#frame");
             data.forEach((_data) => appendCard(_data));
             const like = document.querySelector("#like");
@@ -25,11 +27,18 @@ $(document).ready(function(){
             let lastTimestamp = 0;
             initCard(current);
 
+            let countData = -1;
+
             like.onclick = () => {
+                countData++;
+                if(countData >= data.length) countData = -1;
+
+
                 $.ajax({
                     url : "like",
-                    data : { email : $("#user-email").text() },
+                    data : { email : data[countData].email },
                     success : function(n){
+
 
                         if(n == "MATCHED"){
 
@@ -45,9 +54,26 @@ $(document).ready(function(){
                                 button: "나가기!",
                             });
 
+                                $.ajax({
+                                    url: "getOneFriendList",
+                                    dataType: "json",
+                                    success: function(matchedFriendList) {
+                                        console.log("one", matchedFriendList);
+                                        imageBox(matchedFriendList);
+                                    }
+                                });
+
                         }
+
+
                     }
                 })
+
+
+
+
+
+
                 if (!firstCardAnimated) return;
                 moveX = 1;
                 moveY = 0;
@@ -85,7 +111,7 @@ $(document).ready(function(){
                                       <div class="title">
                                         <span id="user-email" hidden>${data.email}</span>
                                         <span>${data.nickname}</span>
-                                        <span>총 일기 수 : ${data.countDiary}</span>
+                                        <span> 총 일기 수 : ${data.countDiary}</span>
                                       </div>
                                       <div class="info">
                                         요즘 나는 : ${data.emotion}
@@ -136,7 +162,6 @@ $(document).ready(function(){
             }
 
             function complete() {
-
                 const flyX = (Math.abs(moveX) / moveX) * innerWidth * 1.3;
                 const flyY = (moveY / moveX) * flyX;
                 setTransform(flyX, flyY, (flyX / innerWidth) * 50, innerWidth);
@@ -146,7 +171,7 @@ $(document).ready(function(){
                 if (next) initCard(next);
                 current = next;
                 likeText = current.children[0];
-                appendCard(data[imgCount % 4]);
+                appendCard(data[imgCount % data.length]);
                 setTimeout(() => frame.removeChild(prev), innerWidth);
             }
 
@@ -158,9 +183,55 @@ $(document).ready(function(){
 
 
 
+
+
         }
     })
 
+    $.ajax({
+        url: "friendList",
+        dataType: "json",
+        success: function(n) {
+            imageBox(n);
+        }
+    });
+
+
+
+    function imageBox(n){
+        console.log("n의 길이 ", n.length);
+
+        for (let item of n) {
+            console.log("item이 머가 나오길래  ", item);
+            const friendRow = document.createElement('div');  // div 요소 생성
+            friendRow.classList.add('row', 'p-1', 'friend_row');  // class 추가
+            friendRow.setAttribute("email", item.email);
+
+            // 다른 친구의 일기장으로 가기
+            friendRow.onclick = function(){
+                location.href="friendHomepage?nickname=" + item.nickname;
+            }
+
+            const col1 = document.createElement('div');  // 첫 번째 col div 요소 생성
+            col1.classList.add('col-6');
+            const img = document.createElement('img');  // img 요소 생성
+            img.classList.add('friend_profile');
+            img.setAttribute('src', item.img);  // 이미지 소스 설정
+            col1.appendChild(img);  // col1에 img 추가
+            friendRow.appendChild(col1);  // friendRow에 col1 추가
+
+            const col2 = document.createElement('div');  // 두 번째 col div 요소 생성
+            col2.classList.add('col-6', 'ps-1', 'd-flex', 'justify-item-center', 'align-items-center');
+            const name = document.createElement('p');  // 닉네임 p 요소 생성
+            name.classList.add('info-c');
+            name.innerText = item.nickname;  // 닉네임 설정
+            col2.appendChild(name);  // col2에 name 추가
+            friendRow.appendChild(col2);  // friendRow에 col2 추가
+            document.getElementById("friend_list").appendChild(friendRow);  // friendRow를 body에 추가
+        }
+
+
+    }
 
 
 

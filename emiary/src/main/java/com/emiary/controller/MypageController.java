@@ -41,11 +41,11 @@ public class MypageController {
 
 		int countDiaries = mypageService.countDiaries(userDetails.getUsername());
 		double calcEmotion = mypageService.calcEmotion(userDetails.getUsername());
-//		int countFriends = mypageService.countFriends(userDetails.getUsername());
+		int countFriends = mypageService.countFriends(userDetails.getUsername());
 
 		model.addAttribute("countDiaries", countDiaries);
 		model.addAttribute("calcEmotion", calcEmotion);
-//		model.addAttribute("countFriends", countFriends);
+		model.addAttribute("countFriends", countFriends);
 
 		return "mypageView/mypage";
 	}

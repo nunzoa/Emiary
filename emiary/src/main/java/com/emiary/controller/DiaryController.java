@@ -2,9 +2,12 @@ package com.emiary.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.emiary.domain.Reply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,7 +61,7 @@ public class DiaryController {
     public String read(String dayString, @AuthenticationPrincipal UserDetails user, Model model){
         Diaries diary = diaryservice.read(dayString, user.getUsername());
         String date = diary.getCreated_at();
-        model.addAttribute("content", diary.getContent());
+        model.addAttribute("diary", diary);
         model.addAttribute("created_at", date);
         return "diaryView/readForm";
     }
@@ -124,5 +127,24 @@ public class DiaryController {
         return diaries;
     }
 
+    @ResponseBody
+    @GetMapping("heartStatus")
+    public int heartStatus(String email, String diaryId){
+        int cntHeart = diaryservice.heartStatus(email, diaryId);
+        return cntHeart;
+    }
 
+    @ResponseBody
+    @PostMapping("insertReply")
+    public int comment(String comment, String diaryId, @AuthenticationPrincipal UserDetails userDetails){
+        int result = diaryservice.inputComment(comment, diaryId, userDetails.getUsername());
+        return result;
+    }
+
+    @ResponseBody
+    @GetMapping("getReply")
+    public List<Reply> reply(String diaryId){
+        List<Reply> replies = diaryservice.getReply(diaryId);
+        return replies;
+    }
 }

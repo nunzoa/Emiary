@@ -31,6 +31,6 @@ public interface MyPageDAO {
 
     String getImgURL(String username);
 
-//    int countFriends(String username);
+    int countFriends(String username);
     
 }

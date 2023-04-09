@@ -17,11 +17,12 @@
 		and email = #{username}
 	</select>
 
-<!--친구 수 세기 친구 칼럼이 필요할 듯? -->
-<!--	<select id="countFriends" parameterType="String" resultType="int">-->
-<!--		select count(*)-->
-<!--		from diaries-->
-<!--	</select>-->
+	<select id="countFriends" parameterType="String" resultType="int">
+		select count(*)
+		from friendship
+		where like_status = 'MATCHED' and user_email = #{username}
+	</select>
+
 
 	<select id="checkProfile" parameterType="String" resultType="char">
 		select profile_visibility

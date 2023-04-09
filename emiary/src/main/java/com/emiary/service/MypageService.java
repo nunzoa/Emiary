@@ -22,7 +22,8 @@ public interface MypageService {
     int modify(Member member);
 
     int delete(Member member);
-//    int countFriends(String username);
+
+    int countFriends(String username);
 
     int inputURL(String imageURL, String username);
 

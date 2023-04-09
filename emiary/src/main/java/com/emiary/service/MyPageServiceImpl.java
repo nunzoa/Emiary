@@ -115,10 +115,10 @@ public class MyPageServiceImpl implements MypageService{
         return imgURL;
     }
 
-//    @Override
-//    public int countFriends(String username) {
-//        int n = myPageDAO.countFriends(username);
-//        return n;
-//    }
+    @Override
+    public int countFriends(String username) {
+        int n = myPageDAO.countFriends(username);
+        return n;
+    }
 
 }

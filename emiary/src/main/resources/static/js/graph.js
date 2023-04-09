@@ -200,6 +200,7 @@ $(document).ready(function(){
     dataType: "json",
     success : radarFunction,
     error : function(n){
+
     }
   })
 
@@ -655,6 +656,8 @@ $("#doughnut1").on("click", function(){
   }
 
     function radarFunction(n){
+      console.log("doughnut - n : ", n);
+
         let nameOfDay = [];
         let resultOfSum = [];
 
@@ -714,7 +717,7 @@ $("#doughnut1").on("click", function(){
                 render : (args) => {
                   return args.label
                 },
-              legend: {
+                legend: {
                   font: {
                     size: 10,
                   },

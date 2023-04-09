@@ -20,6 +20,13 @@
 		GROUP BY email, nickname, imgurl
 	</select>
 
+<!--	liked되어도 안나와야함-->
+	<select id="friendMatched" parameterType="String" resultType="FindFriend">
+		select friend_email as email
+		from friendship
+		where user_email = #{username} and like_status IN ('MATCHED', 'LIKED')
+	</select>
+
 	<insert id="likeFriend" parameterType="map">
 		INSERT INTO friendship (user_email, friend_email, like_status)
 		VALUES (#{user_email}, #{friend_email}, 'LIKED')
@@ -42,5 +49,144 @@
 		set like_status = 'MATCHED'
 		where user_email = #{friend_email} and friend_email = #{user_email}
 	</update>
+
+	<select id="friendList" parameterType="String" resultType="FindFriend">
+		select email, nickname, imgurl as img
+		from member
+		where email in (
+			select friend_email
+			from member, friendship
+			where member.email = friendship.user_email
+			  and member.email = #{username}
+			  and like_status = 'MATCHED'
+		)
+	</select>
+
+	<select id="checkTodayDiary" parameterType="String" resultType="int">
+		select count(*)
+		from diaries
+		where email = #{username} and diaries.created_at = to_char(sysdate, 'yyyymmdd')
+	</select>
+
+	<select id="todayDiaryVisited" parameterType="String" resultType="String">
+		select email
+		from diaries join visited
+		using (diary_id)
+		where visited_email = #{username} and diaries.created_at = to_char(sysdate, 'yyyymmdd')
+	</select>
+	<select id="getOneFriendList" parameterType="String" resultType="FindFriend">
+		select rownum, (select nickname from member where email = friend_email) as nickname, (select imgurl from member where email = friend_email) as img, friend_email as email
+		from
+			(
+				select member.email, member.nickname, member.imgurl as img, friendship.friend_email, friendship.created_at
+				from member, friendship
+				where member.email = friendship.user_email
+				  and member.email = #{username}
+				  and like_status = 'MATCHED'
+				order by friendship.created_at desc
+			)
+		where rownum = 1
+	</select>
+
+	<select id="checkDiary" parameterType="String" resultType="Diaries">
+		select to_char(diaries.created_at, 'FMyyyymmdd') as created_at, diaries.emotionscore
+		from diaries join member
+		using (email)
+		where member.nickname = #{nickname}
+	</select>
+
+	<select id="readDiary" parameterType="map" resultType="Diaries">
+		select email, diaries.diary_id as diary_id, diaries.content as content, to_char(diaries.created_at, 'FMyyyy-mm-dd') as created_at
+		from diaries join member
+		using (email)
+		where member.nickname = #{nickname}
+		and diaries.created_at = #{created_at}
+	</select>
+
+	<select id="checkDuplicate" parameterType="map" resultType="int">
+		select count(*)
+		from diaries join visited
+		using (diary_id)
+		where visited_email = #{email} and created_at = #{created_at} and diary_id = ${diaryId}
+	</select>
+
+	<insert id="visted" parameterType="map">
+		insert into visited(visited_id, diary_id, visited_email)
+		values(visited_seq.nextval, #{diary_id}, #{username})
+	</insert>
+
+	<select id="isHeartEmpty" parameterType="map" resultType="Diaries">
+		select heart, visited_email
+		from diaries, member, visited
+		where diaries.email = member.email and visited.diary_id = visited.diary_id
+		  and member.email = #{username}
+		  and visited_email = #{email}
+		  and diaries.created_at = #{created_at}
+		  and visited.diary_id = #{diaryId}
+	</select>
+
+	<select id="countHeart"  parameterType="map" resultType="int">
+		select count(*)
+		from visited
+		where diary_id = #{diaryId} and heart = 'Y'
+	</select>
+
+	<update id="updateHeart" parameterType="map">
+		update visited
+		set heart = #{heartTo}
+		where diary_id = #{diaryId} and visited_email = #{username}
+	</update>
+
+<!--	select diaries.diary_id as diary_id, diaries.content as content, to_char(diaries.created_at, 'FMyyyy-mm-dd') as created_at, visited_email-->
+<!--	from diaries, member, visited-->
+<!--	where diaries.email = member.email and visited.diary_id = visited.diary_id-->
+<!--	and member.email = '마키마스키'-->
+<!--	and diaries.created_at = '2023-04-08'-->
+<!--	and visited.diary_id = '208';-->
+
+	<select id="modalCheck" parameterType="Map" resultType="int">
+		select count(*)
+		from diaries join member
+		using (email)
+		where diaries.created_at = #{created_at}
+		  and member.nickname = #{nickname}
+	</select>
+
+	<select id="writtenDiaryCheck" parameterType="Map" resultType="Diaries">
+		select diaries.content, to_char(diaries.created_at, 'yyyy-mm-dd') as created_at
+		from diaries join member
+		 using (email)
+		where diaries.created_at = #{dayString}
+		  and member.nickname = #{nickname}
+	</select>
+
+
+<!--가장 최근의 일기 감정 점수 갖고 오기-->
+	<select id="readByNickName" parameterType="String" resultType="FindFriend">
+		select rownum, imgurl as img, emotionscore, nickname
+		from(
+				select nickname, imgurl, emotionscore from diaries join member using (email)
+				where nickname = #{nickname} order by diaries.created_at desc
+			)
+		where rownum = 1
+	</select>
+
+	<insert id="inputComment" parameterType="map">
+		insert into reply(reply_id, diary_id, replyContent, writer_email)
+		values (reply_seq.nextval, #{diaryId}, #{comment}, #{username})
+	</insert>
+
+	<select id="getReply" parameterType="String" resultType="Reply">
+		select replyContent, writer_email, to_char(created_at_reply, 'yyyy-mm-dd HH24:MI:SS') as created_at_reply
+		from reply
+		where diary_id = #{diaryId}
+		order by created_at_reply desc
+	</select>
+
+	<select id="getNickName" parameterType="String" resultType="String">
+		select nickname
+		from member
+		where email = #{writerEmail}
+	</select>
 </mapper>
 

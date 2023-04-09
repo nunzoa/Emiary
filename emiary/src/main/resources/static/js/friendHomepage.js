@@ -10,7 +10,7 @@ let emotionColor = "";
 
 $(document).ready(function() {
     $.ajax({
-        url: 'diary/checkDiary',
+        url: 'checkDiary',
         type: 'GET',
         success: function (diaries) {
             emotionColor = diaries;
@@ -21,17 +21,9 @@ $(document).ready(function() {
         }
     });
 
-    $.ajax({
-        url: "friend/friendList",
-        dataType: "json",
-        success: function(n) {
-            console.log(n)
-            imageBox(n);
-        }
-    });
-
-
-
+    // $.ajax({
+    //
+    // })
 
 });
 
@@ -84,9 +76,7 @@ function load() {
 
         // +버튼 누를 시 일기 작성으로 이동
         let todayDate = new Date(year, month, day);
-        let todayString = `${todayDate.getFullYear()}년${(todayDate.getMonth() + 1)}월${todayDate.getDate()}일`;
-        todayDiary.href = `/emiary/diary/write?dayString=` + todayString;
-        // paddingDays는 제외하고 출력
+
         if (i > paddingDays) {
             daySquare.innerText = i - paddingDays;
             
@@ -100,16 +90,17 @@ function load() {
 
                 // 모달 구분 코드 시작
                 $.ajax({
-                    url : "diary/modalCheck",
+                    url : "modalCheck",
                     type : "GET",
                     data : {dateForOne : dateForOne},
                     success : function(n){
                         if(n == 1){
                             delReadModal.style.display = "block";
+                            modalBackDrop.style.display = "block";
                         }else{
-                            writeEventModal.style.display = "block";
+                            // writeEventModal.style.display = "block";
                         }
-                        modalBackDrop.style.display = "block";
+
                     },
                     error : function (xhr, status, error) {
                     console.log(status);
@@ -117,29 +108,28 @@ function load() {
                 })
                 // 모달 구분 코드 끝
 
-                document.getElementById("writeDiary").onclick = function () {
-                    location.href = `/emiary/diary/write?dayString=${barDayString}`;
-                }
+                // document.getElementById("writeDiary").onclick = function () {
+                //     location.href = `/emiary/friend/write?dayString=${barDayString}`;
+                // }
 
                 document.getElementById("readDiary").onclick = function () {
-                    location.href = `/emiary/diary/read?dayString=${barDayString}`;
+                    location.href = `/emiary/friend/read?dayString=${barDayString}`;
                 }
 
-                document.getElementById("deleteDiary").onclick = function () {
-                    location.href = `/emiary/diary/deleteDiary?dayString=${barDayString}`;
-                }
+                // document.getElementById("deleteDiary").onclick = function () {
+                //     location.href = `/emiary/friend/deleteDiary?dayString=${barDayString}`;
+                // }
             })
 
-            document.querySelector('.write-close').addEventListener('click', () => {
-                writeEventModal.style.display = "none";
-                modalBackDrop.style.display = "none";
-            })
+            // document.querySelector('.write-close').addEventListener('click', () => {
+            //     writeEventModal.style.display = "none";
+            //     modalBackDrop.style.display = "none";
+            // })
 
             document.querySelector('.delRead-close').addEventListener('click', () => {
                 delReadModal.style.display = "none";
                 modalBackDrop.style.display = "none";
             })
-
 
             // 색깔 및 이모티콘 넣기
             for(let count = 0; count < emotionColor.length; ++count){
@@ -200,7 +190,6 @@ function load() {
                                 emoticon.classList.add("fa-face-meh-blank");
                                 emoticon.style.color = "#2f2f2f";
                                 daySquare.appendChild(emoticon);
-
                         }
                 }
             }
@@ -231,138 +220,16 @@ function initButton(){
     });
 }
 
+
+
+
+
+
+
 initButton();
 load();
 
-$(".searchinput").on("keyup", function(){
-    $("#moreThanTwo").html("");
-    let searchInput = $(".searchinput").val();
-    if(searchInput.length > 1){
-        $.ajax({
-            url : "findingContent",
-            data : {searchInput : searchInput},
-            dataType : "json",
-            success : function(data){
-
-                let searchLine = '';
-
-                for(let items of data){
-                searchLine +=    `
-                
-                  <div class="card">
-                
-                  <div class="card-body">
-                    <h5 class="card-title">${items.created_at}</h5>
-                    <p class="card-text">${items.content_notag}</p>
-                    <a th:href="@{/diary/read(dayString=${items.created_at})}" class="btn btn-primary">GO</a>
-                  </div>
-                </div>
-                `
-                }
-
-                $("#searchBox").html(searchLine);
-            }
-        })
-    }else{
-        $("#moreThanTwo").html("** 2글자 이상 입력해주세요");
-    }
-    // load(); 입력이 0이면 캘린더가 뜨게 해야하는데... 어캐하지
-
-
-})
-
-$(".searchinput").on("blur", function(){
-    $(".card").css("display", "none");
-    $("#moreThanTwo").html("");
-})
 
 
 
 
-// function imageBox(n){
-//         let canbody = "";
-//     for (let item of n) {
-//         console.log("item", item)
-//         console.log('item.img, item.nickname', item.img, item.nickname )
-//         canbody +=`
-//          <div class="friend-popup row d-flex align-items-center mt-3" nickname=${item.nickname}>
-//             <div class="friendList col-5 text-start">
-//                 <img class="friendImage" src="${item.img}" alt="">
-//             </div>
-//             <div class="col-5 text-white fw-bold lead">
-//                 <span>${item.nickname}</span>
-//             </div>
-//             `
-//
-//             if(item.todayDiary == 1){
-//                 canbody +=
-//                     // 여기는 만약 오늘 일기를 쓴 상대방이라면 알림이 뜬다.
-//                     `
-//                         <div class="col-2">
-//                             <i class="fa-solid fa-bell fa-shake" style="color: #ffff00;"></i>
-//                         </div>
-//                     `
-//             }
-//
-//             canbody +=
-//             `
-//                </div>
-//             `
-//
-//
-//
-//     }
-//     document.querySelector(".offcanvas-body").innerHTML = canbody;
-//
-// }
-
-function imageBox(n) {
-    let offcanvasBody = document.querySelector(".offcanvas-body");
-    for (let item of n) {
-        let friendPopup = document.createElement("div");
-        friendPopup.className = "friend-popup row d-flex align-items-center mt-3";
-        friendPopup.setAttribute("nickname", item.nickname);
-
-        let friendList = document.createElement("div");
-        friendList.className = "friendList col-5 text-start";
-        let friendImage = document.createElement("img");
-        friendImage.className = "friendImage";
-        friendImage.src = item.img;
-        friendList.appendChild(friendImage);
-
-        let friendInfo = document.createElement("div");
-        friendInfo.className = "col-5 text-white fw-bold lead";
-        let nicknameSpan = document.createElement("span");
-        nicknameSpan.textContent = item.nickname;
-        friendInfo.appendChild(nicknameSpan);
-
-        friendPopup.appendChild(friendList);
-        friendPopup.appendChild(friendInfo);
-
-        
-        // 수정 중
-        if (item.todayDiary == 1) {
-            let bellIcon = document.createElement("div");
-            bellIcon.className = "col-2";
-            let bellIconElement = document.createElement("i");
-            bellIconElement.className = "fa-solid fa-bell fa-shake";
-            bellIconElement.style.color = "#ffff00";
-            bellIcon.appendChild(bellIconElement);
-            friendPopup.appendChild(bellIcon);
-        }else if(item.todayDiary == -1){
-            let eyeBall = document.createElement("div");
-            eyeBall.className = "col-2";
-            let eyeBallElement = document.createElement("i");
-            eyeBallElement.className = "fa-solid fa-eye";
-            eyeBallElement.style.color = "#ff0000";
-            eyeBall.appendChild(eyeBallElement);
-            friendPopup.appendChild(eyeBall);
-        }
-
-        friendPopup.onclick = function(){
-            location.href="friend/friendHomepage?nickname=" + item.nickname;
-        }
-
-        offcanvasBody.appendChild(friendPopup);
-    }
-}

@@ -1,6 +1,7 @@
 package com.emiary.service;
 
 
+import com.emiary.domain.Reply;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class DiaryServiceImpl implements DiaryService {
 	@Override
 	public int write(Diaries diaries) {
 		int result = diarydao.write(diaries);
+
+		//
 		return result;
 	}
 
@@ -184,6 +187,50 @@ public class DiaryServiceImpl implements DiaryService {
 		}
 
 		return isDiaryEmpty;
+	}
+
+    @Override
+    public List<Diaries> findingContent(String searchInput, String username) {
+		Map<String, String> map = new HashMap<>();
+		map.put("searchInput", searchInput);
+		map.put("username", username);
+
+		List<Diaries> content = diarydao.findingContent(map);
+
+
+		return content;
+    }
+
+	@Override
+	public int heartStatus(String email, String diaryId) {
+		Map<String, String> map = new HashMap<>();
+		map.put("email", email);
+		map.put("diaryId", diaryId);
+
+		int cntHeart = diarydao.heartStatus(map);
+
+		return cntHeart;
+	}
+
+    @Override
+    public int inputComment(String comment, String diaryId, String username) {
+		Map<String, String> map = new HashMap<>();
+		map.put("comment", comment);
+		map.put("diaryId", diaryId);
+		map.put("username", username);
+		int result = diarydao.inputComment(map);
+		return result;
+    }
+
+	@Override
+	public List<Reply> getReply(String diaryId) {
+		List<Reply> replies = diarydao.getReply(diaryId);
+
+		for(Reply reply : replies){
+			reply.setNickname(diarydao.getNickName(reply.getWriter_email()));
+		}
+
+		return replies;
 	}
 
 

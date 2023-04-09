@@ -12,6 +12,7 @@
       <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
       <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@latest"></script>
       <script src="https://cdn.jsdelivr.net/npm/@editorjs/image@2.3.0"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script>
       <script src="https://cdn.jsdelivr.net/npm/@editorjs/nested-list@latest"></script>
       <script src="https://cdn.jsdelivr.net/npm/@editorjs/checklist@latest"></script>
       <script src="https://cdn.jsdelivr.net/npm/@editorjs/raw"></script>
@@ -27,19 +28,19 @@
   </head>
   <body>
 
-    <header class="overflow-hidden bg-orange">
+    <header class="overflow-hidden bg-orange mx-auto">
         <div class="container">
-            <div class="row p-3 d-flex align-items-center">
+            <div class="row pt-5 d-flex align-items-center">
                 <div class="col-sm-6 text-lg-start">
                   <!-- 1. 로고 누르면 홈페이지로 이동 -->
-                    <a th:href="@{/}" class="navbar-brand display-1 text-white fs-1">
+                    <a th:href="@{/}" class="navbar-brand display-1 text-white fs-1 ms-5">
                         Emiary  
                         <img src="../image/logo.png" class="img-fluid" alt="logo">
                     </a>
                 </div>
 
                 <div id="date" class="col-sm-6 text-end text-white">
-                    <span id="dayString" th:text="${dayString}"></span> 일기
+                    <span id="dayString" class="lead fw-bold me-3" th:text="${dayString}"></span>
                 </div>
             </div>
 
@@ -58,7 +59,7 @@
 
                 <div id="editorjs" class="p-3"></div>
 
-                <button type="button" id="diarybtn" class="btn subbtn mx-auto text-white mt-4 w-25">
+                <button type="button" id="diarybtn" class="btn subbtn mx-auto text-white mb-4 w-50">
                     제출
                 </button>
         </div>

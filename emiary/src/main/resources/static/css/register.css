@@ -18,6 +18,12 @@ body{
 
 
 /* header 부분 */
+header{
+    max-width: 770px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
 header .container{
     max-width: 1200px;
   }
@@ -26,7 +32,15 @@ header .container{
     background-color: var(--orange) !important;
 }
   
-  
+section{
+    width : 770px;
+    border-left: 3px solid var(--orange);
+    border-right: 3px solid var(--orange);
+    border-bottom: 3px solid var(--orange);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
 .container{
     width : 770px;
 }   

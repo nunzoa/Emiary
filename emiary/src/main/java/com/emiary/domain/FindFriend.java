@@ -13,5 +13,7 @@ public class FindFriend {
     String img;
     int countDiary;
     String emotion;
+    int emotionscore;
+    int todayDiary;
 }
 

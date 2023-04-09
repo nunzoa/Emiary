@@ -18,14 +18,14 @@
   </head>
   <body>
 
-    <header class="overflow-hidden bg-orange">
+    <header class="overflow-hidden bg-orange mx-auto">
       <div class="container">
         <div class="row pt-5">
           <div class="col-sm-6 text-lg-start">
             <!-- 1. 로고 누르면 홈페이지로 이동 -->
             <a
               th:href="@{/}"
-              class="navbar-brand display-1 text-white fs-1"
+              class="navbar-brand display-1 text-white fs-1 ms-5"
             >
               Emiary
               <img th:src="@{/image/logo.png}" class="img-fluid" alt="logo" />
@@ -35,15 +35,13 @@
           <div class="col-sm-6 d-md-flex text-white align-items-center nav-icons justify-content-end">
             <nav class="navbar">
               <div class="container-fluid">
-                <div class="text-white">마이페이지</div>
+                <div class="text-white"></div>
               </div>
             </nav>
           </div>
 
 
-          <div class="row"></div>
-
-            <div class="row pt-5">
+            <div class="row pt-3">
               <div class="col-8">
                 <ul class="nav nav-tabs ">
 
@@ -81,8 +79,9 @@
 
     </header>
 
-    <section class="m-5 mx-auto">
-      <div class="container">
+
+    <section class=" mx-auto pb-3 pt-3">
+      <div class="container ">
         <div id="profileBox" class="row d-flex justify-content-center">
 
           <a id="profileImageA" class="d-flex justify-content-center mt-3" onclick="document.getElementById('inputImage').click()">
@@ -114,7 +113,7 @@
           <!-- 평균 감정 -->
           <div class="inputinformation d-flex align-items-center justify-content-center text-center p-1" id="averageEmotion" th:emotionscore="${calcEmotion}"></div>
           <!-- 친구 수 -->
-          <div class="inputinformation d-flex align-items-center justify-content-center text-center p-1">추후 수정</div>
+          <div class="inputinformation d-flex align-items-center justify-content-center text-center p-1" th:text="${countFriends}">추후 수정</div>
         </div>
 
         <!-- 회원정보 수정 -->
