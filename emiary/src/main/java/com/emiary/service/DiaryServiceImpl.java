@@ -2,12 +2,22 @@ package com.emiary.service;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.text.StringEscapeUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.cloudinary.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emiary.dao.DiaryDAO;
 import com.emiary.domain.Diaries;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -20,10 +30,38 @@ public class DiaryServiceImpl implements DiaryService {
 
 	@Override
 	public int write(Diaries diaries) {
+		//String results = getESValues(diaries.getKeyword());
+
 		int result = diarydao.write(diaries);
+
 		return result;
 	}
 
+	private String getValue(String keyword) throws IOException {
+		HttpClient httpClient = HttpClients.createDefault();
+
+		HttpPost httpPost = new HttpPost("http://43.201.101.83:8000/search/");
+
+		httpPost.setHeader("Content-type", "application/json");
+		//서버에 요청 할 때, 나의 컨텐츠 타입을 "application/json"
+
+		JSONObject jsonObject = new JSONObject();
+
+		jsonObject.put("keyword", keyword);
+
+		StringEntity stringEntity = new StringEntity(jsonObject.toString(), "UTF-8");
+
+		httpPost.setEntity(stringEntity);
+
+		HttpResponse httpResponse = httpClient.execute(httpPost);
+		httpResponse.setHeader("Content-type", "application/json");
+
+		String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
+
+		String output = StringEscapeUtils.unescapeJava(responseBody);
+
+		return output;
+	}
 	@Override
 	public Diaries read(String dayString, String username) {
 		Map<String, String> map = new HashMap<>();

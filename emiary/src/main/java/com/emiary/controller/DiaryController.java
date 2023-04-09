@@ -41,6 +41,7 @@ public class DiaryController {
      * @return 캘린더 홈으로 이동
      */
 
+
     @ResponseBody
     @PostMapping("write")
     public double write(Diaries diaries, @AuthenticationPrincipal UserDetails user, Model model) {
