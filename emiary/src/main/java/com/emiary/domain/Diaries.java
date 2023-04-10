@@ -14,8 +14,10 @@ public class Diaries {
 	String content; // 본문
 	double emotionscore; // 감정지수
 	String keyword;         // 빈출단어
+	String wordsforai;      // 그림API용 빈출단어
 	String created_at; // 작성 날짜
 	String updated_at; // 수정 날짜
+	
 
 	
 }

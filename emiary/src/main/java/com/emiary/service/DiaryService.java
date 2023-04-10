@@ -23,4 +23,5 @@ public interface DiaryService {
     Diaries lastReadDiary(String dayString, String username);
 
     Diaries nextReadDiary(String dayString, String username);
+
 }

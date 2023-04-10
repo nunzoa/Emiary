@@ -186,5 +186,8 @@ public class DiaryServiceImpl implements DiaryService {
 		return isDiaryEmpty;
 	}
 
+	
+
+
 
 }
