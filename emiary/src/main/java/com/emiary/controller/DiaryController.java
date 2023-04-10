@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.emiary.domain.Reply;
+import com.emiary.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.emiary.domain.Diaries;
-import com.emiary.domain.EmotionAnalysisResult;
-import com.emiary.domain.EmotionColor;
 import com.emiary.service.DiaryService;
 import com.emiary.util.EmotionAnalyzer;
 
@@ -146,5 +143,14 @@ public class DiaryController {
     public List<Reply> reply(String diaryId){
         List<Reply> replies = diaryservice.getReply(diaryId);
         return replies;
+    }
+
+    @ResponseBody
+    @GetMapping("replyAlarm")
+    public List<ReplyAlarm> replyAlarm(String yearMonth, @AuthenticationPrincipal UserDetails userDetails){
+        log.debug("년월이 떠야해 ! {}", yearMonth );
+        List<ReplyAlarm> list = diaryservice.getReplyAlarm(yearMonth, userDetails.getUsername());
+        log.debug("맵으로 보내는게 조금 잘못된듯? : {}", list);
+        return list;
     }
 }

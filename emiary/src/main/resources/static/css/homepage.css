@@ -111,8 +111,9 @@ header .container{
   width : 97px;
   height : 97px;
   box-shadow: 3px 3px 0px var(--orange);
-
 }
+
+
 
 .day:hover{
   background-color: rgba(255, 127, 0, 0.5);
@@ -310,4 +311,17 @@ ion-icon:hover{
   font-size : 2rem;
 }
 
+.inform{
+  position: absolute;
+  right : -10px;
+  top : -10px;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #ff2d2d;
+  font-size: 15px;
+  text-align: center;
+  color : #fff;
+}
 

@@ -6,9 +6,27 @@ const delReadModal = document.getElementById("delReadModal");
 const todayDiary = document.getElementById("todayDiary");
 const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
-let emotionColor = "";
 
+let emotionColor = "";
+let replyAlarm = [];
 $(document).ready(function() {
+
+    $.ajax({
+        url : "diary/replyAlarm",
+        data : {yearMonth : $("#monthDisplay").text()},
+        dataType: "json",
+        success : function(n){
+
+            replyAlarm = n;
+            console.log("알림리스트 : ", n);
+            load();
+
+        },error : function(n){
+            console.log("알람 에러", n)
+        }
+    })
+
+    console.log("실행되고1")
     $.ajax({
         url: 'diary/checkDiary',
         type: 'GET',
@@ -25,19 +43,20 @@ $(document).ready(function() {
         url: "friend/friendList",
         dataType: "json",
         success: function(n) {
-            console.log(n)
+            console.log("친구리스트 : ", n)
             imageBox(n);
         }
     });
 
-
-
+    console.log("여기는 오니");
 
 });
 
 
 // load 시작
 function load() {
+
+    console.log("실행되나??2")
     const dt = new Date();
     
     // 3월 29일 이후 2월달 캘린더가 안떴는데 그게 month만 빼서 그럼
@@ -62,13 +81,15 @@ function load() {
     })
 
     const paddingDays = weekdays.indexOf(dateString.split(',')[0]);
-    document.getElementById("monthDisplay").innerText = `${dt.toLocaleDateString('en-us', {month: 'numeric'})}월 ${year}`
+    document.getElementById("monthDisplay").innerText = `${year}-${dt.toLocaleDateString('en-us', {month: 'numeric'})}`
 
     console.log("달", month)
     console.log("daysInMonth", daysInMonth)
 
     calendar.innerHTML = '';
 
+
+    let countAlarm = 0;
     // for문 캘린더 작성
     for (let i = 1; i <= paddingDays + daysInMonth; i++) {
         let daySquare = document.createElement('a');
@@ -212,8 +233,23 @@ function load() {
         } else {
             daySquare.classList.add('padding');
         }
+
+        
         calendar.appendChild(daySquare);
-    }
+
+        //메시지 추가 부분
+        let replyDot = document.createElement("a")
+        replyDot.classList.add("inform");
+            for(let k = 0; k < replyAlarm.length; ++k){
+                if(replyAlarm[k].created_at == barDayString){
+                    replyDot.innerHTML = replyAlarm[k].countPerDay;
+                    daySquare.appendChild(replyDot);
+                }
+            }
+        //끝
+
+        }
+
 
 }
 // load 끝

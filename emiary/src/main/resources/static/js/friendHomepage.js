@@ -54,7 +54,7 @@ function load() {
     })
 
     const paddingDays = weekdays.indexOf(dateString.split(',')[0]);
-    document.getElementById("monthDisplay").innerText = `${dt.toLocaleDateString('en-us', {month: 'numeric'})}월 ${year}`
+    document.getElementById("monthDisplay").innerText = `${year}-${dt.toLocaleDateString('en-us', {month: 'numeric'})}`
 
     console.log("달", month)
     console.log("daysInMonth", daysInMonth)

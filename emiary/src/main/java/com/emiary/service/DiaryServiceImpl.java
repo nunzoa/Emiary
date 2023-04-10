@@ -2,6 +2,7 @@ package com.emiary.service;
 
 
 import com.emiary.domain.Reply;
+import com.emiary.domain.ReplyAlarm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,10 @@ public class DiaryServiceImpl implements DiaryService {
 		map.put("email", username);
 
 		Diaries diary = diarydao.readDiary(map);
+
+		//해당 페이지를 열어서 보게 되면 viewed로 바뀌게 됨
+		int n = diarydao.readComment(diary.getDiary_id());
+
 		return diary;
 	}
 
@@ -232,6 +237,18 @@ public class DiaryServiceImpl implements DiaryService {
 
 		return replies;
 	}
+
+    @Override
+    public List<ReplyAlarm> getReplyAlarm(String yearMonth, String username) {
+		log.debug("y {} u {} ", yearMonth, username);
+		Map<String, String> map = new HashMap<>();
+		map.put("yearMonth", yearMonth);
+		map.put("username", username);
+
+		List<ReplyAlarm> list = diarydao.getReplyAlarm(map);
+		log.debug("서비스 returnmap {}", list);
+		return list;
+    }
 
 
 }

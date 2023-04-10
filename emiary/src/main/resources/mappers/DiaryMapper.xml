@@ -96,5 +96,18 @@
 		where email = #{writerEmail}
 	</select>
 
+	<select id="getReplyAlarm" parameterType="map" resultType="ReplyAlarm">
+		select to_char(created_at, 'FMyyyy-mm-dd') as created_at, count(*) as countPerDay
+		from diaries join reply
+		using (diary_id)
+		where email = #{username} and to_char(created_at, 'FMyyyy-mm') = #{yearMonth} and writer_email != #{username} and viewed = 0
+		group by created_at
+	</select>
+
+	<update id="readComment" parameterType="int">
+		update reply
+		set viewed = 1
+		where diary_id = #{diaryId}
+	</update>
 </mapper>
 
