@@ -13,6 +13,7 @@
 		, content_notag
 		, emotionscore
 		, keyword
+		, wordsforai
 		, created_at
 		)
 		values (
@@ -22,12 +23,13 @@
 		, #{content_notag}
 		, #{emotionscore}
 		, #{keyword}
+		, #{wordsforai}
 		, #{created_at}
 		)
 	</insert>
 
 	<select id="readDiary" parameterType="Map" resultType="Diaries">
-		select diary_id, content, to_char(created_at, 'FMyyyy-mm-dd') as created_at
+		select diary_id, content, to_char(created_at, 'FMyyyy-mm-dd') as created_at, keyword, wordsforai
 		from diaries
 		where email = #{email}
 		  and created_at = #{created_at}
