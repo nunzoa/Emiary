@@ -1,20 +1,33 @@
 package com.emiary.service;
 
+import com.cloudinary.Cloudinary;
 import com.emiary.dao.MyPageDAO;
 import com.emiary.domain.Member;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MyPageServiceImpl implements MypageService{
+
+    private final Cloudinary cloudinary;
 
     @Autowired
     MyPageDAO myPageDAO;
+
+    @Autowired
+    PasswordEncoder encoder;
+
 
     @Override
     public int countDiaries(String username) {
@@ -36,6 +49,15 @@ public class MyPageServiceImpl implements MypageService{
         char isProfile = myPageDAO.checkProfile(username);
 
         return isProfile;
+    }
+
+    @Override
+    public int modify(Member member) {
+        String pw = encoder.encode(member.getMemberpw());
+        member.setMemberpw(pw);
+        int result = myPageDAO.modify(member);
+
+        return result;
     }
 
     @Override
@@ -61,11 +83,42 @@ public class MyPageServiceImpl implements MypageService{
         return img;
     }
 
-//    @Override
-//    public int countFriends(String username) {
-//        int n = myPageDAO.countFriends(username);
-//        return n;
-//    }
+    @Override
+    public Member read(String username) {
 
+        Member member = myPageDAO.selectMember(username);
+        return member;
+    }
+
+
+    @Override
+    public int delete(Member member) {
+        int delChild = myPageDAO.deletChildMember(member);
+        int result = myPageDAO.deleteMember(member);
+        return result;
+    }
+
+
+    @Override
+    public int inputURL(String imageURL, String username) {
+        Map<String, String> map = new HashMap<>();
+        map.put("username", username);
+        map.put("imageURL", imageURL);
+
+        int result = myPageDAO.inputURL(map);
+        return result;
+    }
+
+    @Override
+    public String getImgURL(String username) {
+        String imgURL = myPageDAO.getImgURL(username);
+        return imgURL;
+    }
+
+    @Override
+    public int countFriends(String username) {
+        int n = myPageDAO.countFriends(username);
+        return n;
+    }
 
 }

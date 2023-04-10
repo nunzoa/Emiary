@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Map;
 
+import com.emiary.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.emiary.domain.Diaries;
-import com.emiary.domain.EmotionAnalysisResult;
-import com.emiary.domain.EmotionColor;
 import com.emiary.service.DiaryService;
 import com.emiary.service.ImageGenerationService;
 import com.emiary.util.EmotionAnalyzer;
@@ -119,7 +119,7 @@ public class DiaryController {
     	log.debug("리드의 데이스트링 : {}" , dayString);
         Diaries diary = diaryservice.read(dayString, user.getUsername());
         String date = diary.getCreated_at();
-        model.addAttribute("content", diary.getContent());
+        model.addAttribute("diary", diary);
         model.addAttribute("created_at", date);
         return "diaryView/readForm";
     }
@@ -186,5 +186,33 @@ public class DiaryController {
     }
     
 
+    @ResponseBody
+    @GetMapping("heartStatus")
+    public int heartStatus(String email, String diaryId){
+        int cntHeart = diaryservice.heartStatus(email, diaryId);
+        return cntHeart;
+    }
 
+    @ResponseBody
+    @PostMapping("insertReply")
+    public int comment(String comment, String diaryId, @AuthenticationPrincipal UserDetails userDetails){
+        int result = diaryservice.inputComment(comment, diaryId, userDetails.getUsername());
+        return result;
+    }
+
+    @ResponseBody
+    @GetMapping("getReply")
+    public List<Reply> reply(String diaryId){
+        List<Reply> replies = diaryservice.getReply(diaryId);
+        return replies;
+    }
+
+    @ResponseBody
+    @GetMapping("replyAlarm")
+    public List<ReplyAlarm> replyAlarm(String yearMonth, @AuthenticationPrincipal UserDetails userDetails){
+        log.debug("년월이 떠야해 ! {}", yearMonth );
+        List<ReplyAlarm> list = diaryservice.getReplyAlarm(yearMonth, userDetails.getUsername());
+        log.debug("맵으로 보내는게 조금 잘못된듯? : {}", list);
+        return list;
+    }
 }

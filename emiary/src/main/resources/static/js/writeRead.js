@@ -2,16 +2,18 @@
 
 const editor = new EditorJS({
   holder: "editorjs",
+  minHeight : 30,
   tools: {
     header: Header,
     quote: Quote,
-
     checklist: {
       class: Checklist,
       inlineToolbar: true,
     },
-    raw: RawTool,
+
+
   },
+
 });
 
 
@@ -19,6 +21,7 @@ const editor = new EditorJS({
 $("#diarybtn").click(function() {
   let content = $("#editorjs").html();
   let daystring = $("#dayString").text();
+  let content_notag = $("#editorjs").text();
     // 버튼 클릭시 스크롤 최상단으로 이동
     window.scrollTo(0, 0);
 
@@ -28,7 +31,7 @@ $("#diarybtn").click(function() {
   $.ajax({
     type: "POST",
     url: "write",
-    data: { content : content, created_at : daystring },
+    data: { content : content, created_at : daystring, content_notag : content_notag},
     dataType : 'text',
     success: function(n) {
       let emotionTitle = document.createElement("i");
@@ -158,3 +161,89 @@ $("#nextReadDiary").click(function() {
     }
   })
 });
+
+// $("#contentEmptyHeart").on("click", function(){
+//   $("#contentEmptyHeart").css("display", "none");
+//   $("#contentFullHeart").css("display", "block");
+// })
+
+
+
+$(document).ready(function(){
+  $.ajax({
+    url : "heartStatus",
+    data : { email : $("#getEmail").text(), diaryId : $("#getDiaryId").text() },
+    dataType : "json",
+    success : function(n){
+      console.log(n);
+       $(".countHeart").html(n);
+
+    }
+  })
+
+
+  $("#reply-btn").on("click", function(){
+    $.ajax({
+      url : "insertReply",
+      method : "POST",
+      data : {comment : $("#commentText").val(), diaryId : $("#getDiaryId").text()},
+      success : function(n){
+        console.log(n);
+
+        $.ajax({
+          url : "getReply",
+          data : { diaryId : $("#getDiaryId").text() },
+          success : function(n){
+            for (let items of n) {
+
+
+              let replies = "";
+              for (let items of n) {
+                replies +=
+                    `
+            <div class="reply row p-3 mt-2 mx-auto d-flex align-items-center">
+                <div class="replyContent col-2">${items.nickname}</div>
+                <div class="replyContent col-7">${items.replyContent}</div>
+                <div class="replyContent col-3">${items.created_at_reply}</div>
+            </div>
+            `
+              }
+              console.log(replies)
+              $("#commentBox").html(replies)
+
+            }
+          }
+        })
+      }
+    })
+  })
+
+
+  $.ajax({
+    url : "getReply",
+    data : { diaryId : $("#getDiaryId").text() },
+    success : function(n){
+      for (let items of n) {
+
+        let replies = "";
+        for (let items of n) {
+          replies +=
+              `
+            <div class="reply row p-3 mt-2 d-flex align-items-center">
+                <div class="replyContent col-2">${items.nickname}</div>
+                <div class="replyContent col-7">${items.replyContent}</div>
+                <div class="replyContent col-3">${items.created_at_reply}</div>
+            </div>
+            `
+        }
+        console.log(replies)
+        $("#commentBox").html(replies)
+
+      }
+    }
+  })
+})
+
+
+
+

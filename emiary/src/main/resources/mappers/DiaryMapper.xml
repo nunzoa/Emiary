@@ -10,6 +10,7 @@
 		diary_id
 		, email
 		, content
+		, content_notag
 		, emotionscore
 		, keyword
 		, wordsforai
@@ -19,6 +20,7 @@
 		diaries_seq.nextval
 		, #{email}
 		, #{content}
+		, #{content_notag}
 		, #{emotionscore}
 		, #{keyword}
 		, #{wordsforai}
@@ -65,9 +67,49 @@
 		where created_at = #{dayString}
 		  and email = #{username}
 	</select>
-	
-	
 
-	
+	<select id="findingContent" parameterType="map" resultType="Diaries">
+		select to_char(created_at, 'yyyy-mm-dd') as created_at, substr(content_notag, 0, 15) || '.....' as content_notag
+		from diaries
+		where email = #{username} and content like '%'||#{searchInput}||'%'
+	</select>
+
+	<select id="heartStatus" parameterType="map" resultType="int">
+		select count(*)
+		from visited
+		where diary_id = #{diaryId} and heart = 'Y'
+	</select>
+
+	<insert id="inputComment" parameterType="map">
+		insert into reply(reply_id, diary_id, replyContent, writer_email)
+		values (reply_seq.nextval, #{diaryId}, #{comment}, #{username})
+	</insert>
+
+	<select id="getReply" parameterType="String" resultType="Reply">
+		select replyContent, writer_email, to_char(created_at_reply, 'yyyy-mm-dd HH24:MI:SS') as created_at_reply
+		from reply
+		where diary_id = #{diaryId}
+		order by created_at_reply desc
+	</select>
+
+	<select id="getNickName" parameterType="String" resultType="String">
+		select nickname
+		from member
+		where email = #{writerEmail}
+	</select>
+
+	<select id="getReplyAlarm" parameterType="map" resultType="ReplyAlarm">
+		select to_char(created_at, 'FMyyyy-mm-dd') as created_at, count(*) as countPerDay
+		from diaries join reply
+		using (diary_id)
+		where email = #{username} and to_char(created_at, 'FMyyyy-mm') = #{yearMonth} and writer_email != #{username} and viewed = 0
+		group by created_at
+	</select>
+
+	<update id="readComment" parameterType="int">
+		update reply
+		set viewed = 1
+		where diary_id = #{diaryId}
+	</update>
 </mapper>
 

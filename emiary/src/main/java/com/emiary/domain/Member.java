@@ -21,6 +21,7 @@ public class Member implements UserDetails {
 	String birthdate ;				//생일
 	String 	originalfile;	//첨부파일 원래이름
 	String 	savedfile;		//첨부파일 서버에 저장된 이름
+	String imgURL;
 	boolean enabled;			//계정 상태 (1-사용가능, 0-불가능)
 	String rolename;			//('ROLE_USER' - 일반회원, 'ROLE_ADMIN' - 관리자)
 	List<Member> friends;

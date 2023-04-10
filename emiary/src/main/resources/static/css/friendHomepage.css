@@ -25,20 +25,25 @@ header{
   border-top-right-radius: 50px;
 }
 
+
 header .container{
   max-width: 770px;
 }
 
 .bg-orange{
-  background-color: var(--orange) !important;
+  background-color: var(--green-dark) !important;
 }
 
 
+.container{
+  width : 770px;
+}
+
 .surround{
   width : 770px;
-  border-left: 3px solid var(--orange);
-  border-right: 3px solid var(--orange);
-  border-bottom: 3px solid var(--orange);
+  border-left: 3px solid var(--green-dark);
+  border-right: 3px solid var(--green-dark);
+  border-bottom: 3px solid var(--green-dark);
   border-bottom-left-radius: 50px;
   border-bottom-right-radius: 50px;
 }
@@ -63,17 +68,17 @@ header .container{
 
 .btn-header:hover{
   background-color: #fff;
-  color : var(--orange)!important;
+  color : var(--green-dark)!important;
 }
 
 .btn-normal:hover{
-  border: 2px solid var(--orange)!important;
+  border: 2px solid var(--green-dark)!important;
   background-color: #fff!important;
-  color : var(--orange)!important;
+  color : var(--green-dark)!important;
 }
 
 #monthDisplay{
-  color : var(--orange);
+  color : var(--green-dark);
 }
 
 
@@ -81,20 +86,20 @@ header .container{
 #weekdays{
 
   font-weight: bold;
-  color : var(--orange)!important;
+  color : var(--green-dark)!important;
   display: flex;
   flex-wrap: nowrap;
 }
 
 #weekdays .col{
-  border : 2px solid var(--orange)!important;
+  border : 2px solid var(--green-dark)!important;
   border-radius: 10px;
   margin : 10px;
-  box-shadow: 3px 3px 0px var(--orange);
+  box-shadow: 3px 3px 0px var(--green-dark);
 }
 
 #weekdays .col:hover{
-    background-color: var(--orange)!important;
+    background-color: var(--green-dark)!important;
     color : #fff!important;
     box-shadow: 3px 3px 0px #fff;
 }
@@ -102,7 +107,7 @@ header .container{
 .day{
   position: relative;
   border-radius: 1.05rem;
-  border : 3px solid var(--orange)!important;
+  border : 3px solid var(--green-dark)!important;
   display: flex;
   margin : 5px;
   color : #13bc7e;
@@ -110,20 +115,19 @@ header .container{
   font-size: 20px;
   width : 97px;
   height : 97px;
-  box-shadow: 3px 3px 0px var(--orange);
+  box-shadow: 3px 3px 0px var(--green-dark);
+
 }
 
-
-
 .day:hover{
-  background-color: rgba(255, 127, 0, 0.5);
+  background-color: rgba(19, 188, 126, 0.5);
   color: #fff;
   border : 0px;
   box-shadow: 3px 3px 0px #fff;
 }
 
 .day:active{
-  background-color: rgba(255, 127, 0, 0.8);
+  background-color: rgba(19, 188, 126, 0.5);
   color: white;
   box-shadow: 3px 3px 0px #fff;
 }
@@ -153,15 +157,15 @@ hasDiary{
 
 
 #currentDay{
-  background-color: rgba(255, 127, 0, 0.6);
+  background-color: rgba(19, 188, 126, 0.5);
   color : #fff;
-  box-shadow: 3px 3px 0px var(--orange);
+  box-shadow: 3px 3px 0px var(--green-dark);
 }
 
 #currentDay:hover{
-  background-color: rgba(255, 127, 0, 0.6);
+  background-color: rgba(19, 188, 126, 0.5);
   color : #fff;
-  box-shadow: 0px 0px 50px #ff7f00;
+  box-shadow: 0px 0px 50px var(--green-dark);
 }
 
 a{
@@ -177,17 +181,17 @@ a{
 }
 
 .nav-link:hover{
-  color : var(--orange)!important;
+  color : var(--green-dark)!important;
   background: #fff;
 }
 
 .nav-link:focus{
-  color : var(--orange)!important;
+  color : var(--green-dark)!important;
   background: #fff;
 }
 
 .active{
-  color : var(--orange)!important;
+  color : var(--green-dark)!important;
 }
 
 ion-icon{
@@ -197,7 +201,7 @@ ion-icon{
 
 ion-icon:hover{
   background: #fff;
-  color : var(--green-dark)!important;
+  color : var(--orange)!important;
   border-radius: 50%;
 }
 
@@ -211,21 +215,21 @@ ion-icon:hover{
   margin-top : 250px;
   margin-left : 650px;
   width: 200px;
-  background: #13bc7e;
+  background: var(--orange);
   box-shadow: 5px 5px 0px #076140;
 }
 
 .btn-modal{
   background: #fff;
-  color : var(--orange);
-  border : 2px solid var(--orange);
+  color : var(--green-dark);
+  border : 2px solid var(--green-dark);
   width : 150px;
   margin-bottom: 20px;
   box-shadow: 5px 5px 0px #076140;
 }
 
 .btn-modal:hover{
-  background-color: #ff7f00;
+  background-color: var(--green-dark);
   color : #fff;
 }
 
@@ -235,7 +239,7 @@ ion-icon:hover{
   left: 0px;
   z-index: 10;
   width: 100vw;
-  height: 300vh;
+  height: 150vh;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.3);
 }
@@ -245,83 +249,73 @@ ion-icon:hover{
   right : 30px;
   bottom : 20px;
   border : none!important;
-  background: var(--green-dark)!important;
+  background: var(--orange)!important;
   color : #fff!important;
 }
 
 #colorExplanation:hover{
   background: #fff!important;
-  color : var(--green-dark)!important;
-  border : 1px solid var(--green-dark)!important;
+  color : var(--orange)!important;
+  border : 1px solid var(--orange)!important;
 }
-
-
-.offcanvas{
-  position : absolute;
-  left : 50%;
-}
-
 
 .offcanvas-start{
-  height: auto;
-  width: 365px!important;
-  background :var(--green-dark);
+  height: 330px;
+  width: 250px!important;
+  background :var(--orange);
   border-radius: 5px;
   box-shadow: 5px 5px 0px #076140;
 }
 
 .offcanvas-body{
-  width : 350px!important;
+  width : 200px!important;
 }
 
-.friend-popup:hover{
-  border-radius: 50px;
-  background: rgba(0, 0, 0, 0.8);
+#veryNegative{
+  width: 80px;
+  height : 20px;
+  background : #EC00FFFF  ;
+  border-radius: 5px;
 }
 
-#moreThanTwo{
-  color : #f1f1f1;
+#negative{
+  width: 80px;
+  height : 20px;
+  background : #ff2d2d   ;
+  border-radius: 5px;
 }
 
-#searchBox{
-  position : absolute;
-  left : calc(50% - 385px);
-  z-index : 20;
-  top : 180px;
-  width : 770px;
+#neutral{
+  width: 80px;
+  height : 20px;
+  background : #919191  ;
+  border-radius: 5px;
 }
 
-.container-fluid{
-  z-index: 30;
+#positive{
+  width: 80px;
+  height : 20px;
+  background : #4476ff  ;
+  border-radius: 5px;
 }
 
+#veryPositive{
+  width: 80px;
+  height : 20px;
+  background : #00FF7F  ;
+  border-radius: 5px;
+}
 
-.friendImage{
-  width: 100px;
-  height : 100px;
+#failed{
+  width: 80px;
+  height : 20px;
+  background : #2f2f2f  ;
+  border-radius: 5px;
+}
+
+#profile_image{
+  width : 120px;
+  height : 120px;
   object-fit: cover;
   border-radius: 50%;
 }
-
-.fa-bell{
-  font-size : 2rem;
-}
-
-.fa-eye{
-  font-size : 2rem;
-}
-
-.inform{
-  position: absolute;
-  right : -10px;
-  top : -10px;
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: #ff2d2d;
-  font-size: 15px;
-  text-align: center;
-  color : #fff;
-}
-

@@ -2,6 +2,9 @@ package com.emiary.service;
 
 
 import com.emiary.domain.Member;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 public interface MypageService {
     int countDiaries(String username);
@@ -14,5 +17,15 @@ public interface MypageService {
 
     String changeImg(Member member);
 
-//    int countFriends(String username);
+    Member read(String username);
+
+    int modify(Member member);
+
+    int delete(Member member);
+
+    int countFriends(String username);
+
+    int inputURL(String imageURL, String username);
+
+    String getImgURL(String username);
 }

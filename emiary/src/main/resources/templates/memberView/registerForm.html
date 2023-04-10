@@ -12,12 +12,12 @@
 
   <body>
 
-    <header class="overflow-hidden bg-orange">
+    <header class="overflow-hidden bg-orange mx-auto">
         <div class="container">
             <div class="row pt-5">
                 <div class="col-sm-6 text-lg-start">
                   <!-- 1. 로고 누르면 홈페이지로 이동 -->
-                    <a th:href="@{/}" class="navbar-brand display-1 text-white fs-1">
+                    <a th:href="@{/}" class="navbar-brand display-1 text-white fs-1 ms-5">
                         Emiary  
                         <img th:src="@{/image/logo.png}" class="img-fluid" alt="logo">
                     </a>
@@ -30,7 +30,8 @@
         </div>
     </header>
 
-        <div class="login mx-auto mt-5">
+    <section class="mx-auto p-3">
+        <div class="login mx-auto">
 
             <h1 class="text-uppercase display-3 fw-bold text-white">sign up</h1>
 
@@ -87,6 +88,7 @@
                 <input type="button" id="signup-btn" class="btn text-white w-100 border-white my-3 fw-bold" value="SIGN UP">
             </form>
         </div>
+    </section>
     <script th:src="@{/js/register.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   </body>

@@ -21,6 +21,13 @@ ul li{
 }
 
 /* header 부분 */
+
+header{
+    max-width: 1200px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
 header .container{
     max-width: 770px;
   }
@@ -107,6 +114,15 @@ header .container{
 section{
     height : 700px;
     width : 1200px;
+}
+
+#full{
+    width : 1200px;
+    border-left: 3px solid var(--orange);
+    border-right: 3px solid var(--orange);
+    border-bottom: 3px solid var(--orange);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 .chart{

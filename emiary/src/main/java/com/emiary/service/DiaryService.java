@@ -1,8 +1,11 @@
 package com.emiary.service;
 
 import com.emiary.domain.Diaries;
+import com.emiary.domain.Reply;
+import com.emiary.domain.ReplyAlarm;
 
 import java.util.List;
+import java.util.Map;
 
 public interface DiaryService {
 
@@ -24,4 +27,13 @@ public interface DiaryService {
 
     Diaries nextReadDiary(String dayString, String username);
 
+    List<Diaries> findingContent(String searchInput, String username);
+
+    int heartStatus(String email, String diaryId);
+
+    int inputComment(String comment, String diaryId, String username);
+
+    List<Reply> getReply(String diaryId);
+
+    List<ReplyAlarm> getReplyAlarm(String yearMonth, String username);
 }

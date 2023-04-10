@@ -17,11 +17,12 @@
 		and email = #{username}
 	</select>
 
-<!--친구 수 세기 친구 칼럼이 필요할 듯? -->
-<!--	<select id="countFriends" parameterType="String" resultType="int">-->
-<!--		select count(*)-->
-<!--		from diaries-->
-<!--	</select>-->
+	<select id="countFriends" parameterType="String" resultType="int">
+		select count(*)
+		from friendship
+		where like_status = 'MATCHED' and user_email = #{username}
+	</select>
+
 
 	<select id="checkProfile" parameterType="String" resultType="char">
 		select profile_visibility
@@ -45,6 +46,42 @@
 		select originalfile
 		from member
 		where email = #{email}
+	</select>
+
+	<select id="selectMember" parameterType="String" resultType="Member">
+		select email, nickname, phone, birthdate, originalfile, savedfile
+		from member
+		where email = #{email}
+	</select>
+
+	<update id="modify" parameterType="Member">
+		update member
+		set
+			memberpw = #{memberpw}
+		  , nickname = #{nickname}
+		  , phone = #{phone}
+		where
+			email = #{email}
+	</update>
+
+	<delete id="deletChildMember" parameterType="Member">
+		DELETE FROM diaries WHERE email = #{email}
+	</delete>
+
+	<delete id="deleteMember" parameterType="Member">
+		DELETE FROM member WHERE email = #{email}
+	</delete>
+
+	<update id="inputURL" parameterType="map">
+		update member
+		set imgurl = #{imageURL}
+		where email = #{username}
+	</update>
+
+	<select id="getImgURL" parameterType="String" resultType="String">
+		select imgurl
+		from member
+		where email = #{username}
 	</select>
 </mapper>
 

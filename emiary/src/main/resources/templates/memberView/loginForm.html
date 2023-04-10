@@ -9,12 +9,12 @@
 </head>
 
 <body>
-<header class="overflow-hidden bg-orange">
+<header class="overflow-hidden bg-orange mx-auto">
     <div class="container">
         <div class="row pt-5">
             <div class="col-sm-6 text-lg-start">
                 <!-- 1. 로고 누르면 홈페이지로 이동 -->
-                <a th:href="@{/member/loginForm}" class="navbar-brand display-1 text-white fs-1">
+                <a th:href="@{/member/loginForm}" class="navbar-brand display-1 text-white fs-1 ms-5">
                     Emiary
                     <img th:src="@{/image/logo.png}" class="img-fluid" alt="logo">
                 </a>
@@ -27,48 +27,49 @@
     </div>
 </header>
 
-<div class="login mx-auto mt-5">
+<section class="mx-auto p-3">
+    <div class="login mx-auto">
 
-    <h1 class="text-uppercase display-3 fw-bold text-white">sign in</h1>
+        <h1 class="text-uppercase display-3 fw-bold text-white">sign in</h1>
 
-    <form th:action="@{/member/login}" method="post" class="needs-validation">
+        <form th:action="@{/member/login}" method="post" class="needs-validation">
 
-        <div class="form-group mt-2 was-validated">
-            <label for="email" class="form-label text-white fw-bold">Email address</label>
-            <input type="email" id="email" name="email" class="form-control" required>
-            <div class="invalid-feedback fw-bold">
-                이메일 형식을 지켜주세요
+            <div class="form-group mt-2 was-validated">
+                <label for="email" class="form-label text-white fw-bold">Email address</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+                <div class="invalid-feedback fw-bold">
+                    이메일 형식을 지켜주세요
+                </div>
             </div>
-        </div>
 
-        <div class="form-group mt-2 was-validated">
-            <label for="memberpw" class="form-label text-white fw-bold">Password</label>
-            <input type="password" id="memberpw" name="memberpw" class="form-control" required>
-            <div class="invalid-feedback fw-bold">
-                비밀번호를 입력해주세요
+            <div class="form-group mt-2 was-validated">
+                <label for="memberpw" class="form-label text-white fw-bold">Password</label>
+                <input type="password" id="memberpw" name="memberpw" class="form-control" required>
+                <div class="invalid-feedback fw-bold">
+                    비밀번호를 입력해주세요
+                </div>
             </div>
+
+            <div class="form-group mt-2">
+                <input type="checkbox" id="check" name="check" class="form-check-in">
+                <label for="check" class="form-check-label text-white fw-bold ">Remember me</label>
+            </div>
+
+            <input type="submit" id="signin" class="btn text-white border-white mt-3 fw-bold" value="SIGN IN">
+            <input type="button" id="signup"  class="btn text-white border-white mt-3 fw-bold" value="SIGN UP">
+        </form>
+
+        <div class="social-icons d-flex justify-content-center mt-3">
+            <a class="icon google me-3">
+
+            </a>
+
+            <a class="icon naver">
+
+            </a>
         </div>
-
-        <div class="form-group mt-2">
-            <input type="checkbox" id="check" name="check" class="form-check-in">
-            <label for="check" class="form-check-label text-white fw-bold ">Remember me</label>
-        </div>
-
-        <input type="submit" id="signin" class="btn text-white border-white mt-3 fw-bold" value="SIGN IN">
-        <input type="button" id="signup"  class="btn text-white border-white mt-3 fw-bold" value="SIGN UP">
-    </form>
-
-    <div class="social-icons d-flex justify-content-center mt-3">
-        <a class="icon google me-3">
-
-        </a>
-
-        <a class="icon naver">
-
-        </a>
     </div>
-</div>
-
+</section>
 <script th:src="@{/js/login.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
