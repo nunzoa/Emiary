@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>갤러리</title>
+    <style>
+        /* 갤러리 이미지의 스타일링 */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .gallery img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        /* 모달 창의 스타일링 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        .modal-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <h1>갤러리</h1>
+    <div class="gallery"></div>
+    <div class="modal">
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="일기 그림">
+        </div>
+    </div>
+
+    <script>
+        // 서버에서 일기 그림의 URL 정보를 가져오는 비동기 함수
+        async function getDiaryPictures() {
+            // 서버에서 일기 그림의 URL 정보를 가져오는 로직을 구현
+            // 예시: 서버에서 일기 그림의 URL 정보를 가져와서 배열로 반환
+            const response = await fetch('/get_diary_pictures'); // 서버 API 엔드포인트
+            const data = await response.json();
+            return data;
+        }
+
+        // 갤러리에 이미지를 추가하는 함수
+        function addImageToGallery(imageUrl) {
+            const gallery = document.querySelector('.gallery');
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = '일기 그림';
+            img.addEventListener('click', () => openModal(imageUrl));
+            gallery.appendChild(img);
+        }
+
+        // 모달 창을 열고 이미지를 표시하는 함수
+        function openModal(imageUrl) {
+            const modal = document.querySelector('.modal');
+            const modalImage = document.getElementById('modalImage');
+            modalImage.src = imageUrl;
+            modal.style.display = 'flex';
+        }
+
+        // 모달 창을 닫는 함수
+        function closeModal() {
+            const modal = document.querySelector('.modal');
+            modal.style.display = 'none';
+        }
+
+        // 페이지 로드 시 갤러리에 이미지를 추가하는 함수
+        async function loadGallery() {
+            const images = await getDiaryPictures(); // 서버에서 일기 그림의 URL 정보를 가져옴
+            // 갤러리에 이미지를 추가
+        for (const imageUrl of images) {
+            addImageToGallery(imageUrl);
+        }
+    }
+
+    // 페이지 로드 시 갤러리를 로드
+    window.addEventListener('load', loadGallery);
+
+    // 모달 창을 닫기 위한 이벤트 리스너
+    document.addEventListener('click', (event) => {
+        if (event.target === document.querySelector('.modal')) {
+            closeModal();
+        }
+    });
+</script>
+</body>
+</html>
