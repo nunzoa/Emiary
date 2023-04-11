@@ -52,7 +52,22 @@ dependencies {
 	implementation 'com.squareup.okhttp3:okhttp:4.9.3'
 
 	testImplementation 'org.springframework:spring-test'
-	testImplementation 'org.springframework:spring-mock'
+
+
+	implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+	// https://mvnrepository.com/artifact/org.json/json
+	implementation group: 'org.json', name: 'json', version: '20230227'
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	implementation group: 'org.apache.commons', name: 'commons-text', version: '1.10.0'
+
+	// Jackson Core 라이브러리
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.12.5'
+
+	// Jackson Databind 라이브러리
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.5'
+
+	// Jackson Annotation 라이브러리 (선택적으로 사용)
+	implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.5'
 }
 
 tasks.named('test') {

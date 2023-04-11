@@ -10,4 +10,6 @@ import java.util.Map;
 @Mapper
 public interface GalleryDAO {
     List<Diaries> getAIImg(Map<String, String> map);
+
+    String getKeyword(String username);
 }

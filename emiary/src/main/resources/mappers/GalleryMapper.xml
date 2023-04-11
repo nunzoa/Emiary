@@ -18,5 +18,13 @@
 		order by created_at
 	</select>
 
+	<select id="getKeyword" parameterType="String" resultType="String">
+		select keyword
+		from (select keyword, created_at
+			  from diaries
+			  where email = #{username}
+			  order by created_at desc)
+		where rownum = 1
+	</select>
 </mapper>
 

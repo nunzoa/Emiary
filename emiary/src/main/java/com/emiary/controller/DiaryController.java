@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.emiary.domain.*;
 import com.emiary.service.FileUpload;
@@ -66,18 +67,24 @@ public class DiaryController {
         String wordsForAi = String.join(",", result.getWordsForAi());
         log.debug("문자열로 바뀐 AI 단어 리스트 : {}", wordsForAi);
 
-        String artStyles = "Random Painting";
+        String artStyles = "Abbott Fuller Graves,Childe Hassam,Colour Field Painting,Coloured Pencil,Impressionism,Oil Painting";
+        String[] artStylesArray = artStyles.split(",");
+        Random random = new Random();
+
+        int randomIndex = random.nextInt(artStylesArray.length);
+
+        String selectedStyle = artStylesArray[randomIndex];
+        log.debug("selectedStyle : {}", selectedStyle);
 
         double value = result.getScore();
-        if (value > 0.1) {
-            if (value <= -0.5) {
-                wordsForAi += ",negative";
-            } else {
-                wordsForAi +=",positive";
-            }
+
+        if (value <= -0.5) {
+            wordsForAi += ",negative";
+        }else if(value > 0.1 ){
+            wordsForAi +=",positive";
         }
 
-        String wordsForAi1 = artStyles+ "," + wordsForAi;
+        String wordsForAi1 = selectedStyle+ "," + wordsForAi;
         log.debug("최종 ai words : {}", wordsForAi1);
         diaries.setWordsforai(wordsForAi1);
 

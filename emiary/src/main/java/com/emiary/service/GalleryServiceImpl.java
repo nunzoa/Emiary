@@ -25,4 +25,9 @@ public class GalleryServiceImpl implements GalleryService {
         List<Diaries> diaries = galleryDAO.getAIImg(map);
         return diaries;
     }
+
+    @Override
+    public String getKeyword(String username) {
+        return galleryDAO.getKeyword(username);
+    }
 }

@@ -36,8 +36,13 @@ public class friend {
             }
             count--;
         }
+    }
 
 
-
+    @Test
+    void comma(){
+        String hi = "sadhjkasd\"\"dasdsa";
+        hi = hi.replaceAll("\"", "");
+        System.out.println(hi);
     }
 }

@@ -182,7 +182,7 @@ public class EmotionAnalyzer {
         Collections.sort(sortedWords, (word1, word2) -> wordFrequency.get(word2) - wordFrequency.get(word1));
         System.out.print("반복수로 내림차순된 결과 : " + sortedWords);
         // 상위 5개의 단어를 반환
-        return sortedWords.subList(0, Math.min(6, sortedWords.size()));
+        return sortedWords.subList(0, Math.min(2, sortedWords.size()));
     }
 }
 

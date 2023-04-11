@@ -43,37 +43,39 @@
 
             <div class="row pt-4">
 
-                <div class="col-8">
+                <div class="col-11">
                     <ul class="nav nav-tabs ">
 
-                        <!-- 3. 캘린더 페이지로 이동 -->
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="#header">캘린더</a>
                         </li>
 
-                        <!-- 4. 감정 분석 페이지로 이동 -->
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/graph/home}">감정분석</a>
-                        </li>
-
-                        <!-- 5. 친구 페이지로 이동 -->
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/friend/findFriend}">친구</a>
+                            <a class="nav-link" th:href="@{friend/findFriend}">친구</a>
                         </li>
 
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{mypage/home}">마이페이지</a>
                         </li>
 
+
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{gallery/home}">갤러리</a>
+                            <a class="nav-link" th:href="@{graph/home}">감정분석</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{gallery/home}">AI갤러리</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{gallery/insta}">인스타그램갤러리</a>
                         </li>
 
                     </ul>
                 </div>
                 <!-- 7. 오늘의 글쓰기 페이지로 이동 -->
-                <div class="col-4 text-end d-flex justify-content-lg-end justify-content-center">
-                    <a id="todayDiary" ><ion-icon name="add-circle-outline" class="text-white" ></ion-icon></a>
+                <div class="col-1 text-end d-flex justify-content-lg-end justify-content-center">
+                    <a id="todayDiary" ></a>
                 </div>
             </div>
         </div>
