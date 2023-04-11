@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 :root{
     --orange: #ff7f00;
     --green-dark: #13bc7e;
-    --light-grey: #f1f1f1;
-  
-  }
+    --light-grey: #e5e5e5;
+    --purple-red: #934A5F;
+    --purple-blue: #57648C;
+    --purple-light: #C2B4D6;
+}
 
 *{
     margin : 0;
@@ -20,8 +23,8 @@ body{
 /* header 부분 */
 header{
     max-width: 770px;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
 }
 
 header .container{
@@ -29,16 +32,16 @@ header .container{
   }
   
 .bg-orange{
-    background-color: var(--orange) !important;
+    background-color: var(--purple-light) !important;
 }
   
 section{
     width : 770px;
-    border-left: 3px solid var(--orange);
-    border-right: 3px solid var(--orange);
-    border-bottom: 3px solid var(--orange);
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-left: 3px solid var(--purple-light);
+    border-right: 3px solid var(--purple-light);
+    border-bottom: 3px solid var(--purple-light);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .container{
@@ -52,7 +55,7 @@ section{
     height :min-content;
     padding : 20px;
     border-radius : 12px;
-    background: var(--orange);
+    background: var(--purple-light);
 }
 
 .invalid-feedback{
@@ -72,7 +75,7 @@ section{
 .btn:hover{
     background-color: var(--green-dark);
     font-weight: 600;
-    border : 1px solid var(--orange)!important;
+    border : 1px solid var(--purple-light)!important;
 }
 
 .btn:active{

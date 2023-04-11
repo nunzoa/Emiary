@@ -166,60 +166,42 @@ function load() {
             for(let count = 0; count < emotionColor.length; ++count){
                 if (emotionColor[count].created_at == cleanDayString) {
                     let scores = emotionColor[count].emotionscore
-                    let emoticon = document.createElement("i");
+                    let emoticon = document.createElement("img");
                         switch (true){
                             //     매우 부정
                             case scores > -2 && scores <= -1.2  :
-                                // daySquare.style.background = '#EC00FFFF';
-                                emoticon.classList.add("emoticon");
-                                emoticon.classList.add("fa-solid");
-                                emoticon.classList.add("fa-face-dizzy");
-                                emoticon.style.color = "#EC00FFFF";
+                                emoticon.classList.add("shiba");
+                                emoticon.src = "https://res.cloudinary.com/dn6holbea/image/upload/v1681213626/%EC%9A%B0%EB%8A%94%EC%8B%9C%EB%B0%94_liodwa.png";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     약간 부정
                             case scores > -1.2 && scores <= -0.5 :
-                                // daySquare.style.background = '#ff2d2d';
-                                emoticon.classList.add("emoticon");
-                                emoticon.classList.add("fa-solid");
-                                emoticon.classList.add("fa-face-frown-open");
-                                emoticon.style.color = "#ff2d2d";
+                                emoticon.classList.add("shiba");
+                                emoticon.src = "https://res.cloudinary.com/dn6holbea/image/upload/v1681213626/%EC%95%BD%EA%B0%84%EB%B6%80%EC%A0%95%EC%8B%9C%EB%B0%94_xalmhh.png";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     중립
                             case scores > -0.5 && scores <= 0.1 :
-                                // daySquare.style.background = '#919191';
-                                emoticon.classList.add("emoticon");
-                                emoticon.classList.add("fa-solid");
-                                emoticon.classList.add("fa-face-meh");
-                                emoticon.style.color = "#919191";
+                                emoticon.classList.add("shiba");
+                                emoticon.src = "https://res.cloudinary.com/dn6holbea/image/upload/v1681213626/%EC%A4%91%EB%A6%BD%EC%8B%9C%EB%B0%94_cykb2v.png";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     약간 긍정
                             case scores > 0.1 && scores <= 1.0 :
-                                // daySquare.style.background = '#4476ff';
-                                emoticon.classList.add("emoticon");
-                                emoticon.classList.add("fa-solid");
-                                emoticon.classList.add("fa-face-laugh");
-                                emoticon.style.color = "#4476ff";
+                                emoticon.classList.add("shiba");
+                                emoticon.src = "https://res.cloudinary.com/dn6holbea/image/upload/v1681213626/%EA%B8%8D%EC%A0%95%EC%8B%9C%EB%B0%94_kehf7d.png";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     매우 긍정
                             case scores > 1.0 && scores <= 2.0 :
-                                // daySquare.style.background = '#00FF7F';
-                                emoticon.classList.add("emoticon");
-                                emoticon.classList.add("fa-solid");
-                                emoticon.classList.add("fa-face-laugh-squint");
-                                emoticon.style.color = "#00FF7F";
+                                emoticon.classList.add("shiba");
+                                emoticon.src = "https://res.cloudinary.com/dn6holbea/image/upload/v1681213626/%EC%99%84%EC%A0%84%EA%B8%8D%EC%A0%95%EC%8B%9C%EB%B0%94_vxnrl3.png";
                                 daySquare.appendChild(emoticon);
                                 break;
                             //     10같은 경우 판변 못함으로 기본값처리
                             default :
-                                // daySquare.style.background = '#2f2f2f';
-                                emoticon.classList.add("emoticon");
-                                emoticon.classList.add("fa-solid");
-                                emoticon.classList.add("fa-face-meh-blank");
-                                emoticon.style.color = "#2f2f2f";
+                                emoticon.classList.add("shiba");
+                                emoticon.src = "https://res.cloudinary.com/dn6holbea/image/upload/v1681213626/%EA%B3%84%EC%82%B0%EB%AA%BB%ED%95%9C%EC%8B%9C%EB%B0%94_ndh3w7.png";
                                 daySquare.appendChild(emoticon);
 
                         }
@@ -290,13 +272,14 @@ $(".searchinput").on("keyup", function(){
                   <div class="card-body">
                     <h5 class="card-title">${items.created_at}</h5>
                     <p class="card-text">${items.content_notag}</p>
-                    <a th:href="@{/diary/read(dayString=${items.created_at})}" class="btn btn-primary">GO</a>
+                    <a href="/emiary/diary/read?dayString=${items.created_at}" class="btn btn-secondary btn-goDiary">일기보러가기</a>
                   </div>
                 </div>
                 `
                 }
 
                 $("#searchBox").html(searchLine);
+
             }
         })
     }else{
@@ -307,50 +290,14 @@ $(".searchinput").on("keyup", function(){
 
 })
 
-$(".searchinput").on("blur", function(){
-    $(".card").css("display", "none");
-    $("#moreThanTwo").html("");
-})
+$(".searchinput").on("blur", function () {
+    setTimeout(function() {
+        $(".card").css("display", "none");
+        $("#moreThanTwo").html("");
+    }, 500);
+});
 
 
-
-
-// function imageBox(n){
-//         let canbody = "";
-//     for (let item of n) {
-//         console.log("item", item)
-//         console.log('item.img, item.nickname', item.img, item.nickname )
-//         canbody +=`
-//          <div class="friend-popup row d-flex align-items-center mt-3" nickname=${item.nickname}>
-//             <div class="friendList col-5 text-start">
-//                 <img class="friendImage" src="${item.img}" alt="">
-//             </div>
-//             <div class="col-5 text-white fw-bold lead">
-//                 <span>${item.nickname}</span>
-//             </div>
-//             `
-//
-//             if(item.todayDiary == 1){
-//                 canbody +=
-//                     // 여기는 만약 오늘 일기를 쓴 상대방이라면 알림이 뜬다.
-//                     `
-//                         <div class="col-2">
-//                             <i class="fa-solid fa-bell fa-shake" style="color: #ffff00;"></i>
-//                         </div>
-//                     `
-//             }
-//
-//             canbody +=
-//             `
-//                </div>
-//             `
-//
-//
-//
-//     }
-//     document.querySelector(".offcanvas-body").innerHTML = canbody;
-//
-// }
 
 function imageBox(n) {
     let offcanvasBody = document.querySelector(".offcanvas-body");

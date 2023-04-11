@@ -23,7 +23,7 @@
                 <!-- 1. 로고 누르면 홈페이지로 이동 -->
                 <a th:href="@{/}" class="navbar-brand display-1 text-white fs-1 ms-5">
                     Emiary
-                    <img th:src="@{/image/logo.png}" class="img-fluid" alt="logo">
+                    <img src="https://res.cloudinary.com/dn6holbea/image/upload/v1681215012/MainLogo_djlbex.png" class="img-fluid" alt="logo" style="width : 40px">
                 </a>
             </div>
 
@@ -111,34 +111,8 @@
 </div>
 <div class="modalBackDrop"></div>
 
-<button id="colorExplanation" class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">감정 색깔표</button>
+<button id="colorExplanation" class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">홈으로</button>
 
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title fs-4" id="offcanvasScrollingLabel">감정색깔표</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body container w-25">
-        <div class="row d-flex justify-content-evenly">매우 부정
-            <span id="veryNegative"></span>
-        </div>
-        <div class="row mt-3 d-flex justify-content-evenly">약간 부정
-            <span id="negative"></span>
-        </div>
-        <div class="row mt-3 d-flex justify-content-evenly">중립 상태
-            <span id="neutral"></span>
-        </div>
-        <div class="row mt-3 d-flex justify-content-evenly">약간 긍정
-            <span id="positive"></span>
-        </div>
-        <div class="row mt-3 d-flex justify-content-evenly">매우 긍정
-            <span id="veryPositive"></span>
-        </div>
-        <div class="row mt-3 d-flex justify-content-evenly">평가 실패
-            <span id="failed"></span>
-        </div>
-    </div>
-</div>
 <script th:src="@{/js/friendHomepage.js}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>

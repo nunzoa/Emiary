@@ -5,7 +5,7 @@ const lineChart = document.getElementById("lineChart");
 const DoughnutChart = document.getElementById("DoughnutChart");
 let barDraw;
 let lineDraw;
-let doughnutDraw;
+let doughnutDraw =[1, 1, 1, 1, 1];
 let emotionscoreArr = [];
 let n;
 $(document).ready(function(){

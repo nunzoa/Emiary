@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
+
 :root{
   --orange: #ff7f00;
   --green-dark: #13bc7e;
-  --light-grey: #f1f1f1;
-
+  --light-grey: #e5e5e5;
+  --purple-red: #934A5F;
+  --purple-blue: #57648C;
+  --purple-light: #C2B4D6;
 }
-
 
 
 *{
@@ -23,8 +25,8 @@ ul li{
 
 header{
   max-width: 770px;
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }
 
 header .container{
@@ -32,7 +34,7 @@ header .container{
 }
 
 .bg-green{
-  background-color: var(--green-dark)!important;
+  background-color: var(--purple-red)!important;
 }
 
 
@@ -42,11 +44,11 @@ header .container{
 
 #content > .container{
   width: 770px;
-  border-left: 3px solid var(--green-dark);
-  border-right: 3px solid var(--green-dark);
-  border-bottom: 3px solid var(--green-dark);
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-left: 3px solid var(--purple-red);
+  border-right: 3px solid var(--purple-red);
+  border-bottom: 3px solid var(--purple-red);
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 #editorjs{
@@ -56,13 +58,13 @@ header .container{
 }
 
 .subbtn{
-  background: var(--orange)!important;
+  background: var(--purple-blue)!important;
 }
 
 .subbtn:hover {
   background: #fff!important;
-  border: 1px solid var(--orange)!important;
-  color: var(--orange)!important;
+  border: 1px solid var(--purple-blue)!important;
+  color: var(--purple-blue)!important;
 }
 
 .alert{
@@ -76,18 +78,18 @@ header .container{
 .swal-button {
   padding: 7px 19px;
   border-radius: 5px;
-  background-color: #13BC7EFF;
+  background-color: var(--purple-red);
   font-size: 12px;
-  border: 1px solid #13BC7EFF!important;
+  border: 1px solid var(--purple-red)!important;
 }
 
 .swal-button:hover{
   background-color: #fff!important;
-  color : var(--green-dark);
+  color : var(--purple-red);
 }
 
 .swal-button:active{
-  color : var(--green-dark);
+  color : var(--purple-red);
 }
 
 i{
@@ -133,7 +135,7 @@ i{
 .loading .line-box .line {
   height: 20px;
   border-radius: 20px;
-  background-color: var(--orange);
+  background-color: var(--purple-blue);
   animation: loading 5s forwards cubic-bezier(0, 0, 0, 0);
 }
 
@@ -159,7 +161,7 @@ i{
 
 .arrow{
   font-size: 1rem;
-  color: var(--orange);
+  color: var(--purple-blue);
 }
 
 .move:hover{
@@ -174,7 +176,7 @@ i{
 
 #comment{
   width: 770px;
-  border: 3px solid var(--green-dark);
+  border: 3px solid var(--purple-red);
   border-radius: 50px;
 }
 
@@ -201,13 +203,13 @@ i{
 
 .reply {
   width: 770px;
-  border: 3px solid var(--green-dark);
+  border: 3px solid var(--purple-red);
   border-radius: 50px;
 }
 
 #writeComment {
   width: 770px;
-  border-bottom: 2px solid var(--green-dark);
+  border-bottom: 2px solid var(--purple-red);
 }
 .form-control{
   width: 80%;
@@ -220,14 +222,19 @@ i{
 
 #reply-btn{
   width: 20%;
-  border : 1px solid #13bc7e!important;
+  border : 1px solid var(--purple-red)!important;
   border-radius: 5px;
   height: 50px;
 }
 
 #reply-btn:hover{
-  background: #13bc7e!important;
+  background: var(--purple-red)!important;
   color : #fff!important;
   font-weight: bold;
 
+}
+
+.move{
+  background: #fff!important;
+  border-radius: 50%!important;
 }

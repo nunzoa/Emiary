@@ -3,8 +3,10 @@
 :root{
   --orange: #ff7f00;
   --green-dark: #13bc7e;
-  --light-grey: #f1f1f1;
-
+  --light-grey: #e5e5e5;
+  --purple-red: #934A5F;
+  --purple-blue: #57648C;
+  --purple-light: #C2B4D6;
 }
 
 *{
@@ -21,8 +23,8 @@ ul li{
 
 header{
   max-width: 770px;
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
 }
 
 header .container{
@@ -30,17 +32,17 @@ header .container{
 }
 
 .bg-orange{
-  background-color: var(--orange) !important;
+  background-color: var(--purple-light) !important;
 }
 
 
 .surround{
   width : 770px;
-  border-left: 3px solid var(--orange);
-  border-right: 3px solid var(--orange);
-  border-bottom: 3px solid var(--orange);
-  border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
+  border-left: 3px solid var(--purple-light);
+  border-right: 3px solid var(--purple-light);
+  border-bottom: 3px solid var(--purple-light);
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .searchinput{
@@ -63,17 +65,17 @@ header .container{
 
 .btn-header:hover{
   background-color: #fff;
-  color : var(--orange)!important;
+  color : var(--purple-light)!important;
 }
 
 .btn-normal:hover{
-  border: 2px solid var(--orange)!important;
+  border: 2px solid var(--purple-light)!important;
   background-color: #fff!important;
-  color : var(--orange)!important;
+  color : var(--purple-light)!important;
 }
 
 #monthDisplay{
-  color : var(--orange);
+  color : var(--purple-light);
 }
 
 
@@ -81,20 +83,20 @@ header .container{
 #weekdays{
 
   font-weight: bold;
-  color : var(--orange)!important;
+  color : var(--purple-light)!important;
   display: flex;
   flex-wrap: nowrap;
 }
 
 #weekdays .col{
-  border : 2px solid var(--orange)!important;
+  border : 2px solid var(--purple-light)!important;
   border-radius: 10px;
   margin : 10px;
-  box-shadow: 3px 3px 0px var(--orange);
+  box-shadow: 3px 3px 0px var(--purple-light);
 }
 
 #weekdays .col:hover{
-    background-color: var(--orange)!important;
+    background-color: var(--purple-light)!important;
     color : #fff!important;
     box-shadow: 3px 3px 0px #fff;
 }
@@ -102,7 +104,7 @@ header .container{
 .day{
   position: relative;
   border-radius: 1.05rem;
-  border : 3px solid var(--orange)!important;
+  border : 3px solid var(--purple-light)!important;
   display: flex;
   margin : 5px;
   color : #13bc7e;
@@ -110,13 +112,13 @@ header .container{
   font-size: 20px;
   width : 97px;
   height : 97px;
-  box-shadow: 3px 3px 0px var(--orange);
+  box-shadow: 3px 3px 0px var(--purple-light);
 }
 
 
 
 .day:hover{
-  background-color: rgba(255, 127, 0, 0.5);
+  background-color: var(--purple-blue);
   color: #fff;
   border : 0px;
   box-shadow: 3px 3px 0px #fff;
@@ -128,23 +130,17 @@ header .container{
   box-shadow: 3px 3px 0px #fff;
 }
 
-.emoticon{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  color: #fff;
-  transition: font-size 0.2s ease;
-}
 
-.emoticon:hover{
+
+.shiba:hover{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 3.5rem;
+  width : 100px;
+  height : 100px;
   color: #fff;
+
 }
 
 hasDiary{
@@ -153,15 +149,15 @@ hasDiary{
 
 
 #currentDay{
-  background-color: rgba(255, 127, 0, 0.6);
+  background-color: var(--purple-blue);
   color : #fff;
-  box-shadow: 3px 3px 0px var(--orange);
+  box-shadow: 3px 3px 0px var(--purple-light);
 }
 
 #currentDay:hover{
-  background-color: rgba(255, 127, 0, 0.6);
+  background-color: var(--purple-blue);
   color : #fff;
-  box-shadow: 0px 0px 50px #ff7f00;
+  box-shadow: 0px 0px 50px var(--purple-blue);
 }
 
 a{
@@ -177,17 +173,17 @@ a{
 }
 
 .nav-link:hover{
-  color : var(--orange)!important;
+  color : var(--purple-light)!important;
   background: #fff;
 }
 
 .nav-link:focus{
-  color : var(--orange)!important;
+  color : var(--purple-light)!important;
   background: #fff;
 }
 
 .active{
-  color : var(--orange)!important;
+  color : var(--purple-light)!important;
 }
 
 ion-icon{
@@ -217,15 +213,15 @@ ion-icon:hover{
 
 .btn-modal{
   background: #fff;
-  color : var(--orange);
-  border : 2px solid var(--orange);
+  color : var(--purple-light);
+  border : 2px solid var(--purple-light);
   width : 150px;
   margin-bottom: 20px;
   box-shadow: 5px 5px 0px #076140;
 }
 
 .btn-modal:hover{
-  background-color: #ff7f00;
+  background-color: var(--purple-blue);
   color : #fff;
 }
 
@@ -265,9 +261,9 @@ ion-icon:hover{
 .offcanvas-start{
   height: auto;
   width: 365px!important;
-  background :var(--green-dark);
+  background :var(--purple-light);
   border-radius: 5px;
-  box-shadow: 5px 5px 0px #076140;
+  box-shadow: 5px 5px 0px var(--purple-blue);
 }
 
 .offcanvas-body{
@@ -325,3 +321,12 @@ ion-icon:hover{
   color : #fff;
 }
 
+.shiba{
+  width : 45px;
+  height : 45px;
+  position: absolute;
+  left : 50%;
+  top : 50%;
+  transform: translate(-50%, -50%);
+  transition: font-size 0.5s ease;
+}

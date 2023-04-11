@@ -38,7 +38,7 @@
                 class="navbar-brand display-1 text-white fs-1 ms-5"
               >
                 Emiary
-                <img th:src="@{/image/logo.png}" class="img-fluid" alt="logo" />
+                <img src="https://res.cloudinary.com/dn6holbea/image/upload/v1681215012/MainLogo_djlbex.png" class="img-fluid" alt="logo" style="width : 40px">
               </a>
             </div>
   
@@ -50,39 +50,36 @@
               </nav>
             </div>
 
-            <div class="row"></div>
   
-              <div class="row pt-5">
-                <div class="col-8">
+              <div class="row pt-3">
+                <div class="col-11">
                   <ul class="nav nav-tabs ">
-  
-                    <!-- 3. 캘린더 페이지로 이동 -->
+
                     <li class="nav-item">
                       <a class="nav-link" aria-current="page" th:href="@{/}">캘린더</a>
                     </li>
-  
-                    <!-- 4. 감정 분석 페이지로 이동 -->
+
+                    <li class="nav-item">
+                      <a class="nav-link" th:href="@{/friend/findFriend}">친구</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" th:href="@{/mypage/home}">마이페이지</a>
+                    </li>
+
+
                     <li class="nav-item">
                       <a class="nav-link active" href="#graphHref">감정분석</a>
                     </li>
 
-                    <!-- 하위 메뉴 1,  막대 2, 라인 3 오각형 -->
+                    <li class="nav-item">
+                      <a class="nav-link" th:href="@{/gallery/home}">AI갤러리</a>
+                    </li>
 
-  
-                    <!-- 5. 친구 페이지로 이동 -->
                     <li class="nav-item">
-                      <a class="nav-link" th:href="@{/friend/findFriend}">친구</a>
+                      <a class="nav-link" th:href="@{/gallery/insta}">인스타그램갤러리</a>
                     </li>
-  
-                    <!-- 음악 추천 해주기 -->
-  <!--                  <li class="nav-item">-->
-  <!--                    <a class="nav-link" href="#">음악 추천</a>-->
-  <!--                  </li>-->
-  
-                    <!-- 6. 마이페이지로 이동 -->
-                    <li class="nav-item">
-                      <a class="nav-link" th:href="@{/mypage/home}">마이페이지</a>
-                    </li>
+
                   </ul>
                 </div>
               </div>

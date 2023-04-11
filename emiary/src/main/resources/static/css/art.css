@@ -3,8 +3,10 @@
 :root{
     --orange: #ff7f00;
     --green-dark: #13bc7e;
-    --light-grey: #f1f1f1;
-
+    --light-grey: #e5e5e5;
+    --purple-red: #934A5F;
+    --purple-blue: #57648C;
+    --purple-light: #C2B4D6;
 }
 
 
@@ -29,25 +31,17 @@ header{
 }
 
 header .container{
-    max-width: 1200px;
-}
-
-section{
-    width : 1200px;
-    border-left: 3px solid var(--orange);
-    border-right: 3px solid var(--orange);
-    border-bottom: 3px solid var(--orange);
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    max-width: 770px;
 }
 
 .bg-orange{
-    background-color: var(--orange) !important;
+    background-color: var(--purple-light) !important;
 }
 
 
+
 .container{
-    width : 1200px;
+    width : 770px;
 }
 
 .nav-link{
@@ -55,18 +49,28 @@ section{
 }
 
 .nav-link:hover{
-    color : var(--orange)!important;
+    color : var(--purple-light)!important;
     background: #fff!important;
 }
 
 .nav-link:focus{
-    color : var(--orange)!important;
+    color : var(--purple-light)!important;
     background: #fff;
 }
 
 .active{
-    color : var(--orange)!important;
+    color : var(--purple-light)!important;
 }
+
+section{
+    width : 1200px;
+    border-left: 3px solid var(--purple-light);
+    border-right: 3px solid var(--purple-light);
+    border-bottom: 3px solid var(--purple-light);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
 
 div.galleryblock{
     width: 100%;
@@ -87,5 +91,5 @@ div.galleryblock{
 
 .galleryblock > div > a > img{
     width: 180px;
-    height : 300px;
+    height : 280px;
 }

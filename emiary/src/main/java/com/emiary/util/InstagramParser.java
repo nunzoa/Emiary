@@ -11,6 +11,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -35,11 +36,10 @@ public class InstagramParser {
 
         String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
 
-        String output = StringEscapeUtils.unescapeJava(responseBody);
 
-
-
-        return output;
+        return responseBody;
     }
+
+
 
 }
