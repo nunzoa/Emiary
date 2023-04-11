@@ -4,12 +4,13 @@ import com.emiary.domain.Diaries;
 import com.emiary.domain.Reply;
 import com.emiary.domain.ReplyAlarm;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public interface DiaryService {
 
-	int write(Diaries diaries);
+	int write(Diaries diaries) throws IOException;
 
 	Diaries read(String dayString, String username);
 
@@ -36,4 +37,6 @@ public interface DiaryService {
     List<Reply> getReply(String diaryId);
 
     List<ReplyAlarm> getReplyAlarm(String yearMonth, String username);
+
+    int updateAIAddr(Diaries diaries);
 }

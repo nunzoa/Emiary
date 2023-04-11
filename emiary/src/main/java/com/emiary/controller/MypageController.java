@@ -69,7 +69,6 @@ public class MypageController {
 		/* 받고 Y, N*/
 		char isProfile = mypageService.checkProfile(userDetails.getUsername());
 
-
 		return isProfile;
 	}
 
@@ -90,7 +89,6 @@ public class MypageController {
 
 	}
 
-
 	@GetMapping("modify")
 	public String modify(@AuthenticationPrincipal UserDetails user, Model model) {
 		Member member = mypageService.read(user.getUsername());
@@ -110,11 +108,11 @@ public class MypageController {
 	public String uploadFile(@AuthenticationPrincipal UserDetails userDetails ,@RequestParam("image") MultipartFile multipartFile,
 							 Model model) throws IOException {
 		String imageURL = fileUpload.uploadFile(multipartFile);
+
 		int result = mypageService.inputURL(imageURL, userDetails.getUsername());
 		model.addAttribute("imageURL",imageURL);
 		return "redirect:home";
 	}
-
 
 	@ResponseBody
 	@GetMapping("getImgURL")

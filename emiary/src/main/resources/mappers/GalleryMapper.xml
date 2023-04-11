@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.emiary.dao.GalleryDAO">
+
+	<select id="getAIImg" parameterType="map" resultType="Diaries">
+		select diary_id, to_char(created_at, 'yyyy-mm-dd') as created_at, aiimg, wordsforai
+		from diaries
+		where email = #{username}  and AIIMG is not null
+		<if test="yearAndMonth != null and yearAndMonth != ''">
+			and to_char(created_at, 'FMyyyy-mm') = #{yearAndMonth}
+		</if>
+
+		<if test="keyword != null and keyword != ''">
+			and wordsforai like '%'||#{keyword}||'%'
+		</if>
+		order by created_at
+	</select>
+
+</mapper>
+

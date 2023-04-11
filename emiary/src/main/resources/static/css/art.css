@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+:root{
+    --orange: #ff7f00;
+    --green-dark: #13bc7e;
+    --light-grey: #f1f1f1;
+
+}
+
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+ul li{
+    list-style-type: none;
+}
+
+.display-1{
+    letter-spacing: 1px;
+}
+
+/* header 부분 */
+
+header{
+    max-width: 1200px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+header .container{
+    max-width: 1200px;
+}
+
+section{
+    width : 1200px;
+    border-left: 3px solid var(--orange);
+    border-right: 3px solid var(--orange);
+    border-bottom: 3px solid var(--orange);
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.bg-orange{
+    background-color: var(--orange) !important;
+}
+
+
+.container{
+    width : 1200px;
+}
+
+.nav-link{
+    color : #fff!important;
+}
+
+.nav-link:hover{
+    color : var(--orange)!important;
+    background: #fff!important;
+}
+
+.nav-link:focus{
+    color : var(--orange)!important;
+    background: #fff;
+}
+
+.active{
+    color : var(--orange)!important;
+}
+
+div.galleryblock{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 1fr 0.81fr 1fr 0.81fr 1fr;
+
+
+    grid-template-areas:
+        "img1  img2  img3 img4   img5"
+        "img1  img7  img3 img9   img5"
+        "img6  img7  img8 img9   img10"
+        "img6  img12 img8 img14  img10 "
+        "img11 img12 img13 img14 img15";
+
+    grid-gap: 0.5em;
+}
+
+.galleryblock > div > a > img{
+    width: 180px;
+    height : 300px;
+}

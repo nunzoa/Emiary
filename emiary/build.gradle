@@ -9,6 +9,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
+	httpclient
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -17,6 +18,7 @@ configurations {
 repositories {
 	mavenCentral()
 	maven { url 'https://jitpack.io' }
+	maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
 }
 
 dependencies {
@@ -45,8 +47,19 @@ dependencies {
 	implementation 'com.cloudinary:cloudinary-taglib:1.32.2'
 	implementation 'io.github.cdimascio:dotenv-java:2.2.4'
 
+	implementation 'org.apache.httpcomponents:httpcore:4.4.14'
+	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+	implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+
+	testImplementation 'org.springframework:spring-test'
+	testImplementation 'org.springframework:spring-mock'
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+task copyHttpclient(type: Copy) {
+	from configurations.httpclient
+	into 'libs'
 }

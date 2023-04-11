@@ -1,10 +1,14 @@
 package com.emiary.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import com.emiary.domain.*;
+import com.emiary.service.FileUpload;
+import com.emiary.service.ImageGenerationService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -21,13 +25,21 @@ import com.emiary.service.DiaryService;
 import com.emiary.util.EmotionAnalyzer;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @RequestMapping("diary")
+@RequiredArgsConstructor
 @Controller
 public class DiaryController {
+
+    private final FileUpload fileUpload;
+
     @Autowired
     DiaryService diaryservice;
+
+    @Autowired
+    ImageGenerationService imageGenerationService;
 
     @GetMapping("write")
     public String write(String dayString, Model model) {
@@ -43,14 +55,47 @@ public class DiaryController {
 
     @ResponseBody
     @PostMapping("write")
-    public double write(Diaries diaries, @AuthenticationPrincipal UserDetails user, Model model) {
-        log.debug("diaries.getCreated_at() : {}", diaries.getCreated_at());
+    public double write(Diaries diaries, @AuthenticationPrincipal UserDetails user, Model model) throws IOException {
+
     	EmotionAnalysisResult result = EmotionAnalyzer.analyzeEmotion(diaries.getContent());
+        log.debug("result : {}", result);
         diaries.setEmotionscore(result.getScore());
         diaries.setKeyword(result.getNoun());
         diaries.setEmail(user.getUsername());
 
+        String wordsForAi = String.join(",", result.getWordsForAi());
+        log.debug("문자열로 바뀐 AI 단어 리스트 : {}", wordsForAi);
+
+        String artStyles = "Random Painting";
+
+        double value = result.getScore();
+        if (value > 0.1) {
+            if (value <= -0.5) {
+                wordsForAi += ",negative";
+            } else {
+                wordsForAi +=",positive";
+            }
+        }
+
+        String wordsForAi1 = artStyles+ "," + wordsForAi;
+        log.debug("최종 ai words : {}", wordsForAi1);
+        diaries.setWordsforai(wordsForAi1);
+
         int n = diaryservice.write(diaries);
+
+        Diaries diary = diaryservice.read(diaries.getCreated_at(), user.getUsername());
+        System.out.print( "쓰기에서 일기 저장 직후 일기객체 : " + diary);
+
+        String text = diary.getWordsforai();
+        log.debug("다이어리에 저장된 키워드! : {}", text);
+        int diary_id = diary.getDiary_id();
+        MultipartFile multipartFile = imageGenerationService.generateImage(text, diary_id);
+        String aiIMG = fileUpload.uploadFile(multipartFile);
+        diary.setAiIMG(aiIMG);
+        int updateAIaddr = diaryservice.updateAIAddr(diary);
+        log.debug("diaries.getDiary_id() : {}, diaries.getAiIMG() : {}", diary.getDiary_id(), diaries.getAiIMG());
+        log.debug("imageURL {}", aiIMG);
+
         return result.getScore();
     }
 

@@ -39,4 +39,6 @@ public interface DiaryDAO {
     List<ReplyAlarm> getReplyAlarm(Map<String, String> map);
 
 	int readComment(int diaryId);
+
+    int updateAIaddr(Diaries diaries);
 }

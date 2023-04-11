@@ -136,7 +136,7 @@ i{
   height: 20px;
   border-radius: 20px;
   background-color: var(--green-dark);
-  animation: loading 5s forwards cubic-bezier(0, 0, 0, 0);
+  animation: loading 8s forwards cubic-bezier(0, 0, 0, 0);
 }
 
 @keyframes loading {
