@@ -68,14 +68,14 @@ public class DiaryController {
 
         String selectedStyle = artStylesArray[randomIndex];
         log.debug("selectedStyle : {}", selectedStyle);
+        
        double value = result.getScore();
-        if (value > 0.1) {
             if (value <= -0.5) {
             	wordsForAi += ",negative";
-            } else {
+            } else if (value > 0.1 ){
             	wordsForAi +=",positive";
             }
-        }
+        
         
         String wordsForAi1 = selectedStyle+ "," + wordsForAi;
         log.debug("최종 ai words : {}", wordsForAi1);
