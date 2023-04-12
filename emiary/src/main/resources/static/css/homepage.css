@@ -343,9 +343,22 @@ ion-icon:hover{
 }
 
 .fa-envelope{
+  display: none;
   position: fixed;
   right : 230px;
   bottom : 33px;
   font-size: 5rem;
   color : var(--purple-red)
+}
+
+.banner-right{
+  position: fixed;
+  top : 200px;
+  right : 40px;
+}
+
+.banner-left{
+  position: fixed;
+  top : 200px;
+  left : 40px;
 }

@@ -1,4 +1,83 @@
-body{margin-top:20px;}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+:root{
+    --orange: #ff7f00;
+    --green-dark: #13bc7e;
+    --light-grey: #e5e5e5;
+    --purple-red: #934A5F;
+    --purple-blue: #57648C;
+    --purple-light: #C2B4D6;
+}
+
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+ul li{
+    list-style-type: none;
+}
+
+.display-1{
+    letter-spacing: 1px;
+}
+
+/* header 부분 */
+
+header{
+    max-width: 1200px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+header .container{
+    max-width: 770px;
+}
+
+section{
+    width : 1200px;
+    border-left: 3px solid var(--purple-light);
+    border-right: 3px solid var(--purple-light);
+    border-bottom: 3px solid var(--purple-light);
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+section .container{
+    width : 500px;
+    height : 530px;
+    background : var(--purple-blue);
+    border-radius: 25px;
+}
+
+
+.bg-orange{
+    background-color: var(--purple-light) !important;
+}
+
+
+.container{
+    width : 1200px;
+}
+
+.nav-link{
+    color : #fff!important;
+}
+
+.nav-link:hover{
+    color : var(--purple-light)!important;
+    background: #fff!important;
+}
+
+.nav-link:focus{
+    color : var(--purple-light)!important;
+    background: #fff;
+}
+
+.active{
+    color : var(--purple-light)!important;
+}
+
 
 .chat-online {
     color: #34ce57
@@ -11,7 +90,7 @@ body{margin-top:20px;}
 .chat-messages {
     display: flex;
     flex-direction: column;
-    max-height: 800px;
+    max-height: 400px;
     overflow-y: scroll
 }
 
@@ -42,4 +121,25 @@ body{margin-top:20px;}
 }
 .border-top {
     border-top: 1px solid #dee2e6!important;
+}
+
+#helloshiba{
+    object-fit: cover;
+}
+
+#sendMessageBtn{
+    background: var(--purple-light);
+    color : #fff;
+    font-weight: bold;
+}
+
+
+.list-group-item{
+    position: relative;
+}
+.badge {
+    border-radius: 50%;
+    position: absolute;
+    left : 250px!important;
+    top: 11px!important;
 }

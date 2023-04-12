@@ -48,8 +48,7 @@ $(document).ready(function() {
         }
     });
 
-    console.log("여기는 오니");
-
+    checkMail();
 });
 
 
@@ -348,4 +347,39 @@ function imageBox(n) {
 
         offcanvasBody.appendChild(friendPopup);
     }
+}
+
+
+function checkMail(){
+
+    $.ajax({
+        url : "/emiary/message/checkMailHomePage",
+        success : function(n){
+            let shiba =
+                `
+                <i class="fa-solid fa-envelope fa-bounce"></i>
+                `
+            if(n != 0){
+                $("#messageBlock").html(shiba)
+            }else{
+
+            }
+        },
+        error : function(n){
+            console.log(n);
+        }
+    })
+}
+
+$(".fa-envelope").on("mouseover", function (){
+    $(".fa-envelope").removeClass("fa-bounce")
+
+    setTimeout(function () {
+        $(".fa-envelope").addClass("fa-bounce")
+    }, 5000);
+})
+
+
+function showingAD(){
+
 }

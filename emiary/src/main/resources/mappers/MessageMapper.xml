@@ -4,6 +4,13 @@
 
 <mapper namespace="com.emiary.dao.MessageDAO">
 
+		<select id="checkMail" parameterType="String" resultType="int">
+			select count(*)
+			from message
+			where sender_email = #{friendEmail} and read_at is null
+		</select>
+
+
 	<select id="getMessageList" parameterType="map" resultType="Message">
 		SELECT m.message_id, m.sender_email, m.receiver_email, m.content,
 			   TO_CHAR(m.sent_at, 'FMHH:MI AM') as sent_at,
@@ -20,5 +27,23 @@
 		values(message_seq.nextval, #{username}, #{receiverEmail}, #{content})
 	</insert>
 
+	<select id="getProfile" parameterType="String" resultType="Member">
+		select nickname, imgurl
+		from member
+		where email = #{friendEmail}
+	</select>
+
+	<update id="messageRead" parameterType="Map">
+		update message
+		set read_at = sysdate
+		where (sender_email = #{friendEmail} and receiver_email = #{username})
+	</update>
+
+	<select id="checkMailHomePage" parameterType="String" resultType="int">
+		select count(*)
+		from message
+		where receiver_email = #{username}
+		  and read_at is null
+	</select>
 </mapper>
 

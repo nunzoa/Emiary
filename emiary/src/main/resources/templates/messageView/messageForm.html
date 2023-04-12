@@ -13,10 +13,76 @@
 
 </head>
 <body>
-<main class="content">
+
+
+<header class="overflow-hidden bg-orange mx-auto">
+  <div class="container">
+    <div class="row pt-5">
+      <div class="col-sm-6 text-lg-start">
+        <!-- 1. 로고 누르면 홈페이지로 이동 -->
+        <a
+                th:href="@{/}"
+                class="navbar-brand display-1 text-white fs-1 ms-5"
+        >
+          Emiary
+          <img src="https://res.cloudinary.com/dn6holbea/image/upload/v1681215012/MainLogo_djlbex.png" class="img-fluid" alt="logo" style="width : 40px">
+        </a>
+      </div>
+
+      <div class="col-sm-6 d-md-flex text-white align-items-center nav-icons justify-content-end">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <div class="text-white"></div>
+          </div>
+        </nav>
+      </div>
+
+
+      <div class="row pt-3">
+        <div class="col-12">
+          <ul class="nav nav-tabs ">
+
+
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" th:href="@{/}">캘린더</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/friend/findFriend}">친구</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link " th:href="@{/mypage/home}">마이페이지</a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/graph/home}">감정분석</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/gallery/home}">AI갤러리</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/gallery/insta}">인스타그램갤러리</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" th:href="@{/message/to}">쪽지</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+
+</header>
+
+<main class="content" id="messageBox">
   <div class="container p-0">
 
-    <h1 class="h3 mb-3">쪽지</h1>
 
     <div class="card">
       <div class="row g-0">
@@ -48,14 +114,11 @@
           </div>
 
           <div class="position-relative">
-            <div class="chat-messages p-4">
+            <div class="chat-messages p-4" id="chatMessages">
 
               <!--오른쪽 자기 메시지-->
 
-              <div class="shibaPhone">
-                <img class="shibaImg" src="https://res.cloudinary.com/dn6holbea/image/upload/v1681276668/shibaMessage_zyyjtl.png" alt="">
-
-              </div>
+                <img id="helloshiba" src="https://res.cloudinary.com/dn6holbea/image/upload/v1681294479/Shiba06_generated_mdwfko.jpg" alt="">
 
               <!--상대방 메시지-->
 
@@ -68,7 +131,7 @@
           <div class="flex-grow-0 py-3 px-4 border-top">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="메시지 입력해주세요" id="messageContent">
-              <button class="btn btn-primary" id="sendMessageBtn">전송</button>
+              <button type="button" class="btn" id="sendMessageBtn">전송</button>
             </div>
           </div>
 

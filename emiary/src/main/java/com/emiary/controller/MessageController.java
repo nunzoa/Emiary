@@ -1,5 +1,6 @@
 package com.emiary.controller;
 
+import com.emiary.domain.Member;
 import com.emiary.domain.Message;
 import com.emiary.service.MessageService;
 import lombok.extern.slf4j.Slf4j;
@@ -38,12 +39,44 @@ public class MessageController {
         return messageList;
     }
 
+
+
     @ResponseBody
     @GetMapping("sendMessage")
     public int sendMessage(String content, String receiver_email, @AuthenticationPrincipal UserDetails userDetails) {
-
+        log.debug("receiver_email : {}, userDetails.getUsername() : {}", receiver_email, userDetails.getUsername());
         int result = messageService.sendMessage(content, receiver_email, userDetails.getUsername());
 
         return result;
     }
+
+    @ResponseBody
+    @GetMapping("getFriendProfile")
+    public Member getFriendProfile(String friendEmail){
+        Member member = messageService.getProfile(friendEmail);
+        return member;
+    }
+
+
+    @ResponseBody
+    @GetMapping("messageRead")
+    public int messageRead(String friend_email, @AuthenticationPrincipal UserDetails userDetails) {
+        int result = messageService.messageRead(friend_email, userDetails.getUsername());
+        return result;
+    }
+
+    @ResponseBody
+    @GetMapping("checkMail")
+    public int checkMail(String friend_email){
+        int count = messageService.checkMail(friend_email);
+        return count;
+    }
+
+    @ResponseBody
+    @GetMapping("checkMailHomePage")
+    public int checkMailHomePage(@AuthenticationPrincipal UserDetails userDetails) {
+        int result = messageService.checkMailHomePage(userDetails.getUsername());
+        return result;
+    }
+
 }

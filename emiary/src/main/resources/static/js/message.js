@@ -1,97 +1,123 @@
 $(document).ready(function(){
 
-    showingMessage();
-
-
-
-
-
-
+    showFriendList();
 
 })
 
-function showingMessage(){
-    
-    
+
+
+function showFriendList(){
     $.ajax({
         url: "/emiary/friend/friendList",
         dataType: "json",
         success: function(n) {
             console.log("친구리스트 : ", n)
 
+            //메일 미확인건
+
             let listOfFriend = "";
+            let ajaxCount = 0;
+
             for(let item of n){
-                listOfFriend +=
-                    `
-                    <a class="list-group-item list-group-item-action border-0 ps-5 one-friend" email="${item.email}">
+                $.ajax({
+                    url : "checkMail",
+                    data : {friend_email: item.email},
+                    success : function (count){
+                        listOfFriend +=
+                            `
+                    <a class="list-group-item list-group-item-action border-0 ps-5 one-friend mb-3" email="${item.email}">
                       <!--알람 뜸-->
-                      <div class="badge bg-success float-right">1</div>
-                      <div class="d-flex align-items-start">
+                      `
+
+                        if(count != 0){
+                            console.log("이거 왜 안뜸?")
+                            listOfFriend +=
+                                `
+                      <div class="badge bg-danger float-right">${count}</div>
+                      `
+                        }
+
+
+                        listOfFriend +=
+                            `
+                      <div class="d-flex align-items-center">
                         <!--이미지 들어가고 -->
                         <img src="${item.img}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-                        <div class="flex-grow-1 ml-3">
+                        <div class="flex-grow-1 ml-3 ms-3">
                           <!--닉네임 들어가고-->
                           ${item.nickname}
                         </div>
                       </div>
                     </a>
-                    `
-            }
+                    `;
 
-            $(".friendArray").html(listOfFriend)
-            //친구 리스트 불러오기
+                        ajaxCount++;
 
-
-
-
-            //     친구 리스트 버튼 눌러서 메시지 갖고 오기 시작
-            $(".one-friend").on("click", function(){
-
-                let email = $(this).attr('email');
-                // 메시지 보내기 시작
-                $("#sendMessageBtn").on("click", function(){
-                    let msgContent = $("#messageContent").val();
-                    $.ajax({
-                        url : "sendMessage",
-                        data : {"content" : msgContent, "receiver_email" : email},
-                        success : function(){
-                            getMessageList(email)
-                        },
-                        error : function(n){
-                            console.log(n);
+                        // 모든 $.ajax() 함수의 호출이 완료되었을 때 listOfFriend 변수의 값을 업데이트
+                        if (ajaxCount === n.length) {
+                            $(".friendArray").html(listOfFriend);
                         }
-                    })
+                    }
                 })
-                // 메시지 보내기 끝
-
-                // 친구와의 메시지 불러오기
-                getMessageList(email)
-
-
-
-
-            })
-        //     친구 리스트 버튼 눌러서 메시지 갖고 오기 끝
-
-
-
-
+            }
         },
         error : function(n){
             console.log(n);
         }
-    //    친구 리스트 갖고 오기 끝
-        
+
     });
+
 }
+
+$(document).on("click", ".one-friend", function() {
+
+        let friend_email = $(this).attr('email');
+        console.log("친구 이메일 ", friend_email)
+
+
+        getProfile(friend_email);
+        getMessageList(friend_email);
+        messageRead(friend_email);
+
+        // 메시지 보내기 시작
+        $("#sendMessageBtn").off().on("click", function(e){
+            e.preventDefault(); // 제출 이벤트의 기본 동작 중단
+            let msgContent = $("#messageContent").val();
+            $.ajax({
+                url : "sendMessage",
+                data : {"content" : msgContent, "receiver_email" : friend_email},
+                success : function(){
+                    getMessageList(friend_email)
+                    $("#messageContent").val("");
+
+                },
+                error : function(n){
+                    console.log(n);
+                }
+            })
+        })
+
+});
 
 
 function getMessageList(email){
+
+
+    $(".chat-messages").html("");
+
+    $.ajax({
+        url : "getFriendProfile",
+        data : {friendEmail : email},
+        success : function(){
+
+        }
+    })
+
     $.ajax({
         url : "getMessageList",
         data : {friendEmail : email},
         success : function(n){
-            console.log(n);
+            console.log("getMessageList", email);
 
             let chatRoom = "";
             let messageContent = "";
@@ -100,6 +126,7 @@ function getMessageList(email){
             for(let msg of n){
 
                 if(msg.sender_email != email){
+
                     messageContent +=
                         `
                                  <div class="chat-message-right pb-4">
@@ -117,44 +144,67 @@ function getMessageList(email){
                                   </div>
                                 `
                 }else{
-                    chatRoom =
-                        `
-                                        <div className="position-relative">
-                                            <img src="${msg.imgurl}"
-                                                 className="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                                        </div>
-                                        <div className="flex-grow-1 pl-3">
-                                            <!--상대방 닉네임 들어감-->
-                                            <strong>${msg.nickname}</strong>
-                                        </div>
-                                    `
-
 
                     messageContent +=
                         `
-                                     <div class="chat-message-left pb-4">
-                                        <div>
-                                          <!--상대방 프로필 이미지-->
-                                          <img src="${msg.imgurl}" class="rounded-circle mr-1" alt="" width="40" height="40">
-                                          <!--보낸 시간-->
-                                          <div class="text-muted small text-nowrap mt-2">${msg.sent_at}</div>
-                                        </div>
-                                        <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
-                                          <!--상대방 내용-->
-                                          <div class="font-weight-bold mb-1">${msg.nickname}</div>
-                                          ${msg.content}
-                                        </div>
-                                      </div>
-                                    `
+                         <div class="chat-message-left pb-4">
+                            <div>
+                              <!--상대방 프로필 이미지-->
+                              <img src="${msg.imgurl}" class="rounded-circle mr-1" alt="" width="40" height="40">
+                              <!--보낸 시간-->
+                              <div class="text-muted small text-nowrap mt-2">${msg.sent_at}</div>
+                            </div>
+                            <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                              <!--상대방 내용-->
+                              <div class="font-weight-bold mb-1">${msg.nickname}</div>
+                              ${msg.content}
+                            </div>
+                          </div>
+                        `
                 }
                 //     나눠야함
             }
-
-            $(".chatRoom").html(chatRoom)
             $(".chat-messages").html(messageContent)
-
+            var chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
         },
         error : function(n){
+            console.log(n);
+        }
+    })
+}
+
+function getProfile(friend_email){
+    $(".chatRoom").html("");
+    $.ajax({
+        url : "getFriendProfile",
+        data : {friendEmail : friend_email},
+        success : function(n){
+            console.log("여기 갔다오니", n)
+            let chatRoom =
+                `
+                            <div className="position-relative">
+                                <img src="${n.imgURL}"
+                                     className="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                            </div>
+                            <div className="flex-grow-1 pl-3">
+                                <!--상대방 닉네임 들어감-->
+                                <strong>${n.nickname}</strong>
+                            </div>
+                        `
+
+            $(".chatRoom").html(chatRoom);
+
+        }
+    })
+}
+
+function messageRead(friend_email){
+
+    $.ajax({
+        url : "messageRead",
+        data : {friend_email: friend_email},
+        success : function(n){
             console.log(n);
         }
     })

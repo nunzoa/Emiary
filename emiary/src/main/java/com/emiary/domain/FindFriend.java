@@ -15,5 +15,8 @@ public class FindFriend {
     String emotion;
     int emotionscore;
     int todayDiary;
+
+    //
+    String read_at;
 }
 

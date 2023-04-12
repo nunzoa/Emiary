@@ -17,4 +17,7 @@ public class Message {
     String read_at;
     String nickname;
     String imgurl;
+
+    String friend_imgurl;
+    String friend_nickname;
 }

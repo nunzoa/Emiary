@@ -42,7 +42,7 @@
 
 
             <div class="row pt-3">
-              <div class="col-11">
+              <div class="col-12">
                 <ul class="nav nav-tabs ">
 
 
@@ -55,7 +55,7 @@
                   </li>
 
                   <li class="nav-item">
-                    <a class="nav-link active" href="#profileBox">마이페이지</a>
+                    <a class="nav-link active" th:href="@{/mypage/home}">마이페이지</a>
                   </li>
 
 
@@ -69,6 +69,10 @@
 
                   <li class="nav-item">
                     <a class="nav-link" th:href="@{/gallery/insta}">인스타그램갤러리</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" th:href="@{/message/to}">쪽지</a>
                   </li>
 
                 </ul>

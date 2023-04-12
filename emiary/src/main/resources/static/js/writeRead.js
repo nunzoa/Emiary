@@ -60,7 +60,7 @@ $("#diarybtn").click(function() {
           emotionTitle.classList.add("fa-face-meh");
           emotionTitle.classList.add("fa-bounce");
           emotionTitle.style.color = "#919191";
-          emotionText = "상황이 아직 명확하지 않지만, 최선을 다하면 좋은 결과를 얻을 수 있을 것입니다.";
+          emotionText = "요즘은 단조로운 날이군요 이것도 좋아요!";
           break;
           //     약간 긍정
         case n > 0.1 && n <= 1.0 :
@@ -68,14 +68,15 @@ $("#diarybtn").click(function() {
           emotionTitle.classList.add("fa-face-laugh");
           emotionTitle.classList.add("fa-bounce");
           emotionTitle.style.color = "#4476ff";
-          emotionText = "지금까지의 노력이 결실을 맺을 것입니다.";
+          emotionText = "요새 기분이 좋으신가봐요~";
           break;
           //     매우 긍정
         case n > 1.0 && n <= 2.0 :
           emotionTitle.classList.add("fa-solid");
           emotionTitle.classList.add("fa-face-laugh-squint")
+          emotionTitle.classList.add("fa-bounce");
           emotionTitle.style.color = "#00FF7F";
-          emotionText = "축하합니다! 노력하고 기다렸던 보상을 받으셨군요!";
+          emotionText = "요새 완전 행복하신가봐요!";
           break;
           //     10같은 경우 판변 못함으로 기본값처리
         default :

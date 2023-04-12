@@ -43,7 +43,7 @@
 
             <div class="row pt-4">
 
-                <div class="col-11">
+                <div class="col-12">
                     <ul class="nav nav-tabs ">
 
                         <li class="nav-item">
@@ -71,10 +71,13 @@
                             <a class="nav-link" th:href="@{/gallery/insta}">인스타그램갤러리</a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/message/to}">쪽지</a>
+                        </li>
                     </ul>
                 </div>
                 <!-- 7. 오늘의 글쓰기 페이지로 이동 -->
-                <div class="col-1 text-end d-flex justify-content-lg-end justify-content-center">
+                <div class="text-end d-flex justify-content-lg-end justify-content-center">
                     <a id="todayDiary" ></a>
                 </div>
             </div>
@@ -119,7 +122,28 @@
     </div>
 
 </div>
+<!-- 배너 부분 -->
+    <div class="banner-right">
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
 
+<div class="banner-left">
+    <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+</div>
 
 <!-- 모달창 부분 -->
 <div class="modal modalwindow" id="writeEventModal" tabindex="-1" role="dialog">
@@ -156,6 +180,8 @@
         </div>
     </div>
 </div>
+
+
 <div class="modalBackDrop"></div>
 
 <button id="colorExplanation" class="btn btn-primary d-none d-lg-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">친구 목록</button>
@@ -173,10 +199,16 @@
     <img class="shibaImg" src="https://res.cloudinary.com/dn6holbea/image/upload/v1681276668/shibaMessage_zyyjtl.png" alt="">
 </div>
 
-<i class="fa-solid fa-envelope"></i>
+<div id="messageBlock">
+
+</div>
 
 <script>
-    $(".fa-envelope").on("click", function(){
+    $(".shibaImg").on("click", function(){
+        location.href = "/emiary/message/to";
+    })
+
+    $("#messageBlock").on("click", function(){
         location.href = "/emiary/message/to";
     })
 </script>
