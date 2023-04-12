@@ -33,6 +33,8 @@ public class InstagramParser {
         httpPost.setEntity(stringEntity);
         HttpResponse httpResponse = httpClient.execute(httpPost);
         httpResponse.setHeader("Content-type", "application/json");
+//        httpResponse.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+
 
         String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
 

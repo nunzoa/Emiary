@@ -52,11 +52,8 @@ public class EmotionAnalyzer {
      * @return String 빈출단어
      */
     public static String findMostFrequentString(List<String> nouns) {
-        // 리스트 길이가 1일 경우 바로 리턴
-        //if (nouns.size() == 1) {
-        //     return nouns.get(0);
-        // }
-        System.out.print("\n 형태소 리스트 길이 : " + nouns.size() + "\n");
+        System.out.println("nouns : " + nouns);
+        System.out.print("형태소 리스트 길이 : " + nouns.size());
         Map<String, Integer> counts = new HashMap<>();
 
         // 각 문자열의 카운트 계산
@@ -121,7 +118,7 @@ public class EmotionAnalyzer {
                 }
 
             }
-            if (pos.startsWith("NNG") ) {
+            if (pos.startsWith("NNG") || pos.startsWith("NNP") ) {
                 nouns.add(word);
             }
 

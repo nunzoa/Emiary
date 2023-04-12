@@ -12,13 +12,13 @@ $(document).ready(function(){
                 // console.log(src)
                 // console.log(src._source.post_desc);
 
-                // src="${imgurl.img_url}"
+                //
                 for(let imgurl of src._source.img_list){
                     let img_alt = imgurl.img_alt.substring(0, imgurl.img_alt.indexOf("."))
                     insta +=
                         `
                         <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
-                            <div class="bg-white rounded shadow-sm"><img src="https://res.cloudinary.com/dn6holbea/image/upload/v1680741242/f3ca3e1f-effc-407e-ab1b-d61a8511976d.png" alt="" class="img-fluid card-img-top">
+                            <div class="bg-white rounded shadow-sm"><img src="${imgurl.img_url}" alt="" class="img-fluid card-img-top">
                                 <div class="p-4">
                                     <h5> <a href="#" class="text-dark">${src._source.author_id}</a></h5>
                                     <p class="small text-muted mb-0">${src._source.post_desc}</p>

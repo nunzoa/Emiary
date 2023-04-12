@@ -9,29 +9,31 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+@RestController
 @RequestMapping("gallery")
-@Controller
 @Slf4j
 public class GalleryController {
 
     @Autowired
     GalleryService galleryService;
 
-    @GetMapping("/home")
-    public String home() {
-        return "galleryview/arts";
+    @GetMapping("home")
+    public ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("galleryview/arts");
+        return modelAndView;
     }
 
-    @ResponseBody
     @GetMapping("getAIImg")
     public List<Diaries> getAIImg(String keyword, String yearAndMonth, @AuthenticationPrincipal UserDetails userDetails) {
         log.debug("년월 {}", yearAndMonth);
@@ -42,21 +44,23 @@ public class GalleryController {
 
 
     @GetMapping("insta")
-    public String insta() {
-        return "galleryview/instaGallery";
+    public ModelAndView insta() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("galleryview/instaGallery");
+        return modelAndView;
     }
 
-    @ResponseBody
-    @GetMapping("getInsta")
+    @CrossOrigin(origins = "*") // 허용할 오리진 설정
+    @GetMapping("/getInsta")
     public String getInsta(@AuthenticationPrincipal UserDetails userDetails) throws IOException {
 
         String keyword = galleryService.getKeyword(userDetails.getUsername());
 
         log.debug("keyword : {} ", keyword);
-        
+
         InstagramParser instagramParser = new InstagramParser();
         log.debug("이게 문제인가?");
-        String value = instagramParser.getValue("동물");
+        String value = instagramParser.getValue(keyword);
         log.debug("동물결과 : {}", value);
 
         ObjectMapper objectMapper = new ObjectMapper();

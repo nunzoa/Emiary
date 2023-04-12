@@ -58,7 +58,7 @@ public class DiaryController {
     @PostMapping("write")
     public double write(Diaries diaries, @AuthenticationPrincipal UserDetails user, Model model) throws IOException {
 
-    	EmotionAnalysisResult result = EmotionAnalyzer.analyzeEmotion(diaries.getContent());
+    	EmotionAnalysisResult result = EmotionAnalyzer.analyzeEmotion(diaries.getContent_notag());
         log.debug("result : {}", result);
         diaries.setEmotionscore(result.getScore());
         diaries.setKeyword(result.getNoun());
@@ -66,8 +66,8 @@ public class DiaryController {
 
         String wordsForAi = String.join(",", result.getWordsForAi());
         log.debug("문자열로 바뀐 AI 단어 리스트 : {}", wordsForAi);
-
-        String artStyles = "Abbott Fuller Graves,Childe Hassam,Colour Field Painting,Coloured Pencil,Impressionism,Oil Painting";
+//        Abbott Fuller Graves, Colour Field Painting,Coloured Pencil,Impressionism,Oil Painting
+        String artStyles = "Childe Hassam";
         String[] artStylesArray = artStyles.split(",");
         Random random = new Random();
 
