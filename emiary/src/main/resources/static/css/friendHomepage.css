@@ -219,7 +219,6 @@ ion-icon:hover{
   margin-left : 650px;
   width: 200px;
   background: var(--purple-blue);
-  box-shadow: 5px 5px 0px #076140;
 }
 
 .btn-modal{
@@ -228,7 +227,6 @@ ion-icon:hover{
   border : 2px solid var(--purple-red);
   width : 150px;
   margin-bottom: 20px;
-  box-shadow: 5px 5px 0px #076140;
 }
 
 .btn-modal:hover{
@@ -250,7 +248,7 @@ ion-icon:hover{
 #colorExplanation{
   position: fixed;
   right : 30px;
-  bottom : 20px;
+  bottom : 30px;
   border : none!important;
   background: var(--purple-blue)!important;
   color : #fff!important;

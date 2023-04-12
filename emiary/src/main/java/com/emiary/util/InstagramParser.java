@@ -23,7 +23,11 @@ public class InstagramParser {
         HttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost("http://43.201.101.83:8000/search/");
         httpPost.setHeader("Content-type", "application/json");
-
+        httpPost.setHeader("Cross-Origin-Resource-Policy", "same-origin");
+        httpPost.setHeader("Access-Control-Allow-Origin", "*"); // 모든 오리진 허용
+        httpPost.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // 허용할 HTTP 메소드 지정
+        httpPost.setHeader("Access-Control-Allow-Headers", "Content-type, Cross-Origin-Resource-Policy"); // 허용할 요청 헤더 지정
+        httpPost.setHeader("Access-Control-Allow-Credentials", "true"); // 인증정보 허용 여부 설정
         // JSON 객체 생성
         ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonObject = objectMapper.createObjectNode();
@@ -33,9 +37,10 @@ public class InstagramParser {
         httpPost.setEntity(stringEntity);
         HttpResponse httpResponse = httpClient.execute(httpPost);
         httpResponse.setHeader("Content-type", "application/json");
-//        httpResponse.setHeader("Cross-Origin-Resource-Policy", "same-origin");
-
-
+        httpResponse.setHeader("Access-Control-Allow-Origin", "*"); // 모든 오리진 허용
+        httpResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE"); // 허용할 HTTP 메소드 지정
+        httpResponse.setHeader("Access-Control-Allow-Headers", "Content-type, Cross-Origin-Resource-Policy"); // 허용할 요청 헤더 지정
+        httpResponse.setHeader("Access-Control-Allow-Credentials", "true"); // 인증정보 허용 여부 설정
         String responseBody = EntityUtils.toString(httpResponse.getEntity(), "UTF-8");
 
 

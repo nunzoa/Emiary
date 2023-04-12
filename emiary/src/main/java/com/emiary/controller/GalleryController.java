@@ -50,7 +50,7 @@ public class GalleryController {
         return modelAndView;
     }
 
-    @CrossOrigin(origins = "*") // 허용할 오리진 설정
+//    @CrossOrigin(origins = "http://localhost:8888/")
     @GetMapping("/getInsta")
     public String getInsta(@AuthenticationPrincipal UserDetails userDetails) throws IOException {
 

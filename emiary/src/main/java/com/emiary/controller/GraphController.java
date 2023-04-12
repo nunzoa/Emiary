@@ -30,6 +30,7 @@ public class GraphController {
     @ResponseBody
     @GetMapping("bar")
     public List<Graph> bar(String presentYear, @AuthenticationPrincipal UserDetails userDetails){
+        log.debug("바그래프 {}", presentYear);
         List<Graph> graph = graphService.barFunction(presentYear, userDetails.getUsername());
         return graph;
     }
@@ -37,6 +38,7 @@ public class GraphController {
     @ResponseBody
     @GetMapping("line")
     public List<Graph> line(String presentMonth, String presentYear, @AuthenticationPrincipal UserDetails userDetails){
+        log.debug("line +그래프 {}", presentMonth);
         log.debug("가지? presentMonth : {} presentYear : {} ", presentMonth, presentYear);
         List<Graph> lineGraph = graphService.lineFunction(presentMonth, presentYear, userDetails.getUsername());
         log.debug("이거 값이 없어? {}", lineGraph);
@@ -46,6 +48,7 @@ public class GraphController {
     @ResponseBody
     @GetMapping("monthlyLine")
     public List<Graph> monthlyLine(String presentYear, @AuthenticationPrincipal UserDetails userDetails){
+
         List<Graph> radarGraph = graphService.monthlyLineFunction(presentYear, userDetails.getUsername());
         return radarGraph;
     }
@@ -54,6 +57,7 @@ public class GraphController {
     @ResponseBody
     @GetMapping("doughnut")
     public List<Graph> doughnutFunction(String givenMonth, @AuthenticationPrincipal UserDetails userDetails){
+        log.debug("givenMonth : {}", givenMonth);
         List<Graph> doughnutGraph = graphService.doughnutFunction(givenMonth, userDetails.getUsername());
         return doughnutGraph;
     }

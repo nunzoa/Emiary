@@ -239,7 +239,7 @@ ion-icon:hover{
 #colorExplanation{
   position: fixed;
   right : 30px;
-  bottom : 20px;
+  bottom : 30px;
   border : none!important;
   background: var(--green-dark)!important;
   color : #fff!important;
@@ -329,4 +329,23 @@ ion-icon:hover{
   top : 50%;
   transform: translate(-50%, -50%);
   transition: font-size 0.5s ease;
+}
+
+.shibaPhone{
+  position: fixed;
+  right : 150px;
+  bottom : 0px;
+
+}
+
+.shibaImg {
+  width: 250px;
+}
+
+.fa-envelope{
+  position: fixed;
+  right : 230px;
+  bottom : 33px;
+  font-size: 5rem;
+  color : var(--purple-red)
 }

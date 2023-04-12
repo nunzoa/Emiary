@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.emiary.dao.MessageDAO">
+
+	<select id="getMessageList" parameterType="map" resultType="Message">
+		SELECT m.message_id, m.sender_email, m.receiver_email, m.content,
+			   TO_CHAR(m.sent_at, 'FMHH:MI AM') as sent_at,
+			   mem.nickname, mem.imgurl
+		FROM message m
+				 JOIN member mem ON m.sender_email = mem.email
+		WHERE (m.sender_email =#{friendEmail} AND m.receiver_email =#{username})
+		   OR (m.sender_email =#{username} AND m.receiver_email =#{friendEmail})
+		ORDER BY m.sent_at
+	</select>
+
+	<insert id="sendMessage" parameterType="map">
+		insert into message(message_id, sender_email, receiver_email, content)
+		values(message_seq.nextval, #{username}, #{receiverEmail}, #{content})
+	</insert>
+
+</mapper>
+

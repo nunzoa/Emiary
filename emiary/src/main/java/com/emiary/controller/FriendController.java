@@ -88,7 +88,7 @@ public class FriendController {
 		String date = diary.getCreated_at();
 		model.addAttribute("diary", diary);
 		model.addAttribute("created_at", date);
-
+		model.addAttribute("nickname", nickname);
 		return "friendView/friendReadForm";
 	}
 
@@ -161,4 +161,6 @@ public class FriendController {
 		List<Reply> replies = friendService.getReply(diaryId);
 		return replies;
 	}
+
+
 }

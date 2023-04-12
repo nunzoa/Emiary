@@ -78,26 +78,22 @@ section .container{
     color : var(--purple-light)!important;
 }
 
+/*#modify-container{*/
+/*    width : 500px;*/
+/*    height : 700px;*/
+/*    background : var(--green-dark);*/
+/*    border-radius: 25px;*/
+/*    box-shadow: 0px 3px 0px #016641;*/
+/*}*/
 
-
-
-#modify-container{
+#modifysection .container{
     width : 500px;
-    height : 530px;
-    background : var(--green-dark);
+    height : 600px;
+    background : var(--purple-blue);
     border-radius: 25px;
-    box-shadow: 0px 3px 0px #016641;
 }
 
-#modifysection{
-    width : 500px;
-    height : 570px;
-    background : var(--green-dark);
-    border-radius: 25px;
-    box-shadow: 0px 3px 0px #016641;
-}
-
-#quitsection{
+#quitsection > container{
     width : 500px;
     height : 280px;
     background :    var(--green-dark);

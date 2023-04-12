@@ -1,16 +1,18 @@
-let presentYear = new Date().getFullYear();
-let presentMonth = new Date().getMonth() + 1;
-const barChart = document.getElementById("barChart");
-const lineChart = document.getElementById("lineChart");
-const DoughnutChart = document.getElementById("DoughnutChart");
-let barDraw;
-let lineDraw;
-let doughnutDraw =[1, 1, 1, 1, 1];
-let emotionscoreArr = [];
-let n;
+
 $(document).ready(function(){
-  console.log("presentYear", presentYear)
-  console.log("presentMonth", presentMonth)
+
+
+  let presentYear = new Date().getFullYear();
+  let presentMonth = new Date().getMonth() + 1;
+  const barChart = document.getElementById("barChart");
+  const lineChart = document.getElementById("lineChart");
+  const DoughnutChart = document.getElementById("DoughnutChart");
+  let barDraw;
+  let lineDraw;
+  let doughnutDraw =[1, 1, 1, 1, 1];
+  let emotionscoreArr = [];
+  let n;
+
   const YEAR = [
     "1월",
     "2월",
@@ -658,8 +660,8 @@ $("#doughnut1").on("click", function(){
     function radarFunction(n){
       console.log("doughnut - n : ", n);
 
-        let nameOfDay = [];
-        let resultOfSum = [];
+        let nameOfDay = ["최악의 날", "쓸쓸한 날", "잔잔한 날", "행복한 날", "최고의 날"];
+        let resultOfSum = [0, 0, 0, 0, 0];
 
         for(let items of n){
 
@@ -686,6 +688,8 @@ $("#doughnut1").on("click", function(){
               break;
           }
         }
+        console.log(nameOfDay)
+        console.log(resultOfSum)
 
         let maxEmotion = Math.max(...resultOfSum);
         let maxDay = nameOfDay[resultOfSum.indexOf(maxEmotion)];
@@ -703,7 +707,7 @@ $("#doughnut1").on("click", function(){
                 backgroundColor: [
                   '#EC00FFFF',
                   '#ff2d2d',
-                  '#919191',
+                  '#ffcf00',
                   '#4476ff',
                   '#00FF7F',
                 ],
@@ -746,7 +750,7 @@ $("#doughnut1").on("click", function(){
           case "잔잔한 날" :
             $("#radarTitle").text("당신은 수도승?");
             $("#radarContent").text("감정이 요동치지 않고 한결같은 당신은 감정 컨트롤의 신입니다.");
-            $("#radarEmoticon").html('<i class="fa-solid fa-face-meh" style="color : #919191;"></i>')
+            $("#radarEmoticon").html('<i class="fa-solid fa-face-meh" style="color : #ffcf00;"></i>')
             break;
           case "행복한 날" :
             $("#radarTitle").text("요새 행복~");

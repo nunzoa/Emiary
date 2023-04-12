@@ -215,6 +215,6 @@ load();
 
 
 $("#colorExplanation").on("click", function(){
-
+    location.href="/emiary/"
 })
 
