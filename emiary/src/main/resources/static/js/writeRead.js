@@ -190,7 +190,6 @@ $(document).ready(function(){
       data : {comment : $("#commentText").val(), diaryId : $("#getDiaryId").text()},
       success : function(n){
         console.log(n);
-
         $.ajax({
           url : "getReply",
           data : { diaryId : $("#getDiaryId").text() },
@@ -215,8 +214,10 @@ $(document).ready(function(){
             }
           }
         })
+
       }
     })
+    $("#commentText").val('')
   })
 
 
@@ -246,5 +247,17 @@ $(document).ready(function(){
 })
 
 
-
-
+let cccc = 0;
+setInterval(function() {
+  var changeMessage = document.querySelector('.changeMessage'); // 변경할 요소 선택
+  var messages = [
+    "감정 분석 중...",
+    "AI 이미지 생성 중...",
+    "인스타 갖고 오는 중...",
+    "잠시 기다려주세요..."
+  ]; // 변경할 메시지들 배열
+  changeMessage.textContent = messages[cccc++]; // 선택한 메시지로 변경
+  if(cccc >= messages.length){
+    cccc = 0;
+  }
+}, 4000); // 5초(5000ms)마다 실행

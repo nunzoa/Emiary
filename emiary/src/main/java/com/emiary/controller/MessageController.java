@@ -76,6 +76,7 @@ public class MessageController {
     @GetMapping("checkMailHomePage")
     public int checkMailHomePage(@AuthenticationPrincipal UserDetails userDetails) {
         int result = messageService.checkMailHomePage(userDetails.getUsername());
+        log.debug("메시지가 왜 뜨냐 {}", result);
         return result;
     }
 

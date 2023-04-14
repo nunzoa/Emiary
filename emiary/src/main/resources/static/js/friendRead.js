@@ -100,6 +100,7 @@ $(document).ready(function(){
         })
       }
     })
+    $("#commentText").val('')
   })
   $.ajax({
     url : "getReply",

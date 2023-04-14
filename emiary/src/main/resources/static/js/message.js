@@ -26,8 +26,8 @@ function showFriendList(){
                         listOfFriend +=
                             `
                     <a class="list-group-item list-group-item-action border-0 ps-5 one-friend mb-3" email="${item.email}">
-                      <!--알람 뜸-->
-                      `
+                          <!--알람 뜸-->
+                          `
 
                         if(count != 0){
                             console.log("이거 왜 안뜸?")
@@ -128,7 +128,7 @@ function getMessageList(email){
                 if(msg.sender_email != email){
 
                     messageContent +=
-                        `
+                                `
                                  <div class="chat-message-right pb-4">
                                     <div>
                                       <!--자기 프로필 이미지-->
@@ -139,7 +139,21 @@ function getMessageList(email){
                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
                                       <!--메시지 내용-->
                                       <div class="font-weight-bold mb-1">나</div>
-                                      ${msg.content}
+                                 `
+                    let imgCheck = msg.content.substring(msg.content.lastIndexOf("."));
+                    console.log(imgCheck)
+                    if(imgCheck == '.png' || imgCheck == '.webp' || imgCheck == '.jpg' || imgCheck == '.jpeg'){
+                        messageContent +=  `
+                                         <a href="${msg.content}">
+                                        <img src="${msg.content}" width="250" height="350">
+                                        </a>
+                                        `
+                    }else{
+                        messageContent +=  `${msg.content}`
+                    }
+
+                        messageContent +=
+                                `
                                     </div>
                                   </div>
                                 `
@@ -157,7 +171,22 @@ function getMessageList(email){
                             <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
                               <!--상대방 내용-->
                               <div class="font-weight-bold mb-1">${msg.nickname}</div>
-                              ${msg.content}
+                              `
+                    let imgCheck = msg.content.substring(msg.content.lastIndexOf("."));
+                    console.log(imgCheck)
+                    if(imgCheck == '.png' || imgCheck == '.webp' || imgCheck == '.jpg' || imgCheck == '.jpeg'){
+                        messageContent +=  `
+                        <a href="${msg.content}">
+                                        <img src="${msg.content}" width="250" height="350">
+                                        </a>
+                        `
+                    }else{
+                        messageContent +=  `${msg.content}`
+                    }
+
+                    messageContent +=
+                        `
+                             
                             </div>
                           </div>
                         `
